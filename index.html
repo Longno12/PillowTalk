@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PillowTalk</title>
+  <style>
+    /* Reset styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f5f5f5;
+      margin: 0;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    
+    .bg-gradient-to-r {
+      background: linear-gradient(to right, #6b46c1, #44337a);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+      padding-top: 1rem; /* Added padding-top to move content down */
+    }
+    
+    .logo-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 0 1rem; /* Adjusted padding */
+    }
+    
+    .logo-nav img {
+      height: 4rem; /* Increased height */
+      width: 4rem; /* Increased width */
+      border-radius: 50%;
+    }
+    
+    .logo-nav nav {
+      margin-left: auto;
+    }
+    
+    .logo-nav nav a {
+      margin-left: 1.5rem;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+    
+    .logo-nav nav a:hover {
+      color: #d1d5db;
+    }
+    
+    .main-content {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    
+    .main-content h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    
+    .main-content p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      color: #d1d5db; /* Adjusted text color */
+    }
+    
+    .main-content .buttons {
+      margin-top: 1rem;
+    }
+    
+    .buttons a {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background-color: #27272a;
+      color: white;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      font-size: 1rem;
+      margin-right: 1rem;
+    }
+    
+    .buttons a:hover {
+      background-color: #3f3f46;
+    }
+
+    .main-content .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio (responsive) */
+      margin-top: 2rem;
+    }
+    
+    .main-content video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-gradient-to-r">
+    <header class="logo-nav">
+      <img src="IMG_1479.png" alt="Logo">
+      <nav>
+        <a href="index.html">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="contact.html">CONTACT</a>
+        <a href="staff.html">MEET THE STAFF</a>
+      </nav>
+    </header>
+    <div class="container">
+      <div class="main-content">
+        <h1>WELCOME TO PILLOWTALK</h1>
+        <p>WHERE WE TALK TO THE MOST IMPORTANT PEOPLE IN RECROOM - YOU!!!</p>
+        <div class="buttons">
+          <a href="about.html">Visit About to learn More!</a>
+          <a class="discord-link" href="https://discord.gg/pz5FZzSEqK" target="_blank" rel="noopener noreferrer">Join our Discord</a>
+        </div>
+        <div class="video-wrapper">
+          <video controls>
+            <source src="trailer.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

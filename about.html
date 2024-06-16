@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Pillowtalk</title>
+  <style>
+    /* Reset styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f5f5f5;
+      margin: 0;
+      color: #333;
+    }
+    
+    /* Flexbox utility */
+    .flex-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    
+    /* Header styling */
+    header {
+      background: linear-gradient(to right, #6b46c1, #44337a);
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+      width: 100%;
+    }
+    
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    header p {
+      font-size: 1.5rem;
+      color: #d1d5db;
+    }
+    
+    /* Social media styling */
+    .social-media {
+      text-align: center;
+      margin: 1rem 0;
+    }
+
+    .social-media a {
+      margin: 0 1rem;
+      color: #d1d5db;
+      text-decoration: none;
+      font-size: 2rem;
+      transition: color 0.3s ease;
+    }
+
+    .social-media a:hover {
+      color: #ffffff;
+    }
+    
+    .social-media i {
+      font-size: 2rem;
+    }
+
+    /* Navigation styling */
+    nav {
+      margin-top: 1rem;
+      text-align: center;
+    }
+    
+    nav a {
+      margin: 0 1rem;
+      color: #6b46c1;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+    
+    nav a:hover {
+      color: #44337a;
+    }
+    
+    /* Main content styling */
+    main {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      width: 100%;
+      margin: 2rem;
+    }
+    
+    main section {
+      margin-bottom: 2rem;
+    }
+    
+    main h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #6b46c1;
+      border-bottom: 2px solid #6b46c1;
+      padding-bottom: 0.5rem;
+    }
+    
+    main p {
+      font-size: 1.25rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    
+    /* Team photo styling */
+    .team-photo {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    
+    .team-photo img {
+      border-radius: 0.5rem;
+      max-width: 100%;
+      height: auto;
+    }
+    
+    /* Media query for larger screens */
+    @media (min-width: 768px) {
+      header {
+        padding: 2rem 0;
+      }
+      
+      header h1 {
+        font-size: 4rem;
+      }
+      
+      header p {
+        font-size: 1.75rem;
+      }
+      
+      main {
+        padding: 3rem;
+      }
+      
+      main h2 {
+        font-size: 2.5rem;
+      }
+      
+      main p {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header>
+    <h1>About Pillowtalk</h1>
+    <p>Discover more about our mission and the team behind Pillowtalk</p>
+    <div class="social-media">
+      <a href="https://discord.gg/pz5FZzSEqK" target="_blank"><i class="fab fa-discord"></i></a>
+      <a href="https://www.youtube.com/@PillowTalkRR" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://rec.net/room/PillowTalk" target="_blank"><i class="fas fa-link"></i></a>
+    </div>
+    <nav>
+      <a href="index.html">HOME</a>
+      <a href="about.html">ABOUT</a>
+      <a href="contact.html">CONTACT</a>
+      <a href="staff.html">MEET THE TEAM</a>
+    </nav>
+  </header>
+  
+  <div class="flex-container">
+    <main>
+      <section>
+        <h2>Our Mission</h2>
+        <p>Pillowtalk is dedicated to bringing the voices of the RecRoom community to the forefront. We believe in the power of conversation and aim to connect, entertain, and inform through engaging discussions with the most important people in RecRoom - you!</p>
+      </section>
+      
+      <section>
+        <h2>Meet Our Team</h2>
+        <p>Our team is composed of passionate RecRoom enthusiasts who are committed to creating a platform for meaningful interactions. We work hard to ensure that every episode of Pillowtalk is insightful, entertaining, and reflective of the diverse community we serve.</p>
+        <div class="team-photo">
+          <img src="trio.jpg" alt="Team Photo">
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
