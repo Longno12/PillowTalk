@@ -15,26 +15,19 @@
     body {
       font-family: 'Arial', sans-serif;
       line-height: 1.6;
-      background-color: #f5f5f5;
+      background-color: #1f1f1f;
+      color: #e5e5e5;
       margin: 0;
     }
     
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 1rem;
-    }
-    
     .bg-gradient-to-r {
-      background: linear-gradient(to right, #6b46c1, #44337a);
-      color: white;
+      background: linear-gradient(to right, #6a0dad, #a24dff);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
       align-items: center;
       text-align: center;
-      padding-top: 2rem;
+      padding: 2rem 1rem;
     }
     
     .logo-nav {
@@ -42,7 +35,9 @@
       justify-content: space-between;
       align-items: center;
       width: 100%;
+      max-width: 1200px;
       padding: 1rem;
+      margin-bottom: 2rem;
     }
     
     .logo-nav img {
@@ -52,45 +47,50 @@
     }
     
     .logo-nav nav {
-      margin-left: auto;
+      display: flex;
+      gap: 1.5rem;
     }
     
     .logo-nav nav a {
-      margin-left: 1.5rem;
       color: white;
       text-decoration: none;
       font-weight: bold;
       font-size: 1.1rem;
-      transition: color 0.3s ease;
+      transition: color 0.3s ease, border-bottom 0.3s ease;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid transparent;
     }
     
     .logo-nav nav a:hover {
       color: #d1d5db;
+      border-bottom: 2px solid #d1d5db;
     }
     
     .main-content {
-      text-align: left;
-      margin-top: 2rem;
-      background-color: white;
-      color: black;
-      border-radius: 0.5rem;
-      padding: 2rem;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #2d2d2d;
+      color: #e5e5e5;
+      border-radius: 0.75rem;
+      padding: 2.5rem;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
       max-width: 800px;
       width: 100%;
+      margin: 2rem auto;
+      text-align: center;
     }
     
     .main-content h1 {
-      font-size: 2.5rem;
+      font-size: 2.75rem;
       margin-bottom: 1rem;
-      border-bottom: 2px solid #6b46c1;
+      color: #a24dff;
+      border-bottom: 3px solid #a24dff;
       padding-bottom: 0.5rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     }
     
     .main-content p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
     }
     
     .discord-section {
@@ -98,43 +98,71 @@
     }
     
     .discord-section h2 {
-      font-size: 2rem;
+      font-size: 2.25rem;
+      color: #a24dff;
       margin-bottom: 1rem;
     }
     
     .discord-section p {
-      font-size: 1.1rem;
-      line-height: 1.6;
+      font-size: 1.2rem;
+      line-height: 1.8;
       margin-bottom: 1.5rem;
     }
     
-    .discord-link, .support-ticket-link {
-      display: inline-block;
-      padding: 1rem 2rem;
-      border-radius: 0.5rem;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
-      font-size: 1rem;
-      margin-top: 1rem;
-      cursor: pointer;
-    }
-    
     .discord-link {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      border-radius: 0.75rem;
       background-color: #7289DA;
       color: white;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
     
     .discord-link:hover {
       background-color: #5b6eaa;
+      transform: translateY(-3px);
     }
     
     .support-ticket-link {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      border-radius: 0.75rem;
       background-color: #6b46c1;
       color: white;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
     
     .support-ticket-link:hover {
       background-color: #503b8f;
+      transform: translateY(-3px);
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .logo-nav {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .logo-nav nav {
+        margin-top: 1rem;
+        gap: 1rem;
+      }
+      
+      .main-content {
+        padding: 2rem;
+        margin: 1rem;
+      }
     }
   </style>
 </head>
@@ -143,24 +171,23 @@
     <header class="logo-nav">
       <img src="IMG_1479.png" alt="Logo">
       <nav>
-        <a href="index.html">HOME</a>
-        <a href="about.html">ABOUT</a>
-        <a href="contact.html">CONTACT</a>
-        <a href="staff.html">MEET THE STAFF</a>
-        <a href="3years.html">3 YEARS OF PILLOWTALK</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="staff.html">Meet the Team</a>
+        <a href="3years.html">3 Years of PillowTalk</a>
       </nav>
     </header>
     <div class="container">
       <div class="main-content">
         <h1>Contact PillowTalk</h1>
-        <p>Have questions or need support? Here are your options:</p>
+        <p>If you have any questions or need assistance, here are your options:</p>
         
         <div class="discord-section">
           <h2>Join Our Discord Server</h2>
-          <p>Join our Discord community to chat with us and other PillowTalk enthusiasts!</p>
-          <a class="discord-link" href="https://discord.gg/pz5FZzSEqK" target="_blank" rel="noopener noreferrer">Join Discord to create a support ticket</a>
+          <p>Connect with us and other PillowTalk enthusiasts directly on our Discord server. We're here to help and chat!</p>
+          <a class="discord-link" href="https://discord.gg/pz5FZzSEqK" target="_blank" rel="noopener noreferrer">Join Discord</a>
         </div>
-        
       </div>
     </div>
   </div>
