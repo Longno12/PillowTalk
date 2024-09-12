@@ -13,103 +13,141 @@
     }
     
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
       line-height: 1.6;
-      background-color: #f5f5f5;
+      background-color: #e5e7eb;
+      color: #333;
       margin: 0;
     }
     
     .container {
-      max-width: 800px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 1rem;
+      padding: 2rem;
     }
     
     .bg-gradient-to-r {
-      background: linear-gradient(to right, #6b46c1, #44337a);
+      background: linear-gradient(to right, #4b0082, #2e0058);
       color: white;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
       align-items: center;
       text-align: center;
-      padding-top: 1rem; /* Added padding-top to move content down */
-      position: relative; /* Ensure positioning context for absolute splats */
+      padding: 4rem 1rem 2rem;
+      position: relative;
+      overflow: hidden;
     }
     
     .logo-nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 100%;
-      padding: 0 1rem; /* Adjusted padding */
+      padding: 1rem 2rem;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
     }
     
     .logo-nav img {
-      height: 4rem; /* Increased height */
-      width: 4rem; /* Increased width */
+      height: 3rem;
+      width: 3rem;
       border-radius: 50%;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     }
     
     .logo-nav nav {
-      margin-left: auto;
+      display: flex;
     }
     
     .logo-nav nav a {
       margin-left: 1.5rem;
       color: white;
       text-decoration: none;
-      font-weight: bold;
-      font-size: 1.1rem;
-      transition: color 0.3s ease;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: color 0.3s ease, border-bottom 0.3s ease;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid transparent;
     }
     
     .logo-nav nav a:hover {
       color: #d1d5db;
+      border-bottom: 2px solid #d1d5db;
     }
     
     .main-content {
       text-align: center;
-      margin-top: 2rem;
+      color: #fff;
+      margin-top: 6rem;
     }
     
     .main-content h1 {
-      font-size: 3rem;
+      font-size: 4rem;
       margin-bottom: 1rem;
+      font-weight: 700;
+      line-height: 1.2;
     }
     
     .main-content p {
       font-size: 1.25rem;
       margin-bottom: 2rem;
-      color: #d1d5db; /* Adjusted text color */
+      color: #e5e7eb;
+      font-weight: 400;
     }
     
-    .main-content .buttons {
-      margin-top: 1rem;
+    .buttons {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
     }
     
     .buttons a {
       display: inline-block;
       padding: 1rem 2rem;
-      background-color: #27272a;
-      color: white;
       border-radius: 0.5rem;
       text-decoration: none;
-      transition: background-color 0.3s ease;
       font-size: 1rem;
-      margin-right: 1rem;
+      color: #fff;
+      background-color: #6b1f6d;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .buttons a::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 300%;
+      height: 300%;
+      background: rgba(255, 255, 255, 0.3);
+      transition: transform 0.3s ease;
+      transform: translate(-50%, -50%) scale(0);
+      z-index: 0;
+      border-radius: 50%;
+    }
+    
+    .buttons a:hover::before {
+      transform: translate(-50%, -50%) scale(1);
     }
     
     .buttons a:hover {
-      background-color: #3f3f46;
+      transform: translateY(-5px);
+      background-color: #5a0f5b;
     }
 
     .main-content .video-wrapper {
       position: relative;
       width: 100%;
-      padding-bottom: 56.25%; /* 16:9 aspect ratio (responsive) */
-      margin-top: 2rem;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      margin-top: 3rem;
     }
     
     .main-content video {
@@ -119,6 +157,34 @@
       width: 100%;
       height: 100%;
       border-radius: 0.5rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .logo-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+      }
+      
+      .logo-nav nav {
+        margin-top: 1rem;
+        margin-left: 0;
+      }
+      
+      .main-content h1 {
+        font-size: 2.5rem;
+      }
+      
+      .main-content p {
+        font-size: 1rem;
+      }
+      
+      .buttons a {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.875rem;
+      }
     }
   </style>
 </head>
@@ -127,20 +193,20 @@
     <header class="logo-nav">
       <img src="IMG_1479.png" alt="Logo">
       <nav>
-        <a href="index.html">HOME</a>
-        <a href="about.html">ABOUT</a>
-        <a href="contact.html">CONTACT</a>
-        <a href="staff.html">MEET THE STAFF</a>
-        <a href="3years.html">3 YEARS OF PILLOWTALK</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="staff.html">Meet the Staff</a>
+        <a href="3years.html">3 Years of PillowTalk</a>
       </nav>
     </header>
     <div class="container">
       <div class="main-content">
-        <h1>WELCOME TO PILLOWTALK</h1>
-        <p>WHERE WE TALK TO THE MOST IMPORTANT PEOPLE IN RECROOM - YOU!!!</p>
+        <h1>Welcome to PillowTalk</h1>
+        <p>Where we talk to the most important people in RecRoom - You!!!</p>
         <div class="buttons">
-          <a href="about.html">Visit About to learn More!</a>
-          <a class="discord-link" href="https://discord.gg/pz5FZzSEqK" target="_blank" rel="noopener noreferrer">Join our Discord</a>
+          <a href="about.html">Visit About to Learn More!</a>
+          <a class="discord-link" href="https://discord.gg/pz5FZzSEqK" target="_blank" rel="noopener noreferrer">Join Our Discord</a>
         </div>
         <div class="video-wrapper">
           <video controls>
