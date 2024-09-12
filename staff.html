@@ -5,186 +5,135 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meet The Staff - PillowTalk</title>
   <style>
-    /* Reset styles */
-    /* Reset styles */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  background-color: #f5f5f5;
-  margin: 0;
-}
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f5f5f5;
+      margin: 0;
+    }
 
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 1rem;
-}
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
 
-.bg-gradient-to-r {
-  background: linear-gradient(to right, #6b46c1, #44337a);
-  color: white;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding-top: 1rem;
-  position: relative; /* Ensure relative positioning for absolute elements */
-}
+    .bg-gradient-to-r {
+      background: linear-gradient(to right, #6b46c1, #44337a);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-top: 2rem;
+    }
 
-.logo-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 0 1rem;
-  margin-bottom: 2rem;
-}
+    .logo-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 0 1rem;
+      margin-bottom: 2rem;
+    }
 
-.logo-nav img {
-  height: 4rem;
-  width: 4rem;
-  border-radius: 50%;
-}
+    .logo-nav img {
+      height: 4rem;
+      width: 4rem;
+      border-radius: 50%;
+    }
 
-.logo-nav nav {
-  margin-left: auto;
-}
+    .logo-nav nav {
+      margin-left: auto;
+    }
 
-.logo-nav nav a {
-  margin-left: 1.5rem;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1.1rem;
-  transition: color 0.3s ease;
-}
+    .logo-nav nav a {
+      margin-left: 1.5rem;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
 
-.logo-nav nav a:hover {
-  color: #d1d5db;
-}
+    .logo-nav nav a:hover {
+      color: #d1d5db;
+    }
 
-.staff-section {
-  text-align: center;
-  margin-bottom: 2rem;
-}
+    .staff-section {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
 
-.staff-category {
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
+    .staff-category {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #f5f5f5;
+      text-transform: uppercase;
+      border-bottom: 2px solid #6b46c1;
+      padding-bottom: 0.5rem;
+    }
 
-.staff-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
+    .staff-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
 
-.staff-member {
-  margin: 0.5rem;
-  cursor: pointer;
-  position: relative;
-  width: calc(14.28% - 1rem); /* Width for 7 items per row */
-}
+    .staff-member {
+      position: relative;
+      width: calc(20% - 1rem); /* Adjust for 5 items per row */
+      cursor: pointer;
+    }
 
-.staff-member img {
-  width: 100%;
-  height: auto;
-  border-radius: 50%;
-  object-fit: cover;
-  aspect-ratio: 1 / 1;
-  transition: transform 0.3s ease;
-}
+    .staff-member img {
+      width: 100%;
+      height: 200px; /* Consistent height */
+      border-radius: 50%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
 
-.staff-member:hover img {
-  transform: scale(1.1);
-}
+    .staff-member:hover img {
+      transform: scale(1.1);
+    }
 
-.staff-member .staff-name {
-  position: absolute;
-  bottom: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 0.3rem 0.5rem;
-  border-radius: 0.3rem;
-  font-size: 0.9rem;
-  white-space: nowrap;
-}
+    .staff-member .staff-name {
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 0.5rem;
+      border-radius: 0.3rem;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      width: calc(100% - 1rem);
+      text-align: center;
+    }
 
-.lonely-person-section {
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  text-align: center;
-  z-index: 10;
-}
+    @media (max-width: 800px) {
+      .staff-member {
+        width: calc(33.33% - 1rem); /* 3 items per row */
+      }
+    }
 
-.lonely-person-section .staff-category {
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
+    @media (max-width: 600px) {
+      .staff-member {
+        width: calc(50% - 1rem); /* 2 items per row */
+      }
+    }
 
-.lonely-person-section .staff-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
-
-.lonely-person-section .staff-member {
-  margin: 0.5rem;
-  cursor: pointer;
-  position: relative;
-  width: 80px; /* Adjust the width as needed */
-}
-
-.lonely-person-section .staff-member img {
-  width: 100%;
-  height: auto;
-  border-radius: 50%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.lonely-person-section .staff-member:hover img {
-  transform: scale(1.1);
-}
-
-.lonely-person-section .staff-member .staff-name {
-  position: absolute;
-  bottom: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 0.3rem 0.5rem;
-  border-radius: 0.3rem;
-  font-size: 0.9rem;
-  white-space: nowrap;
-}
-
-
-@media (max-width: 600px) {
-  .staff-member {
-    width: calc(33.33% - 1rem); /* Width for 3 items per row on smaller screens */
-  }
-  .staff-member img {
-    width: 100%;
-  }
-}
-
-    
     /* Fact Overlay Styles */
     .fact-overlay {
       display: none;
@@ -198,7 +147,7 @@ body {
       background-color: rgba(0, 0, 0, 0.5);
       z-index: 1000;
     }
-    
+
     .fact-content {
       background-color: white;
       padding: 2rem;
@@ -206,12 +155,12 @@ body {
       max-width: 600px;
       text-align: center;
     }
-    
+
     .fact-content h2 {
       font-size: 2rem;
       margin-bottom: 1rem;
     }
-    
+
     .fact-content p {
       font-size: 1.2rem;
       line-height: 1.6;
@@ -231,163 +180,131 @@ body {
       </nav>
     </header>
 
-    <div class="lonely-person-section bottom-right">
-      <div class="staff-category">The Lovers</div>
-      <div class="staff-row">
-        <div class="staff-member" data-fact="They keep throwing plates at my head and calling it Frisbee">
-          <img src="Shamweezy.jpg" alt="Lonely Person">
-          <div class="staff-name">Shamweezy</div>
-        </div>
-        <div class="staff-member" data-fact="Shamweezy's 20th time divorced husband!">
-          <img src="SPARKY.png" alt="Director 3">
-          <div class="staff-name">SPARKY</div>
-        </div>
-      </div>
-    </div>
-
     <div class="container">
       <section class="staff-section">
         <div class="staff-category">Directors</div>
         <div class="staff-row">
-          <div class="staff-member" data-fact="Banana’s are yellow">
+          <div class="staff-member" data-fact="Bananas are yellow">
             <img src="Kyper.png" alt="Director 1">
             <div class="staff-name">Kyper</div>
           </div>
-          <div class="staff-member" data-fact="People ain't to be trusted, but they Can be understood.">
+          <div class="staff-member" data-fact="People aren't to be trusted, but they can be understood.">
             <img src="The Foggy Golem.png" alt="Director 2">
             <div class="staff-name">The Foggy Golem</div>
           </div>
-          <div class="staff-member" data-fact="I'm polish">
+          <div class="staff-member" data-fact="I'm Polish">
             <img src="Legacy.png" alt="Director 3">
             <div class="staff-name">Legacy</div>
           </div>
         </div>
-        
+
         <div class="staff-category">Staff Leads</div>
         <div class="staff-row">
           <div class="staff-member" data-fact="2024Joe is a talented developer and a lead member of our team.">
             <img src="Joe.jpg" alt="Staff Lead 1">
             <div class="staff-name">2024Joe</div>
           </div>
-          <div class="staff-member" data-fact="Fact that I'm a rec room karaoke Head Moderator Co Founder of Alfonso Productions and a Staff Lead of pillow talk">
+          <div class="staff-member" data-fact="Fact that I'm a Rec Room Karaoke Head Moderator, Co-Founder of Alfonso Productions, and a Staff Lead of PillowTalk">
             <img src="Mr.Cam.png" alt="Staff Lead 2">
             <div class="staff-name">Mr.Cam</div>
-            </div>
-            </div>
-            <div class="staff-category">Staff Members</div>
-            <div class="staff-row">
-              <div class="staff-member" data-fact="G'day all! It's Big Joe here, the Aussie of the PillowTalk Team! Lil' fact about myself is that every time you guys see me at the show, just keep in mind that it's 3:00am. So apologies if I seem tired or off-putting, just haven't had my morning coffee. Also I do 3D Renders on RecRoom! So, hit me up at @ bigsmokinjoe on Discord!">
-                <img src="BigJoe.png" alt="Staff Member 1">
-                <div class="staff-name">Big Joe</div>
-              </div>
-              <div class="staff-member" data-fact="I'm funny">
-                <img src="O9.jpg" alt="Staff Member 2">
-                <div class="staff-name">O9</div>
-              </div>
-              <div class="staff-member" data-fact="09 is stinky">
-                <img src="poltergeist.jpg" alt="Staff Member 3">
-                <div class="staff-name">Poltergeist</div>
-              </div>
-              <div class="staff-member" data-fact="I'm...a cookie 👍">
-                <img src="Cookie.jpg" alt="Staff Member 4">
-                <div class="staff-name">Cookie</div>
-              </div>
-              <div class="staff-member" data-fact="My name is snoozy! I love sleeping.">
-                <img src="Snoozy.jpg" alt="Staff Member 5">
-                <div class="staff-name">Snoozy</div>
-              </div>
-              <div class="staff-member" data-fact="My name is Nay and I love softball!">
-                <img src="Nay.jpg" alt="Staff Member 6">
-                <div class="staff-name">Nay</div>
-              </div>
-              <div class="staff-member" data-fact="Sniping Furry :3">
-                <img src="Rocko.jpg" alt="Staff Member 7">
-                <div class="staff-name">Rocko</div>
-              </div>
-              <div class="staff-member" data-fact="I am a YouTuber (fact)">
-                <img src="BoomerGK.PNG" alt="Staff Member 8">
-                <div class="staff-name">BoomerGK</div>
-              </div>
-              <div class="staff-member" data-fact="I love Metal music">
-                <img src="Kayoas.jpg" alt="Staff Member 9">
-                <div class="staff-name">Kayoas</div>
-              </div>
-              <div class="staff-member" data-fact="I am very silly, watch out!">
-                <img src="COLORZ.jpg" alt="Staff Member 9">
-                <div class="staff-name">COLORZ</div>
-              </div>
-              <div class="staff-member" data-fact="I have autism and adhd">
-                <img src="Dank.png" alt="Staff Member 9">
-                <div class="staff-name">EggsBenedict</div>
-              </div>
-              <div class="staff-member" data-fact="I'm not fat unlike Kyper">
-                <img src="Light.png" alt="Staff Member 9">
-                <div class="staff-name">Light</div>
-              </div>
-              <div class="staff-member" data-fact=" i love pillow talk👍">
-                <img src="Ally.jpg" alt="Staff Member 9">
-                <div class="staff-name">Ally</div>
-              </div>
-              <div class="staff-member" data-fact=" i have ADHD and very silly, can take things serious if needed, love oranges And poltergeist is my bestie!">
-                <img src="zach.jpg" alt="Staff Member 9">
-                <div class="staff-name">SpaceFreddy</div>
-              </div>
-            </div>
-          </section>
+          </div>
         </div>
-      </div>
-      <!-- Fact Overlay -->
-      <div class="fact-overlay" id="factOverlay">
-        <div class="fact-content">
-          <h2>Meet the Staff</h2>
-          <p id="factText"></p>
+
+        <div class="staff-category">Staff Members</div>
+        <div class="staff-row">
+          <div class="staff-member" data-fact="G'day all! It's Big Joe here, the Aussie of the PillowTalk Team! Lil' fact about myself is that every time you guys see me at the show, just keep in mind that it's 3:00am. So apologies if I seem tired or off-putting, just haven't had my morning coffee. Also, I do 3D Renders on RecRoom! So, hit me up at @bigsmokinjoe on Discord!">
+            <img src="BigJoe.png" alt="Staff Member 1">
+            <div class="staff-name">Big Joe</div>
+          </div>
+          <div class="staff-member" data-fact="I'm funny">
+            <img src="O9.jpg" alt="Staff Member 2">
+            <div class="staff-name">O9</div>
+          </div>
+          <div class="staff-member" data-fact="09 is stinky">
+            <img src="poltergeist.jpg" alt="Staff Member 3">
+            <div class="staff-name">Poltergeist</div>
+          </div>
+          <div class="staff-member" data-fact="I'm...a cookie 👍">
+            <img src="Cookie.jpg" alt="Staff Member 4">
+            <div class="staff-name">Cookie</div>
+          </div>
+          <div class="staff-member" data-fact="My name is Snoozy! I love sleeping.">
+            <img src="Snoozy.jpg" alt="Staff Member 5">
+            <div class="staff-name">Snoozy</div>
+          </div>
+          <div class="staff-member" data-fact="My name is Nay and I love softball!">
+            <img src="Nay.jpg" alt="Staff Member 6">
+            <div class="staff-name">Nay</div>
+          </div>
+          <div class="staff-member" data-fact="Sniping Furry :3">
+            <img src="Rocko.jpg" alt="Staff Member 7">
+            <div class="staff-name">Rocko</div>
+          </div>
+          <div class="staff-member" data-fact="I am a YouTuber (fact)">
+            <img src="BoomerGK.PNG" alt="Staff Member 8">
+            <div class="staff-name">BoomerGK</div>
+          </div>
+          <div class="staff-member" data-fact="I love Metal music">
+            <img src="Kayoas.jpg" alt="Staff Member 9">
+            <div class="staff-name">Kayoas</div>
+          </div>
+          <div class="staff-member" data-fact="I have autism and ADHD">
+            <img src="Dank.png" alt="Staff Member 10">
+            <div class="staff-name">EggsBenedict</div>
+          </div>
+          <div class="staff-member" data-fact="I'm not fat unlike Kyper">
+            <img src="Light.png" alt="Staff Member 11">
+            <div class="staff-name">Light</div>
+          </div>
+          <div class="staff-member" data-fact="I love PillowTalk 👍">
+            <img src="Ally.jpg" alt="Staff Member 12">
+            <div class="staff-name">Ally</div>
+          </div>
+          <div class="staff-member" data-fact="I have ADHD and I'm very silly. Can take things seriously if needed. I love oranges and Poltergeist is my bestie!">
+            <img src="zach.jpg" alt="Staff Member 13">
+            <div class="staff-name">Zach</div>
+          </div>
         </div>
-      </div>
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          // Select all staff members including lonely person
-          const staffMembers = document.querySelectorAll('.staff-member');
-    
-          // Select fact overlay and fact text element
-          const factOverlay = document.getElementById('factOverlay');
-          const factText = document.getElementById('factText');
-    
-          // Function to show fact overlay and set the fact text
-          function showFactOverlay(fact) {
-            factText.textContent = fact;
-            factOverlay.style.display = 'flex'; // Display fact overlay
-          }
-    
-          // Function to hide fact overlay
-          function hideFactOverlay() {
-            factOverlay.style.display = 'none'; // Hide fact overlay
-          }
-    
-          // Attach click event to each staff member
-          staffMembers.forEach(member => {
-            member.addEventListener('click', function(event) {
-              event.stopPropagation(); // Stop propagation to prevent immediate hiding
-              const fact = this.getAttribute('data-fact'); // Get the fact attribute
-              showFactOverlay(fact); // Show fact overlay with the clicked staff's fact
-            });
-          });
-    
-          // Click anywhere on the screen to hide fact overlay
-          document.addEventListener('click', function(event) {
-            const clickedElement = event.target;
-            if (clickedElement.closest('.fact-content')) {
-              return; // Prevent hiding if clicking inside fact content
-            }
-            hideFactOverlay(); // Hide fact overlay when clicking outside
-          });
-    
-          // Close fact overlay on ESC key press
-          document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-              hideFactOverlay();
-            }
-          });
+      </section>
+    </div>
+  </div>
+  <div class="fact-overlay" id="factOverlay">
+    <div class="fact-content">
+      <h2>Meet the Staff</h2>
+      <p id="factText"></p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const staffMembers = document.querySelectorAll('.staff-member');
+      const factOverlay = document.getElementById('factOverlay');
+      const factText = document.getElementById('factText');
+      function showFactOverlay(fact) {
+        factText.textContent = fact;
+        factOverlay.style.display = 'flex';
+      }
+      function hideFactOverlay() {
+        factOverlay.style.display = 'none';
+      }
+      staffMembers.forEach(member => {
+        member.addEventListener('click', function(event) {
+          event.stopPropagation(); 
+          const fact = this.getAttribute('data-fact'); 
+          showFactOverlay(fact); 
         });
-      </script>
-    </body>
-    </html>
+      });
+      document.addEventListener('click', function(event) {
+        if (!event.target.closest('.fact-content')) {
+          hideFactOverlay(); 
+        }
+      });
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+          hideFactOverlay();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
