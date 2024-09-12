@@ -8,33 +8,40 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
     <style>
         body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: url('PTNewLogo.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    margin: 0;
-    padding: 0;
-}
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('PTNewLogo.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+        }
 
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1rem;
+            border-bottom: 2px solid #6b46c1; /* Purple border for navigation */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for navigation */
+        }
 
-
-
-
-        .top-right-nav a {
+        nav a {
             color: #6b46c1; /* Purple color for navigation links */
+            transition: color 0.3s ease, transform 0.3s ease;
         }
 
-        .top-right-nav a:hover {
+        nav a:hover {
             color: #805ad5; /* Lighter purple on hover */
+            transform: scale(1.05); /* Slight zoom effect on hover */
         }
 
+        /* Main Content */
         .main-content {
-            background-color: rgba(255, 255, 255, 0.8); /* White background with slight transparency */
+            background-color: rgba(255, 255, 255, 0.9); /* White background with slight transparency */
             color: #4a5568; /* Grayish text color */
             border-radius: 1rem;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
             padding: 2rem;
             margin-top: 4rem; /* Adjust margin to prevent content from overlapping logo */
         }
@@ -42,6 +49,7 @@
         .main-content h1 {
             font-size: 3rem;
             color: #6b46c1; /* Purple header */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for text */
         }
 
         .main-content p {
@@ -54,25 +62,43 @@
             color: #ffffff; /* White text */
             padding: 12px 24px;
             border-radius: 0.5rem;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
             display: inline-block;
             margin-top: 1rem;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
         }
 
         .main-content a:hover {
             background-color: #805ad5; /* Lighter purple on hover */
+            transform: scale(1.05); /* Slight zoom effect on hover */
+        }
+
+        /* Section Styles */
+        .feature-section {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-section:hover {
+            transform: translateY(-10px); /* Lift effect on hover */
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+        }
+
+        .feature-section h2 {
+            color: #6b46c1; /* Purple headings */
         }
     </style>
 </head>
 
-<body class="bg-gradient-to-r from-zinc-200 via-zinc-300 to-zinc-400 text-foreground">
+<body class="bg-gradient-to-r from-purple-200 via-purple-300 to-purple-400 text-gray-800">
     <div class="container mx-auto px-4 py-8">
         <!-- Navigation -->
         <nav class="flex justify-between items-center">
             <div>
-                <img src="IMG_1479.png" alt="Company Logo" class="h-10">
+                <img src="IMG_1479.png" alt="Company Logo" class="h-12">
             </div>
-            <div class="top-right-nav space-x-6">
+            <div class="space-x-6">
                 <a href="index.html" class="hover:text-accent">HOME</a>
                 <a href="about.html" class="hover:text-accent">ABOUT</a>
                 <a href="contact.html" class="hover:text-accent">CONTACT</a>
@@ -92,8 +118,8 @@
         <div class="flex flex-wrap mt-12">
             <!-- Feature Section 1 -->
             <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div class="p-6 bg-white rounded-lg shadow-xl">
-                    <h2 class="text-xl font-semibold mb-4 text-purple-600">Community Engagement</h2>
+                <div class="feature-section p-6 bg-white rounded-lg shadow-xl">
+                    <h2 class="text-xl font-semibold mb-4">Community Engagement</h2>
                     <p class="text-base text-gray-700">
                         <strong>Objective:</strong> To actively engage the RecRoom community by fostering meaningful interactions, promoting conversations, and creating a vibrant, inclusive platform where members can connect, entertain, and inform each other.
                         <br><br>
@@ -122,8 +148,8 @@
 
             <!-- Feature Section 2 -->
             <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div class="p-6 bg-white rounded-lg shadow-xl">
-                    <h2 class="text-xl font-semibold mb-4 text-purple-600">Innovative Conversations</h2>
+                <div class="feature-section p-6 bg-white rounded-lg shadow-xl">
+                    <h2 class="text-xl font-semibold mb-4">Innovative Conversations</h2>
                     <p class="text-base text-gray-700">
                         <strong>Objective:</strong> To push the boundaries of discussions within the RecRoom community, introducing new ideas, and fostering thought-provoking conversations.
                         <br><br>
@@ -144,36 +170,22 @@
 
             <!-- Feature Section 3 -->
             <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-                <div class="p-6 bg-white rounded-lg shadow-xl">
-                    <h2 class="text-xl font-semibold mb-4 text-purple-600">Future Vision</h2>
+                <div class="feature-section p-6 bg-white rounded-lg shadow-xl">
+                    <h2 class="text-xl font-semibold mb-4">Future Vision</h2>
                     <p class="text-base text-gray-700">
-                        <strong>Objective:</strong> To outline and communicate the future direction of PillowTalk, ensuring continued growth, innovation, and deeper community engagement.
+                        <strong>Objective:</strong> To outline the future direction and aspirations of PillowTalk, setting goals and envisioning new possibilities for continued growth and impact.
                         <br><br>
                         <strong>Strategies and Actions:</strong>
                         <br><br>
-                        <strong>Expansion of Content:</strong>
+                        <strong>Long-Term Goals:</strong> Define the long-term vision for PillowTalk, including objectives for audience growth, content expansion, and community engagement.
                         <br><br>
-                        <strong>Diverse Formats:</strong> Introduce new formats such as video podcasts, live streams, and mini-series to keep the content fresh and engaging.
+                        <strong>Innovation Roadmap:</strong> Develop a roadmap for introducing new features, formats, and collaborations to keep the podcast fresh and relevant.
                         <br><br>
-                        <strong>Special Segments:</strong> Develop special segments focusing on emerging trends, in-depth interviews, and behind-the-scenes content.
+                        <strong>Feedback Integration:</strong> Continuously gather and integrate feedback from the community to ensure that PillowTalk remains aligned with listeners' interests and needs.
                         <br><br>
-                        <strong>Enhanced Community Interaction:</strong>
+                        <strong>Collaborative Opportunities:</strong> Explore partnerships with other creators, brands, and organizations to expand the reach and impact of PillowTalk.
                         <br><br>
-                        <strong>Interactive Platforms:</strong> Leverage new platforms and tools to create more interactive experiences, such as live Q&A sessions and real-time polls during episodes.
-                        <br><br>
-                        <strong>Feedback Channels:</strong> Establish robust feedback channels to gather insights and suggestions from the community, ensuring their voices shape the future of the podcast.
-                        <br><br>
-                        <strong>Partnerships and Collaborations:</strong>
-                        <br><br>
-                        <strong>Strategic Partnerships:</strong> Form strategic partnerships with other content creators, platforms, and brands to expand reach and introduce new perspectives.
-                        <br><br>
-                        <strong>Collaborative Projects:</strong> Engage in collaborative projects that bring together different segments of the RecRoom community, fostering unity and creativity.
-                        <br><br>
-                        <strong>Sustainability and Growth:</strong>
-                        <br><br>
-                        <strong>Monetization Strategies:</strong> Develop sustainable monetization strategies, including sponsorships, merchandise, and premium content, to ensure the long-term viability of PillowTalk.
-                        <br><br>
-                        <strong>Community Support:</strong> Launch community support initiatives like crowdfunding or membership programs to involve listeners in the growth journey.
+                        <strong>Future Projects:</strong> Announce and plan upcoming projects, events, or initiatives that will build on the success of the past three years and set the stage for future achievements.
                     </p>
                 </div>
             </div>
