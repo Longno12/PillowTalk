@@ -5,26 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meet The Staff - PillowTalk</title>
   <style>
-    /* Reset styles */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-
     body {
       font-family: Arial, sans-serif;
       line-height: 1.6;
       background-color: #f5f5f5;
       margin: 0;
     }
-
     .container {
       max-width: 1000px;
       margin: 0 auto;
       padding: 1rem;
     }
-
     .bg-gradient-to-r {
       background: linear-gradient(to right, #6b46c1, #44337a);
       color: white;
@@ -35,7 +31,6 @@
       text-align: center;
       padding-top: 2rem;
     }
-
     .logo-nav {
       display: flex;
       justify-content: space-between;
@@ -44,17 +39,14 @@
       padding: 0 1rem;
       margin-bottom: 2rem;
     }
-
     .logo-nav img {
       height: 4rem;
       width: 4rem;
       border-radius: 50%;
     }
-
     .logo-nav nav {
       margin-left: auto;
     }
-
     .logo-nav nav a {
       margin-left: 1.5rem;
       color: white;
@@ -63,16 +55,13 @@
       font-size: 1.1rem;
       transition: color 0.3s ease;
     }
-
     .logo-nav nav a:hover {
       color: #d1d5db;
     }
-
     .staff-section {
       text-align: center;
       margin-bottom: 2rem;
     }
-
     .staff-category {
       margin-bottom: 1rem;
       font-size: 2rem;
@@ -82,20 +71,17 @@
       border-bottom: 2px solid #6b46c1;
       padding-bottom: 0.5rem;
     }
-
     .staff-row {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 1rem;
     }
-
     .staff-member {
       position: relative;
-      width: calc(20% - 1rem); /* Adjust for 5 items per row */
+      width: calc(20% - 1rem);
       cursor: pointer;
     }
-
     .staff-member img {
       width: 100%;
       height: 200px; /* Consistent height */
@@ -103,11 +89,9 @@
       object-fit: cover;
       transition: transform 0.3s ease;
     }
-
     .staff-member:hover img {
       transform: scale(1.1);
     }
-
     .staff-member .staff-name {
       position: absolute;
       bottom: -20px;
@@ -122,20 +106,16 @@
       width: calc(100% - 1rem);
       text-align: center;
     }
-
     @media (max-width: 800px) {
       .staff-member {
-        width: calc(33.33% - 1rem); /* 3 items per row */
+        width: calc(33.33% - 1rem);
       }
     }
-
     @media (max-width: 600px) {
       .staff-member {
-        width: calc(50% - 1rem); /* 2 items per row */
+        width: calc(50% - 1rem);
       }
     }
-
-    /* Fact Overlay Styles */
     .fact-overlay {
       display: none;
       justify-content: center;
@@ -148,7 +128,6 @@
       background-color: rgba(0, 0, 0, 0.5);
       z-index: 1000;
     }
-
     .fact-content {
       background-color: white;
       padding: 2rem;
@@ -156,12 +135,10 @@
       max-width: 600px;
       text-align: center;
     }
-
     .fact-content h2 {
       font-size: 2rem;
       margin-bottom: 1rem;
     }
-
     .fact-content p {
       font-size: 1.2rem;
       line-height: 1.6;
@@ -180,7 +157,6 @@
         <a href="3years.html">3 YEARS OF PILLOWTALK</a>
       </nav>
     </header>
-
     <div class="container">
       <section class="staff-section">
         <div class="staff-category">Directors</div>
@@ -198,7 +174,6 @@
             <div class="staff-name">Legacy</div>
           </div>
         </div>
-
         <div class="staff-category">Staff Leads</div>
         <div class="staff-row">
           <div class="staff-member" data-fact="talented developer and a lead member of our team.">
@@ -210,7 +185,6 @@
             <div class="staff-name">Mr.Cam</div>
           </div>
         </div>
-
         <div class="staff-category">Staff Members</div>
         <div class="staff-row">
           <div class="staff-member" data-fact="G'day all! It's Big Joe here, the Aussie of the PillowTalk Team! Lil' fact about myself is that every time you guys see me at the show, just keep in mind that it's 3:00am. So apologies if I seem tired or off-putting, just haven't had my morning coffee. Also, I do 3D Renders on RecRoom! So, hit me up at @bigsmokinjoe on Discord!">
@@ -245,72 +219,52 @@
             <img src="BoomerGK.PNG" alt="Staff Member 8">
             <div class="staff-name">BoomerGK</div>
           </div>
-          <div class="staff-member" data-fact="I love Metal music">
-            <img src="Kayoas.jpg" alt="Staff Member 9">
-            <div class="staff-name">Kayoas</div>
-          </div>
           <div class="staff-member" data-fact="I have autism and ADHD">
-            <img src="Dank.png" alt="Staff Member 10">
+            <img src="Dank.png" alt="Staff Member 9">
             <div class="staff-name">EggsBenedict</div>
           </div>
           <div class="staff-member" data-fact="I'm not fat unlike Kyper">
-            <img src="Light.png" alt="Staff Member 11">
+            <img src="Light.png" alt="Staff Member 10">
             <div class="staff-name">Light</div>
           </div>
           <div class="staff-member" data-fact="I love PillowTalk 👍">
-            <img src="Ally.jpg" alt="Staff Member 12">
+            <img src="Ally.jpg" alt="Staff Member 11">
             <div class="staff-name">Ally</div>
           </div>
         </div>
       </section>
     </div>
   </div>
-  
-  <!-- Fact Overlay -->
   <div class="fact-overlay" id="factOverlay">
     <div class="fact-content">
       <h2>Meet the Staff</h2>
       <p id="factText"></p>
     </div>
   </div>
-
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Select all staff members
       const staffMembers = document.querySelectorAll('.staff-member');
-
-      // Select fact overlay and fact text element
       const factOverlay = document.getElementById('factOverlay');
       const factText = document.getElementById('factText');
-
-      // Function to show fact overlay and set the fact text
       function showFactOverlay(fact) {
         factText.textContent = fact;
-        factOverlay.style.display = 'flex'; // Display fact overlay
+        factOverlay.style.display = 'flex';
       }
-
-      // Function to hide fact overlay
       function hideFactOverlay() {
-        factOverlay.style.display = 'none'; // Hide fact overlay
+        factOverlay.style.display = 'none';
       }
-
-      // Attach click event to each staff member
       staffMembers.forEach(member => {
         member.addEventListener('click', function(event) {
-          event.stopPropagation(); // Stop propagation to prevent immediate hiding
-          const fact = this.getAttribute('data-fact'); // Get the fact attribute
-          showFactOverlay(fact); // Show fact overlay with the clicked staff's fact
+          event.stopPropagation();
+          const fact = this.getAttribute('data-fact');
+          showFactOverlay(fact);
         });
       });
-
-      // Click anywhere on the screen to hide fact overlay
       document.addEventListener('click', function(event) {
         if (!event.target.closest('.fact-content')) {
-          hideFactOverlay(); // Hide fact overlay when clicking outside
+          hideFactOverlay();
         }
       });
-
-      // Close fact overlay on ESC key press
       document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape') {
           hideFactOverlay();
