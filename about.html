@@ -5,195 +5,299 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About PillowTalk</title>
   <style>
-    /* Reset styles */
+    :root {
+      --primary-color: #8a2be2;
+      --secondary-color: #9370db;
+      --accent-color: #ff69b4;
+      --background-color: #120024;
+      --text-color: #f0f0f0;
+      --card-color: #1e0042;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-    
+
     body {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.6;
-      background-color: #1f1f1f;
-      color: #e5e5e5;
+      background-color: var(--background-color);
+      color: var(--text-color);
       margin: 0;
     }
-    
-    /* Header styling */
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
     header {
-      background: linear-gradient(to right, #6a0dad, #a24dff);
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
       color: white;
       text-align: center;
       padding: 4rem 2rem;
       position: relative;
-      border-bottom: 5px solid #a24dff;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
     }
-    
-    header h1 {
-      font-size: 4.5rem;
-      font-weight: 700;
+
+    h1 {
+      font-size: 3.5rem;
       margin-bottom: 1rem;
-      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      animation: fadeInDown 1s ease-out;
     }
-    
+
     header p {
-      font-size: 1.8rem;
-      color: #e0e0e0;
-      max-width: 800px;
-      margin: 0 auto;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-    }
-    
-    /* Navigation styling */
-    nav {
-      margin-top: 2rem;
-      text-align: center;
-    }
-    
-    nav a {
-      margin: 0 2rem;
-      color: #e5e5e5;
-      text-decoration: none;
-      font-weight: bold;
       font-size: 1.5rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid transparent;
-      transition: color 0.3s ease, border-bottom 0.3s ease;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      opacity: 0.9;
+      animation: fadeInUp 1s ease-out 0.5s both;
     }
-    
-    nav a:hover {
-      color: #a24dff;
-      border-bottom: 2px solid #a24dff;
-    }
-    
-    /* Social media styling */
+
     .social-media {
-      text-align: center;
-      margin: 2rem 0;
+      margin-bottom: 2rem;
+      animation: fadeIn 1s ease-out 1s both;
     }
 
     .social-media a {
-      margin: 0 1.5rem;
-      color: #d1d5db;
-      font-size: 3rem;
-      transition: color 0.3s ease;
+      display: inline-block;
+      margin: 0 1rem;
+      color: white;
+      font-size: 2rem;
+      transition: transform 0.3s ease, color 0.3s ease;
     }
 
     .social-media a:hover {
-      color: #ffffff;
+      transform: translateY(-5px) scale(1.1);
+      color: var(--accent-color);
     }
 
     .social-media img {
-      width: 3rem;
-      height: 3rem;
+      width: 2rem;
+      height: 2rem;
       vertical-align: middle;
+      filter: brightness(0) invert(1);
+      transition: transform 0.3s ease, filter 0.3s ease;
     }
 
-    /* Main content styling */
+    .social-media a:hover img {
+      transform: translateY(-5px) scale(1.1);
+      filter: brightness(1) invert(0);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 1s ease-out 1.5s both;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      padding: 0.5rem 1rem;
+      margin: 0.5rem;
+      border-radius: 25px;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: var(--accent-color);
+      transform: translateY(-3px);
+    }
+
     main {
-      background-color: #2d2d2d;
-      padding: 3rem;
-      border-radius: 0.75rem;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-      max-width: 900px;
-      width: 90%;
-      margin: 2rem auto;
+      padding: 4rem 0;
     }
-    
-    main section {
-      margin-bottom: 2.5rem;
+
+    .card {
+      background-color: var(--card-color);
+      border-radius: 15px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeIn 1s ease-out;
     }
-    
-    main h2 {
-      font-size: 3rem;
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      color: var(--accent-color);
       margin-bottom: 1rem;
-      color: #a24dff;
-      border-bottom: 3px solid #a24dff;
-      padding-bottom: 0.5rem;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      position: relative;
+      display: inline-block;
     }
-    
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+      transition: width 0.3s ease;
+    }
+
+    .card:hover h2::after {
+      width: 100%;
+    }
+
     main p {
-      font-size: 1.4rem;
-      line-height: 1.8;
+      font-size: 1.1rem;
       margin-bottom: 1.5rem;
+      line-height: 1.8;
     }
-    
-    /* Team photo styling */
+
     .team-photo {
       text-align: center;
-      margin-top: 2.5rem;
+      margin-top: 2rem;
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
     }
-    
+
     .team-photo img {
-      border-radius: 0.75rem;
       max-width: 100%;
-      height: auto;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
     }
-    
-    /* Media query for larger screens */
-    @media (min-width: 768px) {
-      header {
-        padding: 5rem 3rem;
+
+    .team-photo:hover img {
+      transform: scale(1.05);
+    }
+
+    .team-photo::after {
+      content: 'Our Amazing Team';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+      color: white;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .team-photo:hover::after {
+      opacity: 1;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
       }
-      
-      header h1 {
-        font-size: 5rem;
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
-      
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
       header p {
+        font-size: 1.2rem;
+      }
+
+      nav a {
+        font-size: 1rem;
+      }
+
+      h2 {
         font-size: 2rem;
       }
-      
-      main {
-        padding: 4rem;
-      }
-      
-      main h2 {
-        font-size: 3.5rem;
-      }
-      
+
       main p {
-        font-size: 1.5rem;
+        font-size: 1rem;
       }
     }
   </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
   <header>
-    <h1>About PillowTalk</h1>
-    <p>Discover more about our mission and the team behind PillowTalk</p>
-    <div class="social-media">
-      <a href="https://discord.gg/pz5FZzSEqK" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
-      <a href="https://www.youtube.com/@PillowTalkRR" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-      <a href="https://www.instagram.com/pillowtalk_rr?igsh=MzRlODBiNWFlZA==" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="https://rec.net/room/PillowTalk" target="_blank" aria-label="Rec Room"><img src="rr.png" alt="Rec Room"></a>
+    <div class="container">
+      <h1>About PillowTalk</h1>
+      <p>Discover the mission and the passionate team behind RecRoom's favorite talk show</p>
+      <div class="social-media">
+        <a href="https://discord.gg/pz5FZzSEqK" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord server">
+          <i class="fab fa-discord"></i>
+        </a>
+        <a href="https://www.youtube.com/@PillowTalkRR" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to our YouTube channel">
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://www.instagram.com/pillowtalk_rr?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://rec.net/room/PillowTalk" target="_blank" rel="noopener noreferrer" aria-label="Visit our Rec Room">
+          <img src="rr.png" alt="Rec Room icon">
+        </a>
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="staff.html">Meet the Team</a>
+        <a href="3years.html">3 Years of PillowTalk</a>
+      </nav>
     </div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <a href="staff.html">Meet the Team</a>
-      <a href="3years.html">3 Years of PillowTalk</a>
-    </nav>
   </header>
   
   <main>
-    <section>
-      <h2>Our Mission</h2>
-      <p>PillowTalk is dedicated to bringing the voices of the RecRoom community to the forefront. We believe in the power of conversation and aim to connect, entertain, and inform through engaging discussions with the most important people in RecRoom - you!</p>
-    </section>
-    
-    <section>
-      <h2>Meet Our Team</h2>
-      <p>Our team is composed of passionate RecRoom enthusiasts who are committed to creating a platform for meaningful interactions. We work hard to ensure that every episode of PillowTalk is insightful, entertaining, and reflective of the diverse community we serve.</p>
-      <div class="team-photo">
-        <img src="trio.jpg" alt="Team Photo">
-      </div>
-    </section>
+    <div class="container">
+      <section class="card">
+        <h2>Our Mission</h2>
+        <p>At PillowTalk, we're on a mission to amplify the voices of the RecRoom community. We believe in the power of conversation to connect, entertain, and inform. Our goal is to create a platform where the most important people in RecRoom - you, the players - can share your stories, insights, and experiences.</p>
+        <p>Through engaging discussions and interviews, we aim to showcase the diversity, creativity, and passion that make RecRoom such a vibrant virtual world. PillowTalk is more than just a talk show; it's a celebration of community and a bridge between players, creators, and developers.</p>
+      </section>
+      
+      <section class="card">
+        <h2>Meet Our Team</h2>
+        <p>Behind PillowTalk is a dedicated team of RecRoom enthusiasts who are passionate about creating quality content for our community. Each member brings unique skills and perspectives, united by our love for RecRoom and its players.</p>
+        <p>From our hosts who guide the conversations to our behind-the-scenes crew who ensure everything runs smoothly, we're committed to delivering episodes that are insightful, entertaining, and reflective of the diverse RecRoom community we serve.</p>
+        <div class="team-photo">
+          <img src="trio.jpg" alt="The PillowTalk team smiling together">
+        </div>
+      </section>
+    </div>
   </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 </body>
 </html>
