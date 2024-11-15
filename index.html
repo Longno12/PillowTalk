@@ -5,217 +5,228 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PillowTalk</title>
   <style>
-    /* Reset styles */
+    :root {
+      --primary-color: #6b46c1;
+      --secondary-color: #4c1d95;
+      --text-color: #f3f4f6;
+      --hover-color: #9f7aea;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-    
+
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.6;
-      background-color: #e5e7eb;
-      color: #333;
-      margin: 0;
+      color: var(--text-color);
+      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+      min-height: 100vh;
     }
-    
+
     .container {
+      width: 90%;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 2rem;
+      padding: 2rem 1rem;
     }
-    
-    .bg-gradient-to-r {
-      background: linear-gradient(to right, #4b0082, #2e0058);
-      color: white;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 4rem 1rem 2rem;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .logo-nav {
-      position: absolute;
+
+    header {
+      background-color: rgba(0, 0, 0, 0.5);
+      position: fixed;
       top: 0;
       left: 0;
       right: 0;
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+    }
+
+    .header-content {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 2rem;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 1000;
+      padding: 1rem 0;
     }
-    
-    .logo-nav img {
-      height: 3rem;
-      width: 3rem;
+
+    .logo {
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      object-fit: cover;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
-    
-    .logo-nav nav {
+
+    nav ul {
       display: flex;
+      list-style: none;
     }
-    
-    .logo-nav nav a {
+
+    nav ul li {
       margin-left: 1.5rem;
-      color: white;
+    }
+
+    nav ul li a {
+      color: var(--text-color);
       text-decoration: none;
       font-weight: 600;
-      font-size: 1rem;
-      transition: color 0.3s ease, border-bottom 0.3s ease;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid transparent;
+      transition: color 0.3s ease;
     }
-    
-    .logo-nav nav a:hover {
-      color: #d1d5db;
-      border-bottom: 2px solid #d1d5db;
+
+    nav ul li a:hover {
+      color: var(--hover-color);
     }
-    
-    .main-content {
+
+    main {
+      padding-top: 100px;
       text-align: center;
-      color: #fff;
-      margin-top: 6rem;
     }
-    
-    .main-content h1 {
-      font-size: 4rem;
+
+    h1 {
+      font-size: 3.5rem;
       margin-bottom: 1rem;
-      font-weight: 700;
-      line-height: 1.2;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
-    
-    .main-content p {
-      font-size: 1.25rem;
+
+    .tagline {
+      font-size: 1.5rem;
       margin-bottom: 2rem;
-      color: #e5e7eb;
-      font-weight: 400;
+      opacity: 0.9;
     }
-    
-    .buttons {
-      margin-top: 2rem;
+
+    .cta-buttons {
       display: flex;
       justify-content: center;
       gap: 1rem;
+      margin-bottom: 3rem;
     }
-    
-    .buttons a {
+
+    .cta-button {
       display: inline-block;
-      padding: 1rem 2rem;
-      border-radius: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
       text-decoration: none;
-      font-size: 1rem;
-      color: #fff;
-      background-color: #6b1f6d;
-      position: relative;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .primary-cta {
+      background-color: var(--text-color);
+      color: var(--primary-color);
+    }
+
+    .primary-cta:hover {
+      background-color: transparent;
+      border-color: var(--text-color);
+      color: var(--text-color);
+    }
+
+    .secondary-cta {
+      background-color: transparent;
+      border-color: var(--text-color);
+      color: var(--text-color);
+    }
+
+    .secondary-cta:hover {
+      background-color: var(--text-color);
+      color: var(--primary-color);
+    }
+
+    .video-container {
+      max-width: 800px;
+      margin: 0 auto;
+      border-radius: 10px;
       overflow: hidden;
-      transition: transform 0.3s ease, background-color 0.3s ease;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    
-    .buttons a::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 300%;
-      height: 300%;
-      background: rgba(255, 255, 255, 0.3);
-      transition: transform 0.3s ease;
-      transform: translate(-50%, -50%) scale(0);
-      z-index: 0;
-      border-radius: 50%;
-    }
-    
-    .buttons a:hover::before {
-      transform: translate(-50%, -50%) scale(1);
-    }
-    
-    .buttons a:hover {
-      transform: translateY(-5px);
-      background-color: #5a0f5b;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
 
-    .main-content .video-wrapper {
-      position: relative;
+    video {
       width: 100%;
-      padding-bottom: 56.25%; /* 16:9 aspect ratio */
-      margin-top: 3rem;
-    }
-    
-    .main-content video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      display: block;
     }
 
-    /* Responsive Design */
+    .secret-cheese {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: opacity 0.3s ease;
+    }
+
+    .secret-cheese:hover {
+      opacity: 1;
+    }
+
     @media (max-width: 768px) {
-      .logo-nav {
+      .header-content {
         flex-direction: column;
-        align-items: flex-start;
-        padding: 1rem;
       }
-      
-      .logo-nav nav {
+
+      nav ul {
         margin-top: 1rem;
-        margin-left: 0;
       }
-      
-      .main-content h1 {
+
+      nav ul li {
+        margin-left: 0.75rem;
+        margin-right: 0.75rem;
+      }
+
+      h1 {
         font-size: 2.5rem;
       }
-      
-      .main-content p {
-        font-size: 1rem;
+
+      .tagline {
+        font-size: 1.2rem;
       }
-      
-      .buttons a {
-        padding: 0.75rem 1.5rem;
-        font-size: 0.875rem;
+
+      .cta-buttons {
+        flex-direction: column;
       }
     }
   </style>
 </head>
 <body>
-  <div class="bg-gradient-to-r">
-    <header class="logo-nav">
-      <img src="IMG_1479.png" alt="Logo">
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="staff.html">Meet the Staff</a>
-        <a href="3years.html">3 Years of PillowTalk</a>
-      </nav>
-    </header>
+  <header>
     <div class="container">
-      <div class="main-content">
-        <h1>Welcome to PillowTalk</h1>
-        <p>Where we talk to the most important people in RecRoom - You!!!</p>
-        <div class="buttons">
-          <a href="about.html">Visit About to Learn More!</a>
-          <a class="discord-link" href="https://discord.gg/pz5FZzSEqK" target="_blank" rel="noopener noreferrer">Join Our Discord</a>
-        </div>
-        <div class="video-wrapper">
-          <video controls>
-            <source src="trailer.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
+      <div class="header-content">
+        <img src="IMG_1479.png" alt="PillowTalk Logo" class="logo">
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="staff.html">Meet the Staff</a></li>
+            <li><a href="3years.html">3 Years of PillowTalk</a></li>
+          </ul>
+        </nav>
       </div>
     </div>
-  </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <h1>Welcome to PillowTalk</h1>
+      <p class="tagline">Where we talk to the most important people in RecRoom - You!!!</p>
+      <div class="cta-buttons">
+        <a href="about.html" class="cta-button primary-cta">Visit About to Learn More!</a>
+        <a href="https://discord.gg/pz5FZzSEqK" target="_blank" rel="noopener noreferrer" class="cta-button secondary-cta">Join Our Discord</a>
+      </div>
+      <div class="video-container">
+        <video controls>
+          <source src="trailer.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </main>
+
+  <a href="https://youtu.be/C4O82tGsYro" target="_blank" rel="noopener noreferrer">
+    <img src="cheese.png" alt="Secret Cheese" class="secret-cheese">
+  </a>
 </body>
 </html>
