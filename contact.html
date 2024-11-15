@@ -5,191 +5,297 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact PillowTalk</title>
   <style>
-    /* Reset styles */
+    :root {
+      --primary-color: #8b5cf6;
+      --secondary-color: #a78bfa;
+      --background-light: #f3e8ff;
+      --background-dark: #2e1065;
+      --text-light: #4b5563;
+      --text-dark: #e2e8f0;
+      --card-light: #ffffff;
+      --card-dark: #4c1d95;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-    
+
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.6;
-      background-color: #1f1f1f;
-      color: #e5e5e5;
-      margin: 0;
-    }
-    
-    .bg-gradient-to-r {
-      background: linear-gradient(to right, #6a0dad, #a24dff);
+      background: linear-gradient(135deg, var(--background-light), var(--secondary-color));
+      color: var(--text-light);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background: linear-gradient(135deg, var(--background-dark), var(--primary-color));
+      color: var(--text-dark);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
       padding: 2rem 1rem;
     }
-    
-    .logo-nav {
+
+    header {
+      background-color: rgba(255, 255, 255, 0.9);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      transition: background-color 0.3s;
+      box-shadow: 0 2px 10px rgba(139, 92, 246, 0.3);
+    }
+
+    body.dark-mode header {
+      background-color: rgba(46, 16, 101, 0.9);
+      box-shadow: 0 2px 10px rgba(139, 92, 246, 0.5);
+    }
+
+    .header-content {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 100%;
-      max-width: 1200px;
-      padding: 1rem;
-      margin-bottom: 2rem;
+      padding: 1rem 0;
     }
-    
-    .logo-nav img {
-      height: 4rem;
-      width: 4rem;
-      border-radius: 50%;
-    }
-    
-    .logo-nav nav {
+
+    .logo {
       display: flex;
-      gap: 1.5rem;
-    }
-    
-    .logo-nav nav a {
-      color: white;
+      align-items: center;
       text-decoration: none;
+      color: var(--primary-color);
       font-weight: bold;
-      font-size: 1.1rem;
-      transition: color 0.3s ease, border-bottom 0.3s ease;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid transparent;
+      font-size: 1.5rem;
     }
-    
-    .logo-nav nav a:hover {
-      color: #d1d5db;
-      border-bottom: 2px solid #d1d5db;
+
+    .logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
     }
-    
-    .main-content {
-      background-color: #2d2d2d;
-      color: #e5e5e5;
-      border-radius: 0.75rem;
-      padding: 2.5rem;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-      max-width: 800px;
-      width: 100%;
-      margin: 2rem auto;
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin-left: 1.5rem;
+    }
+
+    nav ul li a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: var(--secondary-color);
+    }
+
+    body.dark-mode nav ul li a {
+      color: var(--text-dark);
+    }
+
+    body.dark-mode nav ul li a:hover {
+      color: var(--secondary-color);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      transition: color 0.3s ease;
+    }
+
+    body.dark-mode .theme-toggle {
+      color: var(--text-dark);
+    }
+
+    main {
+      padding-top: 100px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .content-card {
+      background-color: var(--card-light);
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px rgba(139, 92, 246, 0.1);
+      padding: 2rem;
+      margin-top: 2rem;
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    body.dark-mode .content-card {
+      background-color: var(--card-dark);
+      box-shadow: 0 4px 6px rgba(139, 92, 246, 0.3);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
       text-align: center;
     }
-    
-    .main-content h1 {
-      font-size: 2.75rem;
-      margin-bottom: 1rem;
-      color: #a24dff;
-      border-bottom: 3px solid #a24dff;
-      padding-bottom: 0.5rem;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+
+    body.dark-mode h1 {
+      color: var(--secondary-color);
     }
-    
-    .main-content p {
-      font-size: 1.2rem;
-      line-height: 1.8;
-      margin-bottom: 2rem;
-    }
-    
-    .discord-section {
+
+    .contact-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
       margin-top: 2rem;
     }
-    
-    .discord-section h2 {
-      font-size: 2.25rem;
-      color: #a24dff;
+
+    .contact-option {
+      background-color: rgba(139, 92, 246, 0.1);
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    body.dark-mode .contact-option {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .contact-option:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(139, 92, 246, 0.2);
+    }
+
+    .contact-option h2 {
+      font-size: 1.5rem;
+      color: var(--primary-color);
       margin-bottom: 1rem;
     }
-    
-    .discord-section p {
-      font-size: 1.2rem;
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
+
+    body.dark-mode .contact-option h2 {
+      color: var(--secondary-color);
     }
-    
-    .discord-link {
+
+    .contact-option p {
+      margin-bottom: 1rem;
+    }
+
+    .btn {
       display: inline-block;
-      padding: 1rem 2.5rem;
-      border-radius: 0.75rem;
+      padding: 0.8rem 1.5rem;
+      background-color: var(--primary-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 0.25rem;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      font-weight: 500;
+    }
+
+    .btn:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+
+    .btn-discord {
       background-color: #7289DA;
-      color: white;
-      text-decoration: none;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-      font-size: 1.1rem;
-      margin-top: 1rem;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
-    
-    .discord-link:hover {
+
+    .btn-discord:hover {
       background-color: #5b6eaa;
-      transform: translateY(-3px);
     }
-    
-    .support-ticket-link {
-      display: inline-block;
-      padding: 1rem 2.5rem;
-      border-radius: 0.75rem;
-      background-color: #6b46c1;
-      color: white;
-      text-decoration: none;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-      font-size: 1.1rem;
-      margin-top: 1rem;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    
-    .support-ticket-link:hover {
-      background-color: #503b8f;
-      transform: translateY(-3px);
-    }
-    
-    /* Responsive design */
+
     @media (max-width: 768px) {
-      .logo-nav {
+      .header-content {
         flex-direction: column;
         align-items: center;
       }
-      
-      .logo-nav nav {
+
+      nav {
         margin-top: 1rem;
-        gap: 1rem;
       }
-      
-      .main-content {
-        padding: 2rem;
-        margin: 1rem;
+
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      nav ul li {
+        margin: 0.5rem;
+      }
+
+      .theme-toggle {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="bg-gradient-to-r">
-    <header class="logo-nav">
-      <img src="IMG_1479.png" alt="Logo">
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="staff.html">Meet the Team</a>
-        <a href="3years.html">3 Years of PillowTalk</a>
-      </nav>
-    </header>
+  <header>
     <div class="container">
-      <div class="main-content">
+      <div class="header-content">
+        <a href="index.html" class="logo">
+          <img src="IMG_1479.png" alt="PillowTalk Logo">
+          <span>PillowTalk</span>
+        </a>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="staff.html">Meet the Team</a></li>
+            <li><a href="3years.html">3 Years of PillowTalk</a></li>
+          </ul>
+        </nav>
+        <button class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="content-card">
         <h1>Contact PillowTalk</h1>
-        <p>If you have any questions or need assistance, here are your options:</p>
+        <p>Have questions or want to connect with us? Choose from the options below:</p>
         
-        <div class="discord-section">
-          <h2>Join Our Discord Server</h2>
-          <p>Connect with us and other PillowTalk enthusiasts directly on our Discord server. We're here to help and chat!</p>
-          <a class="discord-link" href="https://discord.gg/pz5FZzSEqK" target="_blank" rel="noopener noreferrer">Join Discord</a>
+        <div class="contact-options">
+          <div class="contact-option">
+            <h2>Join Our Discord</h2>
+            <p>Connect with us and other PillowTalk enthusiasts on our vibrant Discord community. Get real-time support, share ideas, and be part of exciting discussions!</p>
+            <a href="https://discord.gg/pz5FZzSEqK" target="_blank" rel="noopener noreferrer" class="btn btn-discord">Join Discord</a>
+          </div>
+          
+          <div class="contact-option">
+            <h2>Meet Our Team</h2>
+            <p>Curious about the faces behind PillowTalk? Visit our team page to learn more about the passionate individuals who make PillowTalk possible.</p>
+            <a href="staff.html" class="btn">Meet the Team</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </main>
+
+  <script>
+    const themeToggle = document.querySelector('.theme-toggle');
+    const body = document.body;
+
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      themeToggle.textContent = body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    });
+  </script>
 </body>
 </html>
