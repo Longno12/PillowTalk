@@ -13,6 +13,10 @@
             --secondary: #f3e8ff;
             --text: #1f2937;
             --background: #f9fafb;
+            --background-light: #fff;
+            --christmas-red: #c0392b;
+            --christmas-green: #27ae60;
+            --christmas-gold: #f1c40f;
         }
         
         * {
@@ -23,9 +27,10 @@
         
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--background);
+            background: linear-gradient(135deg, var(--background-light), var(--primary), var(--christmas-gold));
             color: var(--text);
             line-height: 1.6;
+            overflow: hidden; /* Add this for snowfall effect */
         }
         
         .container {
@@ -82,11 +87,12 @@
         .hero {
             text-align: center;
             padding: 4rem 0;
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            background: linear-gradient(135deg, var(--primary-light), var(--primary), var(--christmas-red));
             color: white;
             border-radius: 20px;
             margin-bottom: 4rem;
             box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+            border: 3px solid var(--christmas-gold);
         }
         
         h1 {
@@ -104,8 +110,8 @@
         }
         
         .cta-button {
-            background-color: white;
-            color: var(--primary);
+            background-color: var(--christmas-green);
+            color: white;
             padding: 12px 24px;
             border-radius: 30px;
             text-decoration: none;
@@ -116,8 +122,8 @@
         }
         
         .cta-button:hover {
-            background-color: var(--primary-dark);
-            color: white;
+            background-color: var(--christmas-gold);
+            color: var(--primary-dark);
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
@@ -137,6 +143,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             position: relative;
             overflow: hidden;
+            border: 2px solid var(--christmas-gold);
         }
         
         .feature::before {
@@ -146,7 +153,7 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(to right, var(--primary-light), var(--primary));
+            background: linear-gradient(to right, var(--christmas-red), var(--christmas-green));
             transform: scaleX(0);
             transition: transform 0.3s ease;
         }
@@ -208,18 +215,59 @@
                 font-size: 2.5rem;
             }
         }
+
+        /* Snowfall animation */
+        .snowflake {
+          position: absolute;
+          top: -10px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 10px;
+          height: 10px;
+          background: white;
+          border-radius: 50%;
+          opacity: 0.8;
+          animation: snowfall 10s linear infinite;
+        }
+
+        @keyframes snowfall {
+          0% {
+            transform: translateX(-50%) translateY(-10px);
+            opacity: 0.8;
+          }
+          100% {
+            transform: translateX(-50%) translateY(100vh);
+            opacity: 0;
+          }
+        }
+
+        .music-control {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          z-index: 1001;
+        }
+
+        .music-button {
+          background-color: var(--christmas-green);
+          color: white;
+          border: none;
+          padding: 10px 15px;
+          border-radius: 5px;
+          cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <nav>
         <div class="container nav-content">
-            <a href="#" class="logo">PillowTalk</a>
+            <a href="#" class="logo">PillowTalk 🎄</a>
             <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
-                <a href="staff.html">Meet the Staff</a>
-                <a href="3years.html">3 Years of PillowTalk</a>
+                <a href="index.html">🏠 Home</a>
+                <a href="about.html">❄️ About</a>
+                <a href="contact.html">🎅 Contact</a>
+                <a href="staff.html">⛄ Meet the Staff</a>
+                <a href="3years.html">🎄 3 Years of PillowTalk</a>
             </div>
         </div>
     </nav>
@@ -233,7 +281,7 @@
 
         <div class="features">
             <section class="feature">
-                <h2>Community Engagement</h2>
+                <h2>🎄 Community Engagement</h2>
                 <button class="feature-toggle">▼</button>
                 <div class="feature-content">
                     <p><strong>Objective:</strong> To actively engage the RecRoom community by fostering meaningful interactions, promoting conversations, and creating a vibrant, inclusive platform where members can connect, entertain, and inform each other.</p>
@@ -247,7 +295,7 @@
             </section>
 
             <section class="feature">
-                <h2>Innovative Conversations</h2>
+                <h2>🎅 Innovative Conversations</h2>
                 <button class="feature-toggle">▼</button>
                 <div class="feature-content">
                     <p><strong>Objective:</strong> To push the boundaries of discussions within the RecRoom community, introducing new ideas, and fostering thought-provoking conversations.</p>
@@ -262,7 +310,7 @@
             </section>
 
             <section class="feature">
-                <h2>Future Vision</h2>
+                <h2>⛄ Future Vision</h2>
                 <button class="feature-toggle">▼</button>
                 <div class="feature-content">
                     <p><strong>Objective:</strong> To outline the future direction and aspirations of PillowTalk, setting goals and envisioning new possibilities for continued growth and impact.</p>
@@ -286,6 +334,20 @@
                 feature.classList.toggle('active');
             });
         });
+
+        // Snowfall animation
+        const numSnowflakes = 50;
+        for (let i = 0; i < numSnowflakes; i++) {
+          const snowflake = document.createElement('div');
+          snowflake.classList.add('snowflake');
+          snowflake.style.left = Math.random() * 100 + '%';
+          snowflake.style.animationDuration = Math.random() * 5 + 5 + 's';
+          document.body.appendChild(snowflake);
+        }
     </script>
+    <script src="js/audio-controller.js"></script>
+    <div id="music-control" class="music-control">
+        <button id="toggleMusic" onclick="toggleMusic()" class="music-button">🔈</button>
+    </div>
 </body>
 </html>

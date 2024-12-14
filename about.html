@@ -12,6 +12,9 @@
       --background-color: #120024;
       --text-color: #f0f0f0;
       --card-color: #1e0042;
+      --christmas-gold: #ffd700;
+      --christmas-red: #ff4136;
+      --christmas-green: #2ecc40;
     }
 
     * {
@@ -26,6 +29,7 @@
       background-color: var(--background-color);
       color: var(--text-color);
       margin: 0;
+      overflow: hidden; /* Add this line for the snow effect */
     }
 
     .container {
@@ -35,7 +39,7 @@
     }
 
     header {
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--christmas-gold));
       color: white;
       text-align: center;
       padding: 4rem 2rem;
@@ -122,14 +126,15 @@
       border-radius: 15px;
       padding: 2rem;
       margin-bottom: 2rem;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
+      border: 2px solid var(--christmas-gold);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       animation: fadeIn 1s ease-out;
     }
 
     .card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 15px 30px rgba(255, 215, 0, 0.3);
     }
 
     h2 {
@@ -147,7 +152,7 @@
       left: 0;
       width: 0;
       height: 3px;
-      background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+      background: linear-gradient(90deg, var(--christmas-gold), var(--christmas-red), var(--christmas-green));
       transition: width 0.3s ease;
     }
 
@@ -248,6 +253,44 @@
         font-size: 1rem;
       }
     }
+
+    /* Snow effect styles */
+    .snowflake {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: fall 10s linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+      }
+      100% {
+        transform: translateY(100vh) translateX(-100vw) rotate(720deg);
+      }
+    }
+
+    /* Music control styles */
+    .music-control {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .music-button {
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
   </style>
 </head>
 <body>
@@ -257,24 +300,24 @@
       <p>Discover the mission and the passionate team behind RecRoom's favorite talk show</p>
       <div class="social-media">
         <a href="https://discord.gg/pz5FZzSEqK" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord server">
-          <i class="fab fa-discord"></i>
+          <i class="fab fa-discord"></i> 🎄
         </a>
         <a href="https://www.youtube.com/@PillowTalkRR" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to our YouTube channel">
-          <i class="fab fa-youtube"></i>
+          <i class="fab fa-youtube"></i> 🎅
         </a>
         <a href="https://www.instagram.com/pillowtalk_rr?igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
-          <i class="fab fa-instagram"></i>
+          <i class="fab fa-instagram"></i> ⛄
         </a>
         <a href="https://rec.net/room/PillowTalk" target="_blank" rel="noopener noreferrer" aria-label="Visit our Rec Room">
-          <img src="rr.png" alt="Rec Room icon">
+          <img src="rr.png" alt="Rec Room icon"> 🎁
         </a>
       </div>
       <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="staff.html">Meet the Team</a>
-        <a href="3years.html">3 Years of PillowTalk</a>
+        <a href="index.html">🏠 Home</a>
+        <a href="about.html">❄️ About</a>
+        <a href="contact.html">🎅 Contact</a>
+        <a href="staff.html">⛄ Meet the Team</a>
+        <a href="3years.html">🎄 3 Years of PillowTalk</a>
       </nav>
     </div>
   </header>
@@ -299,5 +342,23 @@
   </main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+  <script>
+    // Snow effect JavaScript
+    const numSnowflakes = 100;
+    const snowContainer = document.body;
+
+    for (let i = 0; i < numSnowflakes; i++) {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+      snowflake.style.left = Math.random() * 100 + '%';
+      snowflake.style.top = Math.random() * 100 + '%';
+      snowflake.style.animationDuration = Math.random() * 10 + 5 + 's'; // Vary animation speed
+      snowContainer.appendChild(snowflake);
+    }
+  </script>
+  <script src="js/audio-controller.js"></script>
+  <div id="music-control" class="music-control">
+    <button id="toggleMusic" onclick="toggleMusic()" class="music-button">🔈</button>
+  </div>
 </body>
 </html>
