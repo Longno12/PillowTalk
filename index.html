@@ -1,629 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PillowTalk - Where We Talk to You!</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary-color: #8b5cf6;
-      --secondary-color: #4c1d95;
-      --text-color: #f3f4f6;
-      --hover-color: #a78bfa;
-      --background-start: #2e1065;
-      --background-end: #4c1d95;
-      --christmas-gold: #ffd700;
-      --christmas-red: #ff4136;
-      --christmas-green: #2ecc40;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      line-height: 1.6;
-      color: var(--text-color);
-      background: linear-gradient(135deg, var(--background-start), var(--background-end));
-      min-height: 100vh;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: 
-        radial-gradient(circle, transparent 20%, var(--background-start) 20%, var(--background-start) 80%, transparent 80%, transparent),
-        radial-gradient(circle, transparent 20%, var(--background-start) 20%, var(--background-start) 80%, transparent 80%, transparent) 50px 50px,
-        linear-gradient(var(--christmas-gold) 2px, transparent 2px) 0 -1px,
-        linear-gradient(90deg, var(--christmas-gold) 2px, var(--background-start) 2px) -1px 0;
-      background-size: 100px 100px, 100px 100px, 50px 50px, 50px 50px;
-      z-index: -1;
-      opacity: 0.1;
-      pointer-events: none;
-    }
-
-
-    /* Snowflake styles */
-    .snowflake {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: white;
-      border-radius: 50%;
-      filter: blur(1px);
-      opacity: 0.8;
-      animation: snowfall linear infinite;
-    }
-
-    @keyframes snowfall {
-      0% {
-        transform: translateY(-100vh) rotate(0deg);
-      }
-      100% {
-        transform: translateY(100vh) rotate(360deg);
-      }
-    }
-
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-    }
-
-    header {
-      background-color: rgba(0, 0, 0, 0.5);
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      backdrop-filter: blur(10px);
-      transition: background-color 0.3s ease;
-    }
-
-    header:hover {
-      background-color: rgba(0, 0, 0, 0.7);
-    }
-
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 0;
-    }
-
-    .logo {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease;
-    }
-
-    .logo:hover {
-      transform: scale(1.1);
-    }
-
-    nav ul {
-      display: flex;
-      list-style: none;
-    }
-
-    nav ul li {
-      margin-left: 1.5rem;
-    }
-
-    nav ul li a {
-      color: var(--text-color);
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s ease, transform 0.3s ease;
-      display: inline-block;
-    }
-
-    nav ul li a:hover {
-      color: var(--christmas-gold);
-      transform: translateY(-2px);
-    }
-
-    main {
-      padding-top: 120px;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-      background: linear-gradient(45deg, var(--primary-color), var(--christmas-gold), var(--christmas-red), var(--christmas-green));
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradientText 5s ease infinite;
-    }
-
-    @keyframes gradientText {
-      0%, 100% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-    }
-
-    .tagline {
-      font-size: 1.5rem;
-      margin-bottom: 2rem;
-      opacity: 0.9;
-    }
-
-    .cta-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 3rem;
-    }
-
-    .cta-button {
-      display: inline-block;
-      padding: 0.8rem 1.5rem;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      border: 2px solid transparent;
-    }
-
-    .primary-cta {
-      background-color: var(--christmas-gold);
-      color: var(--secondary-color);
-    }
-
-    .primary-cta:hover {
-      background-color: transparent;
-      border-color: var(--christmas-gold);
-      color: var(--christmas-gold);
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .secondary-cta {
-      background-color: transparent;
-      border-color: var(--christmas-red);
-      color: var(--christmas-red);
-    }
-
-    .secondary-cta:hover {
-      background-color: var(--christmas-red);
-      color: var(--text-color);
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .video-container {
-      max-width: 800px;
-      margin: 0 auto 3rem;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease;
-    }
-
-    .video-container:hover {
-      transform: scale(1.02);
-    }
-
-    video {
-      width: 100%;
-      display: block;
-    }
-
-    .secret-cheese {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      opacity: 0.5;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    .secret-cheese:hover {
-      opacity: 1;
-      transform: rotate(15deg) scale(1.1);
-    }
-
-    .scrolling-reviews {
-      margin-top: 3rem;
-      padding: 3rem 0;
-      background: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(10px);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .scrolling-reviews::before,
-    .scrolling-reviews::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 100px;
-      z-index: 2;
-    }
-
-    .scrolling-reviews::before {
-      left: 0;
-      background: linear-gradient(to right, rgba(46, 16, 101, 0.9), rgba(46, 16, 101, 0));
-    }
-
-    .scrolling-reviews::after {
-      right: 0;
-      background: linear-gradient(to left, rgba(76, 29, 149, 0.9), rgba(76, 29, 149, 0));
-    }
-
-    .scrolling-reviews h2 {
-      text-align: center;
-      margin-bottom: 2rem;
-      color: var(--christmas-gold);
-      font-size: 2.5rem;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    }
-
-    .reviews-container {
-      display: flex;
-      transition: transform 0.5s ease;
-      padding: 1rem 0;
-    }
-
-    .review {
-      flex: 0 0 300px;
-      margin-right: 2rem;
-      padding: 1.5rem;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .review:hover {
-      transform: translateY(-5px) scale(1.03);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    .review p {
-      margin-bottom: 1rem;
-      font-style: italic;
-      line-height: 1.6;
-    }
-
-    .stars {
-      color: var(--christmas-gold);
-      font-size: 1.2rem;
-      display: flex;
-      justify-content: center;
-    }
-
-    .star {
-      margin: 0 2px;
-    }
-
-    .star.filled {
-      text-shadow: 0 0 5px rgba(255, 215, 0, 0.7);
-    }
-
-    footer {
-      background-color: rgba(0, 0, 0, 0.5);
-      color: var(--text-color);
-      text-align: center;
-      padding: 1rem 0;
-      margin-top: 2rem;
-    }
-
-    @media (max-width: 768px) {
-      .header-content {
-        flex-direction: column;
-      }
-
-      nav ul {
-        margin-top: 1rem;
-      }
-
-      nav ul li {
-        margin-left: 0.75rem;
-        margin-right: 0.75rem;
-      }
-
-      h1 {
-        font-size: 3rem;
-      }
-
-      .tagline {
-        font-size: 1.2rem;
-      }
-
-      .cta-buttons {
-        flex-direction: column;
-      }
-
-      .review {
-        flex: 0 0 250px;
-      }
-    }
-
-    .music-control {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      z-index: 1000;
-    }
-
-    .music-button {
-      background-color: var(--christmas-gold);
-      color: var(--primary-color);
-      border: none;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      font-size: 24px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    }
-
-    .music-button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .music-button.playing {
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.1);
-      }
-      100% {
-        transform: scale(1);
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PillowTalk - Where We Talk to You!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <div class="container">
-      <div class="header-content">
-        <img src="IMG_1479.png" alt="PillowTalk Logo" class="logo">
-        <nav>
-          <ul>
-            <li><a href="index.html">🏠 Home</a></li>
-            <li><a href="about.html">❄️ About</a></li>
-            <li><a href="contact.html">🎅 Contact</a></li>
-            <li><a href="staff.html">⛄ Meet the Staff</a></li>
-            <li><a href="3years.html">🎄 3 Years of PillowTalk</a></li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-  </header>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <img src="IMG_1479.png" alt="PillowTalk Logo">
+                    <span>PillowTalk</span>
+                </a>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="staff.html">Meet the Staff</a></li>
+                    <li><a href="3years.html">3 Years of PillowTalk</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-  <main>
-    <div class="container">
-      <h1>Welcome to PillowTalk</h1>
-      <p class="tagline">Where we talk to the most important people in RecRoom - You!!!</p>
-      <div class="cta-buttons">
-        <a href="about.html" class="cta-button primary-cta">Visit About to Learn More!</a>
-        <a href="https://discord.gg/pz5FZzSEqK" target="_blank" rel="noopener noreferrer" class="cta-button secondary-cta">Join Our Discord</a>
-      </div>
-      <div class="video-container">
-        <video controls>
-          <source src="trailer.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
-    </div>
-  </main>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Welcome to PillowTalk</h1>
+                <p class="tagline">Where we talk to the most important people in RecRoom - You!!!</p>
+                <div class="cta-buttons">
+                    <a href="about.html" class="cta-button primary-cta">Learn More</a>
+                    <a href="https://discord.gg/pz5FZzSEqK" target="_blank" rel="noopener noreferrer" class="cta-button secondary-cta">Join Our Discord</a>
+                </div>
+            </div>
+        </section>
 
-  <section class="scrolling-reviews">
-    <h2>What Our Viewers Say</h2>
-    <div class="reviews-container" id="reviewsContainer">
-      <!-- Reviews will be dynamically added here -->
-    </div>
-  </section>
+        <section class="video-section">
+            <div class="container">
+                <div class="video-container">
+                    <video controls>
+                        <source src="trailer.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </section>
 
-  <a href="https://youtu.be/C4O82tGsYro" target="_blank" rel="noopener noreferrer">
-    <img src="cheese.png" alt="Secret Cheese" class="secret-cheese">
-  </a>
+        <section class="reviews-section">
+            <div class="container">
+                <h2>What Our Viewers Say</h2>
+                <div class="reviews-container" id="reviewsContainer"></div>
+            </div>
+        </section>
+    </main>
 
-  <footer>
-    <p>&copy; 2023 PillowTalk. All rights reserved. Happy Holidays! 🎄🎁</p>
-  </footer>
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 PillowTalk. All rights reserved.</p>
+        </div>
+    </footer>
 
-  <script>
-    const reviews = [
-  { text: "PillowTalk is the pinnacle of RecRoom entertainment! The hosts' chemistry is unmatched, and every episode leaves me in stitches. Absolute must-watch!", rating: 5 },
-  { text: "While the content is generally good, some episodes feel a bit rushed. There's room for improvement in pacing and depth of topics.", rating: 3 },
-  { text: "I've never been more engaged with a RecRoom show. PillowTalk tackles important community issues with humor and grace. Bravo!", rating: 5 },
-  { text: "The hosts are charismatic, but the show can be hit or miss. When it's good, it's great, but consistency is an issue.", rating: 3 },
-  { text: "PillowTalk has single-handedly improved my RecRoom experience. The community insights and tips are invaluable!", rating: 5 },
-  { text: "I appreciate the effort, but sometimes the humor falls flat. It's a decent show, just not my cup of tea.", rating: 2 },
-  { text: "This show is a RecRoom institution! The way they involve the community is unparalleled. I feel like I'm part of something special.", rating: 5 },
-  { text: "PillowTalk strikes the perfect balance between informative and entertaining. It's my weekly dose of RecRoom goodness!", rating: 4 },
-  { text: "I've learned so much about RecRoom's hidden gems through PillowTalk. It's expanded my horizons in the game!", rating: 5 },
-  { text: "The production quality has skyrocketed over the years. It's clear the team is dedicated to constant improvement.", rating: 4 },
-  { text: "Sometimes the episodes drag on too long. Tighter editing could really elevate the show.", rating: 2 },
-  { text: "PillowTalk is my go-to source for RecRoom news and community happenings. It's like a virtual town hall!", rating: 5 },
-  { text: "The hosts' banter can be a bit much at times. I wish they'd focus more on the content and less on their jokes.", rating: 2 },
-  { text: "I've made so many friends through PillowTalk's community events. It's more than a show, it's a social hub!", rating: 5 },
-  { text: "While I enjoy most episodes, the quality can be inconsistent. Some weeks are amazing, others are forgettable.", rating: 3 },
-  { text: "PillowTalk has inspired me to create my own RecRoom content. The hosts are so encouraging of community creativity!", rating: 5 },
-  { text: "I wish they'd cover more advanced RecRoom topics. It often feels geared towards newer players.", rating: 2 },
-  { text: "The guest interviews are always a highlight. It's fascinating to hear from different RecRoom creators and developers.", rating: 4 },
-  { text: "PillowTalk is the glue that holds the RecRoom community together. It's fostered such a positive environment!", rating: 5 },
-  { text: "I don't always agree with their opinions, but I respect how they present different viewpoints on RecRoom issues.", rating: 3 },
-  { text: "The interactive segments are brilliant! I love feeling like I'm part of the show from my own dorm room.", rating: 5 },
-  { text: "PillowTalk has become my weekly ritual. It's the perfect way to kick off my RecRoom sessions!", rating: 4 },
-  { text: "I wish they'd stick to a consistent schedule. It's frustrating when episodes are delayed or cancelled.", rating: 2 },
-  { text: "The amount of effort put into each episode is evident. The research, the guests, the topics - all top-notch!", rating: 5 },
-  { text: "PillowTalk has helped me navigate the complexities of RecRoom's creation tools. Their tutorials are lifesavers!", rating: 5 },
-  { text: "While informative, the show can be a bit too 'insider baseball' for casual RecRoom players like me.", rating: 2 },
-  { text: "The way PillowTalk highlights community creations is wonderful. They've helped so many creators gain recognition!", rating: 5 },
-  { text: "I appreciate the attempt at humor, but sometimes it misses the mark and detracts from the content.", rating: 2 },
-  { text: "PillowTalk's community challenges are so fun! They really know how to bring people together in RecRoom.", rating: 5 },
-  { text: "The show has its moments, but I find myself zoning out during certain segments. Mixed bag overall.", rating: 3 },
-  { text: "The hosts are genuinely funny, but sometimes they overdo the humor, and it takes away from the main topics.", rating: 3 },
-  { text: "PillowTalk brings RecRoom players together like no other platform. It's more than a show, it's a movement!", rating: 5 },
-  { text: "I love the creative ways PillowTalk engages the audience. It's like being part of a huge, interactive play!", rating: 4 },
-  { text: "Some of the best tips and tricks for new players come from PillowTalk. They've saved me countless hours of frustration.", rating: 5 },
-  { text: "Not every episode is for me, but the ones that hit the mark are absolutely brilliant!", rating: 4 },
-  { text: "The deep dives into RecRoom lore and history are my favorite. I always learn something new.", rating: 5 },
-  { text: "Their giveaways and challenges are awesome. It's clear the team really cares about the community.", rating: 5 },
-  { text: "Sometimes the show feels repetitive. I'd like to see more variety in topics and discussions.", rating: 3 },
-  { text: "The banter is fun, but I feel like they could cut down on some of the jokes to keep things snappier.", rating: 2 },
-  { text: "The interviews with top RecRoom creators are pure gold. It's inspiring to hear their stories.", rating: 5 },
-  { text: "I wish they'd feature more diverse voices and perspectives. There's so much untapped talent in RecRoom!", rating: 3 },
-  { text: "Watching PillowTalk is like having a conversation with friends. It's casual, fun, and full of laughs.", rating: 5 },
-  { text: "The background music sometimes distracts from the hosts' voices. A small tweak could make a big difference.", rating: 2 }
-];
-
-reviews.sort(() => Math.random() - 0.5);
-
-    function createReviewElement(review) {
-      const reviewElement = document.createElement('div');
-      reviewElement.className = 'review';
-
-      const stars = Array(5)
-        .fill()
-        .map((_, i) => `<span class="star ${i < review.rating ? 'filled' : ''}">★</span>`)
-        .join('');
-
-      reviewElement.innerHTML = `
-        <p>${review.text}</p>
-        <div class="stars">${stars}</div>
-      `;
-
-      return reviewElement;
-    }
-
-    function initializeReviews() {
-      const container = document.getElementById('reviewsContainer');
-      reviews.forEach(review => {
-        container.appendChild(createReviewElement(review));
-      });
-    }
-
-    function scrollReviews() {
-      const container = document.getElementById('reviewsContainer');
-      const firstReview = container.firstElementChild;
-      
-      container.style.transition = 'transform 0.5s ease';
-      container.style.transform = `translateX(-${firstReview.offsetWidth + 32}px)`;
-
-      setTimeout(() => {
-        container.style.transition = 'none';
-        container.style.transform = 'translateX(0)';
-        container.removeChild(firstReview);
-        container.appendChild(firstReview);
-      }, 500);
-    }
-
-    function createSnowflakes() {
-      const snowflakesContainer = document.createElement('div');
-      snowflakesContainer.className = 'snowflakes-container';
-      document.body.appendChild(snowflakesContainer);
-
-      for (let i = 0; i < 50; i++) {
-        const snowflake = document.createElement('div');
-        snowflake.className = 'snowflake';
-        snowflake.style.left = `${Math.random() * 100}vw`;
-        snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
-        snowflake.style.animationDelay = `${Math.random() * 3}s`;
-        snowflakesContainer.appendChild(snowflake);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      initializeReviews();
-      setInterval(scrollReviews, 4000);
-      createSnowflakes();
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-      const bgMusic = document.getElementById('bgMusic');
-      const toggleMusic = document.getElementById('toggleMusic');
-      let isPlaying = false;
-
-      function playMusic() {
-        bgMusic.play();
-        isPlaying = true;
-        toggleMusic.classList.add('playing');
-      }
-
-      function pauseMusic() {
-        bgMusic.pause();
-        isPlaying = false;
-        toggleMusic.classList.remove('playing');
-      }
-
-      toggleMusic.addEventListener('click', function() {
-        if (isPlaying) {
-          pauseMusic();
-        } else {
-          playMusic();
-        }
-      });
-
-      // Attempt to play music automatically (may be blocked by browser)
-      let playAttempt = setInterval(() => {
-        bgMusic.play()
-          .then(() => {
-            clearInterval(playAttempt);
-            isPlaying = true;
-            toggleMusic.classList.add('playing');
-          })
-          .catch(error => {
-            console.log("Auto-play was prevented. Please click the music button to start.");
-          });
-      }, 3000);
-    });
-  </script>
-
-  <!--Start of Tawk.to Script-->
-  <script type="text/javascript">
-  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-  (function(){
-  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-  s1.async=true;
-  s1.src='https://embed.tawk.to/674b868b2480f5b4f5a64220/1idvgb4p6';
-  s1.charset='UTF-8';
-  s1.setAttribute('crossorigin','*');
-  s0.parentNode.insertBefore(s1,s0);
-  })();
-  </script>
-  <!--End of Tawk.to Script-->
-  <div id="music-control" class="music-control">
-    <button id="toggleMusic" class="music-button">🎵</button>
-  </div>
-  <audio id="bgMusic" loop>
-    <source src="christmas-music.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+    <script src="script.js"></script>
 </body>
 </html>
