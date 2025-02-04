@@ -1,497 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meet The Staff - PillowTalk</title>
-  <style>
-    :root {
-      --primary: #8b5cf6;
-      --primary-dark: #6d28d9;
-      --secondary: #f3e8ff;
-      --text: #f8fafc;
-      --background: #1e1b4b;
-      --card-bg: rgba(139, 92, 246, 0.1);
-      --christmas-red: #c0392b;
-      --christmas-green: #27ae60;
-      --christmas-gold: #f1c40f;
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: 'Poppins', sans-serif;
-      line-height: 1.6;
-      background: linear-gradient(135deg, var(--background), var(--primary), var(--christmas-gold));
-      color: var(--text);
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-    header {
-      background-color: rgba(30, 27, 75, 0.95);
-      backdrop-filter: blur(10px);
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-    .logo-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-    }
-    .logo-nav img {
-      height: 3.5rem;
-      width: auto;
-      border-radius: 50%;
-      transition: transform 0.3s ease;
-    }
-    .logo-nav img:hover {
-      transform: scale(1.1);
-    }
-    nav a {
-      margin-left: 1.5rem;
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 1rem;
-      transition: color 0.3s ease, transform 0.3s ease;
-      display: inline-block;
-    }
-    nav a:hover {
-      color: var(--primary);
-      transform: translateY(-2px);
-    }
-    main {
-      padding-top: 6rem;
-    }
-    .staff-section {
-      margin-bottom: 4rem;
-    }
-    .staff-category {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: var(--primary);
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-      text-align: center;
-      letter-spacing: 2px;
-      position: relative;
-    }
-    .staff-category::after {
-      content: '';
-      display: block;
-      width: 50px;
-      height: 4px;
-      background-color: var(--primary);
-      margin: 10px auto 0;
-      border-radius: 2px;
-    }
-    .staff-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 2rem;
-    }
-    .staff-member {
-      background-color: var(--card-bg);
-      border-radius: 1rem;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-      position: relative;
-    }
-    .staff-member::after {
-      content: '🎄';
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 24px;
-    }
-    .staff-member:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(139, 92, 246, 0.2);
-    }
-    .staff-member img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-    .staff-member:hover img {
-      transform: scale(1.05);
-    }
-    .staff-info {
-      padding: 1rem;
-      text-align: center;
-      background-color: rgba(30, 27, 75, 0.8);
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      transition: transform 0.3s ease;
-    }
-    .staff-member:hover .staff-info {
-      transform: translateY(-5px);
-    }
-    .staff-name {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: var(--primary);
-    }
-    .fact-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      z-index: 2000;
-      justify-content: center;
-      align-items: center;
-      backdrop-filter: blur(5px);
-    }
-    .fact-content {
-      background-color: var(--background);
-      padding: 2rem;
-      border-radius: 1rem;
-      max-width: 600px;
-      text-align: center;
-      box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
-      transform: scale(0.9);
-      opacity: 0;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-    .fact-overlay.active .fact-content {
-      transform: scale(1);
-      opacity: 1;
-    }
-    .fact-content h2 {
-      font-size: 2rem;
-      color: var(--primary);
-      margin-bottom: 1rem;
-    }
-    .fact-content p {
-      font-size: 1.2rem;
-      line-height: 1.6;
-    }
-    .cuties-section {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1000;
-    }
-    .cuties-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-    }
-    .cutie-member {
-      background-color: var(--card-bg);
-      border-radius: 1rem;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    .cutie-member:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(139, 92, 246, 0.2);
-    }
-    .cutie-member img {
-      width: 100%;
-      height: 100px;
-      object-fit: cover;
-    }
-    .cutie-info {
-      padding: 0.5rem;
-      text-align: center;
-      background-color: rgba(30, 27, 75, 0.8);
-    }
-    .cutie-name {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--primary);
-    }
-    @media (max-width: 768px) {
-      .logo-nav {
-        flex-direction: column;
-        text-align: center;
-      }
-      nav {
-        margin-top: 1rem;
-      }
-      nav a {
-        margin: 0 0.75rem;
-      }
-      .staff-grid {
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      }
-    }
-    .snowflake {
-      position: absolute;
-      top: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 10px;
-      height: 10px;
-      background: white;
-      border-radius: 50%;
-      animation: fall 10s linear infinite;
-    }
-    @keyframes fall {
-      0% {
-        top: -10px;
-        left: 50%;
-        transform: translateX(-50%) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        top: 100%;
-        left: calc(50% + var(--offset-x));
-        transform: translateX(-50%) rotate(360deg);
-        opacity: 0;
-      }
-    }
-    .music-control {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      z-index: 1000;
-    }
-    .music-button {
-      background-color: transparent;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--text);
-    }
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meet The Staff - PillowTalk</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <div class="logo-nav">
-      <img src="IMG_1479.png" alt="PillowTalkRR">
-      <nav>
-        <a href="index.html">🏠 HOME</a>
-        <a href="about.html">❄️ ABOUT</a>
-        <a href="contact.html">🎅 CONTACT</a>
-        <a href="staff.html">⛄ MEET THE STAFF</a>
-        <a href="3years.html">🎄 3 YEARS OF PILLOWTALK</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <div class="container">
-      <section class="staff-section">
-        <h2 class="staff-category">Directors</h2>
-        <div class="staff-grid">
-          <div class="staff-member" data-fact="Bananas are yellow">
-            <img src="Kyper.png" alt="Kyper">
-            <div class="staff-info">
-              <div class="staff-name">Kyper</div>
-            </div>
-          </div>
-          <div class="staff-member" data-fact="People aren't to be trusted, but they can be understood.">
-            <img src="The Foggy Golem.png" alt="The Foggy Golem">
-            <div class="staff-info">
-              <div class="staff-name">The Foggy Golem</div>
-            </div>
-          </div>
-          <div class="staff-member" data-fact="I'm Polish">
-            <img src="Legacy.png" alt="Legacy">
-            <div class="staff-info">
-              <div class="staff-name">Legacy</div>
-            </div>
-          </div>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <img src="IMG_1479.png" alt="PillowTalk Logo">
+                    <span>PillowTalk</span>
+                </a>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="staff.html">Meet the Staff</a></li>
+                    <li><a href="3years.html">3 Years of PillowTalk</a></li>
+                </ul>
+            </nav>
         </div>
-      </section>
+    </header>
 
-      <section class="staff-section">
-        <h2 class="staff-category">Staff Leads</h2>
-        <div class="staff-grid">
-          <div class="staff-member" data-fact="Support And Safety @PillowTalk">
-            <img src="Joe.jpg" alt="2024Joe">
-            <div class="staff-info">
-              <div class="staff-name">2024Joe</div>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Meet The Staff</h1>
+                <p class="tagline">Get to know the amazing team behind PillowTalk</p>
             </div>
-          </div>
-          <div class="staff-member" data-fact="Fact that I'm a Rec Room Karaoke Head Moderator, Co-Founder of Alfonso Productions, and a Staff Lead of PillowTalk">
-            <img src="Mr.Cam.png" alt="Mr.Cam">
-            <div class="staff-info">
-              <div class="staff-name">Mr.Cam</div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2 class="section-title">Directors</h2>
+                <div class="staff-grid">
+                    <div class="staff-member" data-fact="Bananas are yellow">
+                        <img src="Kyper.png" alt="Kyper">
+                        <div class="staff-info">
+                            <h3>Kyper</h3>
+                            <p>Director</p>
+                        </div>
+                    </div>
+                    <div class="staff-member" data-fact="People aren't to be trusted, but they can be understood.">
+                        <img src="The Foggy Golem.png" alt="The Foggy Golem">
+                        <div class="staff-info">
+                            <h3>The Foggy Golem</h3>
+                            <p>Director</p>
+                        </div>
+                    </div>
+                    <div class="staff-member" data-fact="I'm Polish">
+                        <img src="Legacy.png" alt="Legacy">
+                        <div class="staff-info">
+                            <h3>Legacy</h3>
+                            <p>Director</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="section-title">Staff Leads</h2>
+                <div class="staff-grid">
+                    <div class="staff-member" data-fact="Support And Safety @PillowTalk">
+                        <img src="Joe.jpg" alt="2024Joe">
+                        <div class="staff-info">
+                            <h3>2024Joe</h3>
+                            <p>Staff Lead</p>
+                        </div>
+                    </div>
+                    <div class="staff-member" data-fact="G'day all! It's Big Joe here, the Aussie of the PillowTalk Team! Lil' fact about myself is that every time you guys see me at the show, just keep in mind that it's 3:00am. So apologies if I seem tired or off-putting, just haven't had my morning coffee. Also, I do 3D Renders on RecRoom! So, hit me up at @bigsmokinjoe on Discord!">
+                        <img src="BigJoe.png" alt="Big Joe">
+                        <div class="staff-info">
+                            <h3>Big Joe</h3>
+                            <p>Staff Lead</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="section-title">Staff Members</h2>
+                <div class="staff-grid">
+                    <div class="staff-member" data-fact="I'm funny">
+                        <img src="O9.jpg" alt="O9">
+                        <div class="staff-info">
+                            <h3>O9</h3>
+                            <p>Staff Member</p>
+                        </div>
+                    </div>
+                    <div class="staff-member" data-fact="Fact that I'm a Rec Room Karaoke Head Moderator, Co-Founder of Alfonso Productions, and a Staff Member of PillowTalk">
+                      <img src="Mr.Cam.png" alt="Mr.Cam">
+                      <div class="staff-info">
+                          <h3>Mr.Cam</h3>
+                          <p>Staff Member</p>
+                      </div>
+                    </div>
+                    <div class="staff-member" data-fact="Sniping Furry :3">
+                        <img src="Rocko.jpg" alt="Rocko">
+                        <div class="staff-info">
+                            <h3>Rocko</h3>
+                            <p>Staff Member</p>
+                        </div>
+                    </div>
+                    <div class="staff-member" data-fact="I have autism and ADHD">
+                        <img src="Dank.png" alt="EggsBenedict">
+                        <div class="staff-info">
+                            <h3>EggsBenedict</h3>
+                            <p>Staff Member</p>
+                        </div>
+                    </div>
+                    <div class="staff-member" data-fact="I'm not fat unlike Kyper">
+                        <img src="Light.png" alt="Light">
+                        <div class="staff-info">
+                            <h3>Light</h3>
+                            <p>Staff Member</p>
+                        </div>
+                    </div>
+                    <div class="staff-member" data-fact="I love PillowTalk 👍">
+                        <img src="Ally.jpg" alt="Ally">
+                        <div class="staff-info">
+                            <h3>Ally</h3>
+                            <p>Staff Member</p>
+                        </div>
+                    </div>
+                    <div class="staff-member" data-fact="Look behind you">
+                        <img src="Salt.png" alt="Salt">
+                        <div class="staff-info">
+                            <h3>Mr.Salt</h3>
+                            <p>Staff Member</p>
+                        </div>
+                    </div>
+                    <div class="staff-member" data-fact=" I work here">
+                      <img src="Grant.jpg" alt="Grant">
+                      <div class="staff-info">
+                          <h3>+FreakyGrant+</h3>
+                          <p>Staff Member</p>
+                      </div>
+                    </div>
+                      <div class="staff-member" data-fact=" I like cooking and cleaning and also everyone’s a goober ❤️">
+                        <img src="Yami.png" alt="Yami">
+                        <div class="staff-info">
+                            <h3>Yami Wolf</h3>
+                            <p>Staff Member</p>
+                        </div>
+                  </div>
+                </div>
+
+                <h2 class="section-title">The Cuties</h2>
+                <div class="staff-grid">
+                    <div class="staff-member" data-fact="Married To My Cutie Shamweezy He is such A Cutie 😊">
+                        <img src="SPARKY.png" alt="Sparky">
+                        <div class="staff-info">
+                            <h3>Sparky</h3>
+                            <p>Cutie</p>
+                        </div>
+                    </div>
+                    <div class="staff-member" data-fact="All I want is a vintage Coogi sweater please">
+                        <img src="Shamweezy.jpg" alt="Shamweezy">
+                        <div class="staff-info">
+                            <h3>Shamweezy</h3>
+                            <p>Cutie</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="staff-member" data-fact="G'day all! It's Big Joe here, the Aussie of the PillowTalk Team! Lil' fact about myself is that every time you guys see me at the show, just keep in mind that it's 3:00am. So apologies if I seem tired or off-putting, just haven't had my morning coffee. Also, I do 3D Renders on RecRoom! So, hit me up at @bigsmokinjoe on Discord!">
-            <img src="BigJoe.png" alt="Big Joe">
-            <div class="staff-info">
-              <div class="staff-name">Big Joe</div>
-            </div>
-          </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 PillowTalk. All rights reserved.</p>
         </div>
-      </section>
+    </footer>
 
-      <section class="staff-section">
-        <h2 class="staff-category">Staff Members</h2>
-        <div class="staff-grid">
-          <div class="staff-member" data-fact="I'm funny">
-            <img src="O9.jpg" alt="O9">
-            <div class="staff-info">
-              <div class="staff-name">O9</div>
-            </div>
-          </div>
-          <div class="staff-member" data-fact="My name is Snoozy! I love sleeping.">
-            <img src="Snoozy.jpg" alt="Snoozy">
-            <div class="staff-info">
-              <div class="staff-name">Snoozy</div>
-            </div>
-          </div>
-          <div class="staff-member" data-fact="My name is Nay and I love softball!">
-            <img src="Nay.jpg" alt="Nay">
-            <div class="staff-info">
-              <div class="staff-name">Nay</div>
-            </div>
-          </div>
-          <div class="staff-member" data-fact="Sniping Furry :3">
-            <img src="Rocko.jpg" alt="Rocko">
-            <div class="staff-info">
-              <div class="staff-name">Rocko</div>
-            </div>
-          </div>
-          <div class="staff-member" data-fact="I have autism and ADHD">
-            <img src="Dank.png" alt="EggsBenedict">
-            <div class="staff-info">
-              <div class="staff-name">EggsBenedict</div>
-            </div>
-          </div>
-          <div class="staff-member" data-fact="I'm not fat unlike Kyper">
-            <img src="Light.png" alt="Light">
-            <div class="staff-info">
-              <div class="staff-name">Light</div>
-            </div>
-          </div>
-          <div class="staff-member" data-fact="I love PillowTalk 👍">
-            <img src="Ally.jpg" alt="Ally">
-            <div class="staff-info">
-              <div class="staff-name">Ally</div>
-            </div>
-          </div>
-          <div class="staff-member" data-fact="Building games on Rec Room isn't just a hobby—it's a full-fledged creative pursuit that requires design skills">
-            <img src="OldGuy.jpg" alt="TheOldGuy">
-            <div class="staff-info">
-              <div class="staff-name">TheOldGuy</div>
-            </div>
-          </div>
-          <div class="staff-member" data-fact="I’m FazeCrocoYT and I like to do YouTube and playing Rec Room I always like helping out with things on Rec Room and I’m also a Rec Room movie director! ">
-            <img src="FazeCroco.jpg" alt="Faze Croco">
-            <div class="staff-info">
-              <div class="staff-name">FazeCrocoYT</div>
-            </div>
-          </div>
-          <div class="staff-member" data-fact="Look behind you">
-            <img src="Salt.png" alt="Salt">
-            <div class="staff-info">
-              <div class="staff-name">Mr.Salt</div>
-            </div>
-          </div>
+    <div class="fact-overlay" id="factOverlay">
+        <div class="fact-content">
+            <h2>Staff Fact</h2>
+            <p id="factText"></p>
         </div>
-      </section>
     </div>
-  </main>
 
-  <section class="cuties-section">
-    <div class="cuties-grid">
-      <div class="cutie-member" data-fact="Married To My Cutie Shamweezy He is such A Cutie 😊">
-        <img src="SPARKY.png" alt="Cutie 1">
-        <div class="cutie-info">
-          <div class="Sparky">Sparky</div>
-        </div>
-      </div>
-      <div class="cutie-member" data-fact="All I want is a vintage Coogi sweater please">
-        <img src="Shamweezy.jpg" alt="Cutie 2">
-        <div class="cutie-info">
-          <div class="cutie-name">Shamweezy</div>
-        </div>
-      </div>
-    </div>
-    <div style="text-align: right; margin-top: 0.5rem;">
-      <span style="font-size: 1.2rem; font-weight: bold; color: var(--primary);">The Cuties</span>
-    </div>
-  </section>
-
-  <div class="fact-overlay" id="factOverlay">
-    <div class="fact-content">
-      <h2>Staff Fact</h2>
-      <p id="factText"></p>
-    </div>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const staffMembers = document.querySelectorAll('.staff-member, .cutie-member');
-      const factOverlay = document.getElementById('factOverlay');
-      const factText = document.getElementById('factText');
-
-      function showFactOverlay(fact) {
-        factText.textContent = fact;
-        factOverlay.style.display = 'flex';
-        setTimeout(() => {
-          factOverlay.classList.add('active');
-        }, 10);
-      }
-
-      function hideFactOverlay() {
-        factOverlay.classList.remove('active');
-        setTimeout(() => {
-          factOverlay.style.display = 'none';
-        }, 300);
-      }
-
-      staffMembers.forEach(member => {
-        member.addEventListener('click', function(event) {
-          event.stopPropagation();
-          const fact = this.getAttribute('data-fact');
-          showFactOverlay(fact);
-        });
-      });
-
-      document.addEventListener('click', function(event) {
-        if (!event.target.closest('.fact-content')) {
-          hideFactOverlay();
-        }
-      });
-
-      document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-          hideFactOverlay();
-        }
-      });
-    });
-  </script>
-  <script>
-    const numSnowflakes = 50;
-    for (let i = 0; i < numSnowflakes; i++) {
-      const snowflake = document.createElement('div');
-      snowflake.classList.add('snowflake');
-      snowflake.style.setProperty('--offset-x', `${Math.random() * 200 - 100}px`);
-      snowflake.style.left = `${Math.random() * 100}%`;
-      snowflake.style.animationDelay = `${Math.random() * 10}s`;
-      document.body.appendChild(snowflake);
-    }
-  </script>
-  <script src="js/audio-controller.js"></script>
-  <div id="music-control" class="music-control">
-    <button id="toggleMusic" onclick="toggleMusic()" class="music-button">🔈</button>
-  </div>
+    <script src="staff.js"></script>
 </body>
 </html>
+
