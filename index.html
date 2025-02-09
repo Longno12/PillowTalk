@@ -33,7 +33,7 @@
                 <p class="tagline">Where we talk to the most important people in RecRoom - You!!!</p>
                 <div class="cta-buttons">
                     <a href="about.html" class="cta-button primary-cta">Learn More</a>
-                    <a href="https://discord.gg/pz5FZzSEqK" target="_blank" rel="noopener noreferrer" class="cta-button secondary-cta">Join Our Discord</a>
+                    <a href="https://discord.gg/pillowtalk" target="_blank" rel="noopener noreferrer" class="cta-button secondary-cta">Join Our Discord</a>
                 </div>
             </div>
         </section>
@@ -41,7 +41,7 @@
         <section class="video-section">
             <div class="container">
                 <div class="video-container">
-                    <video controls>
+                    <video controls preload="metadata">
                         <source src="trailer.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -51,18 +51,40 @@
 
         <section class="reviews-section">
             <div class="container">
-                <h2>What Our Viewers Say</h2>
-                <div class="reviews-container" id="reviewsContainer"></div>
+                <h2 class="section-title">What Our Viewers Say</h2>
+                <div class="reviews-container" id="reviewsContainer">
+                    <!-- Reviews will be dynamically added here -->
+                </div>
+                <div class="review-form-container">
+                    <h3>Share Your Thoughts</h3>
+                    <form id="reviewForm" class="review-form">
+                        <div class="star-rating">
+                            <input type="radio" id="star5" name="rating" value="5" required>
+                            <label for="star5" title="5 stars"></label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4" title="4 stars"></label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3" title="3 stars"></label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2" title="2 stars"></label>
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1" title="1 star"></label>
+                        </div>
+                        <textarea id="reviewText" placeholder="Tell us about your experience..." required></textarea>
+                        <button type="submit">Submit Review</button>
+                    </form>
+                </div>
             </div>
-        </section>
+        </section>        
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2023 PillowTalk. All rights reserved.</p>
+            <p>&copy; 2025 PillowTalk. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
+
