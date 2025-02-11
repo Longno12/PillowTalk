@@ -1,37 +1,37 @@
+// Initialize Supabase client
+const supabaseUrl = "https://dhfalykghqmhrwydpzjx.supabase.co"
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRoZmFseWtnaHFtaHJ3eWRwemp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkzMDE0ODEsImV4cCI6MjA1NDg3NzQ4MX0.ykBwHXp31ZbwpKlypbbdnOVnIeNfYanm0XOO3euGj0o"
+const supabase = supabase.createClient(supabaseUrl, supabaseKey)
+
 const reviewsContainer = document.getElementById("reviewsContainer")
 const reviewForm = document.getElementById("reviewForm")
-
-const reviews = JSON.parse(localStorage.getItem("pillowTalkReviews")) || []
-
-function saveReviews() {
-  localStorage.setItem("pillowTalkReviews", JSON.stringify(reviews))
-}
 
 function createReviewElement(review) {
   const reviewElement = document.createElement("div")
   reviewElement.className = "review"
 
   const starsHTML = "★".repeat(review.rating) + "☆".repeat(5 - review.rating)
-  const formattedDate = new Date(review.date).toLocaleDateString("en-US", {
+  const formattedDate = new Date(review.created_at).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
   })
 
   reviewElement.innerHTML = `
-        <div class="review-content">
-            <p class="review-text">${review.text}</p>
-            <div class="review-rating">
-                <span class="review-stars">${starsHTML}</span>
-                <span class="review-date">${formattedDate}</span>
-            </div>
-        </div>
-    `
+    <div class="review-content">
+      <p class="review-text">${review.text}</p>
+      <div class="review-rating">
+        <span class="review-stars">${starsHTML}</span>
+        <span class="review-date">${formattedDate}</span>
+      </div>
+    </div>
+    <p class="review-author">- ${review.name}</p>
+  `
 
   return reviewElement
 }
 
-function displayReviews() {
+function displayReviews(reviews) {
   reviewsContainer.innerHTML = ""
   const fragment = document.createDocumentFragment()
 
@@ -40,35 +40,50 @@ function displayReviews() {
   })
 
   reviewsContainer.appendChild(fragment)
-
-  if (reviews.length === 0) {
-    const noReviewsMessage = document.createElement("p")
-    noReviewsMessage.textContent = "Be the first to leave a review!"
-    noReviewsMessage.className = "no-reviews-message"
-    reviewsContainer.appendChild(noReviewsMessage)
-  }
 }
 
-displayReviews()
+async function fetchReviews() {
+  const { data, error } = await supabase.from("reviews").select("*").order("created_at", { ascending: false }).limit(20)
 
-reviewForm.addEventListener("submit", (e) => {
+  if (error) {
+    console.error("Error fetching reviews:", error)
+    return
+  }
+
+  displayReviews(data)
+}
+
+fetchReviews()
+
+// Set up real-time listener for new reviews
+supabase
+  .channel("public:reviews")
+  .on("postgres_changes", { event: "INSERT", schema: "public", table: "reviews" }, (payload) => {
+    const newReview = payload.new
+    const reviewElement = createReviewElement(newReview)
+    reviewsContainer.insertBefore(reviewElement, reviewsContainer.firstChild)
+  })
+  .subscribe()
+
+reviewForm.addEventListener("submit", async (e) => {
   e.preventDefault()
+  const reviewName = document.getElementById("reviewName").value
   const reviewText = document.getElementById("reviewText").value
   const rating = document.querySelector('input[name="rating"]:checked').value
 
   const newReview = {
+    name: reviewName,
     text: reviewText,
-    rating: Number.parseInt(rating),
-    date: new Date().toISOString(),
+    rating: Number(rating),
   }
 
-  reviews.unshift(newReview)
-  if (reviews.length > 20) {
-    reviews.pop()
-  }
+  // Add the new review to Supabase
+  const { data, error } = await supabase.from("reviews").insert([newReview])
 
-  saveReviews()
-  displayReviews()
+  if (error) {
+    console.error("Error inserting review:", error)
+    return
+  }
 
   reviewForm.reset()
 
@@ -83,28 +98,3 @@ reviewForm.addEventListener("submit", (e) => {
     successMessage.remove()
   }, 3000)
 })
-
-// Add this to your existing CSS file
-const additionalCSS = `
-.no-reviews-message {
-    text-align: center;
-    font-style: italic;
-    color: var(--text-color);
-    opacity: 0.7;
-}
-
-.success-message {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 10px;
-    text-align: center;
-}
-`
-
-// Create a new style element and append it to the head
-const style = document.createElement("style")
-style.textContent = additionalCSS
-document.head.appendChild(style)
-
