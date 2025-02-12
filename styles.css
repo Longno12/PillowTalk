@@ -399,3 +399,105 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Staff Section Styles */
+.staff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.staff-member {
+  background: var(--white);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.staff-member:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.staff-member img {
+  width: 100%;
+  height: 300px;
+  border-bottom: 4px solid var(--primary-color);
+  object-fit: cover;
+  border-radius: 15px 15px 0 0;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.staff-member:hover img {
+  transform: scale(1.05);
+}
+
+.staff-info {
+  padding: 1rem;
+  background-color: var(--light-purple);
+  border-radius: 0 0 15px 15px;
+}
+
+.staff-info h3 {
+  color: var(--primary-color);
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.staff-info p {
+  color: var(--text-color);
+  font-size: 1rem;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+/* Fact Overlay Styles */
+.fact-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fact-overlay.active {
+  display: flex;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.fact-content {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  padding: 2rem;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+
