@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meet The Staff - PillowTalk</title>
+    <meta name="description" content="Get to know the amazing team behind PillowTalk">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon_io/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+    <link rel="manifest" href="favicon_io/site.webmanifest">
+    <meta name="theme-color" content="#4c1d95">
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -15,6 +25,11 @@
                     <img src="IMG_1479.png" alt="PillowTalk Logo">
                     <span>PillowTalk</span>
                 </a>
+                <button class="mobile-nav-toggle" aria-label="Toggle navigation menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
@@ -25,6 +40,8 @@
             </nav>
         </div>
     </header>
+
+    <div class="overlay"></div>
 
     <main>
         <section class="hero">
@@ -130,13 +147,13 @@
                           <p>Staff Member</p>
                       </div>
                     </div>
-                      <div class="staff-member" data-fact=" I like cooking and cleaning and also everyone’s a goober ❤️">
-                        <img src="Yami.png" alt="Yami">
-                        <div class="staff-info">
-                            <h3>Yami Wolf</h3>
-                            <p>Staff Member</p>
-                        </div>
-                  </div>
+                    <div class="staff-member" data-fact=" im goofy as can ever be,and i enjoy fresh tacos 😁">
+                      <img src="Jasper.jpg" alt="Jasper">
+                      <div class="staff-info">
+                          <h3>Jasper</h3>
+                          <p>Staff Member</p>
+                      </div>
+                    </div>
                 </div>
 
                 <h2 class="section-title">The Cuties</h2>
@@ -174,6 +191,6 @@
     </div>
 
     <script src="staff.js"></script>
+    <script src="mobile-nav.js"></script>
 </body>
 </html>
-

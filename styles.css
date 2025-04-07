@@ -65,6 +65,7 @@ nav {
   width: 40px;
   height: 40px;
   margin-right: 10px;
+  border-radius: 50%;
 }
 
 nav ul {
@@ -87,6 +88,39 @@ nav ul li a {
 
 nav ul li a:hover {
   color: var(--primary-color);
+}
+
+/* Mobile Navigation */
+.mobile-nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.mobile-nav-toggle span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px 0;
+  background-color: var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.overlay.active {
+  display: block;
 }
 
 /* Main Content */
@@ -127,6 +161,7 @@ h1 {
   text-decoration: none;
   font-weight: bold;
   transition: all 0.3s ease;
+  text-align: center;
 }
 
 .primary-cta {
@@ -332,71 +367,42 @@ footer {
   padding: 1rem 0;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  nav ul {
-    flex-direction: column;
-    width: 100%;
-    margin-top: 1rem;
-  }
-
-  nav ul li {
-    margin: 0.5rem 0;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  .tagline {
-    font-size: 1rem;
-  }
-
-  .hero {
-    padding: 4rem 1rem;
-    margin-top: 120px;
-  }
-
-  .cta-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .cta-button {
-    margin: 0.5rem 0;
-    width: 100%;
-    max-width: 250px;
-  }
-
-  .reviews-container {
-    grid-template-columns: 1fr;
-  }
-
-  .review-form {
-    padding: 1rem;
-  }
+/* Content Section */
+.content-section {
+  padding: 3rem 0;
 }
 
-@media (hover: none) and (pointer: coarse) {
-  nav ul li a,
-  .cta-button,
-  .review-form button {
-    padding: 0.75rem 1rem;
-  }
-
-  .star-rating label {
-    font-size: 2.5em;
-    padding: 0 0.2em;
-  }
+.card {
+  background-color: var(--white);
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-html {
-  scroll-behavior: smooth;
+.card h2 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.card p {
+  margin-bottom: 1rem;
+}
+
+.card ul {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.team-photo {
+  margin-top: 1.5rem;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.team-photo img {
+  width: 100%;
+  display: block;
 }
 
 /* Staff Section Styles */
@@ -490,6 +496,9 @@ html {
   text-align: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.5s ease-in-out;
+  max-width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 @keyframes fadeIn {
@@ -497,7 +506,172 @@ html {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Responsive Design */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
+  .mobile-nav-toggle {
+    display: block;
+    position: absolute;
+    right: 1rem;
+    top: 1.5rem;
+    z-index: 1001;
+  }
+  
+  nav ul {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background-color: var(--white);
+    flex-direction: column;
+    padding: 80px 20px 20px;
+    transition: right 0.3s ease;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    margin: 0;
+  }
+  
+  nav ul.active {
+    right: 0;
+  }
+  
+  nav ul li {
+    margin: 1rem 0;
+  }
+  
+  .mobile-nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  
+  .mobile-nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .mobile-nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
 
+  h1 {
+    font-size: 2rem;
+  }
 
+  .tagline {
+    font-size: 1rem;
+  }
 
+  .hero {
+    padding: 4rem 1rem;
+    margin-top: 60px;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-button {
+    margin: 0.5rem 0;
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .reviews-container {
+    grid-template-columns: 1fr;
+  }
+
+  .review-form {
+    padding: 1rem;
+  }
+  
+  .staff-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  
+  .staff-member img {
+    height: 200px;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.2rem;
+  }
+  
+  .logo img {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .hero {
+    padding: 3rem 1rem;
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  .tagline {
+    font-size: 0.9rem;
+  }
+  
+  .card {
+    padding: 1.5rem;
+  }
+  
+  .staff-member img {
+    height: 180px;
+  }
+  
+  input[type="text"],
+  textarea,
+  .review-form button {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+  
+  .star-rating {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .star-rating label {
+    padding: 0 0.3em;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  nav ul li a,
+  .cta-button,
+  .review-form button {
+    padding: 0.75rem 1rem;
+  }
+
+  .star-rating label {
+    font-size: 2.5em;
+    padding: 0 0.2em;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Fix for iOS Safari */
+@supports (-webkit-touch-callout: none) {
+  .hero {
+    background-attachment: scroll;
+  }
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
