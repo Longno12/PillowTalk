@@ -1,110 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PillowTalk - Where We Talk to You!</title>
-    <meta name="description" content="Welcome to PillowTalk. Where we talk to the most important people in RecRoom - You!!!">
-    
-    <!-- Favicon -->
-    <link rel="icon" href="favicon_io/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
-    <link rel="manifest" href="favicon_io/site.webmanifest">
-    <meta name="theme-color" content="#4c1d95">
-    
-    <!-- Fonts and Styles -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <div class="container">
-            <nav>
-                <a href="index.html" class="logo">
-                    <img src="IMG_1479.png" alt="PillowTalk Logo">
-                    <span>PillowTalk</span>
-                </a>
-                <button class="mobile-nav-toggle" aria-label="Toggle navigation menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="staff.html">Meet the Staff</a></li>
-                    <li><a href="3years.html">3 Years of PillowTalk</a></li>
-                </ul>
-            </nav>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PillowTalk - Where We Talk to You!</title>
+  <meta name="description" content="Welcome to PillowTalk. Where we talk to the most important people in RecRoom - You!!!"/>
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon_io/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+  <link rel="manifest" href="favicon_io/site.webmanifest">
+  <meta name="theme-color" content="#4c1d95">
+
+  <!-- Fonts and Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    #farewellBanner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #181818;
+      color: #f1f1f1;
+      padding: 20px 15px;
+      font-family: 'Arial', sans-serif;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+      z-index: 9999;
+      animation: slideDown 0.4s ease-out;
+    }
+  
+    #farewellBanner h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      font-weight: 600;
+    }
+  
+    #farewellBanner p {
+      margin: 6px 0;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+  
+    #farewellBanner .credit {
+      margin-top: 10px;
+      font-style: italic;
+      color: #ccc;
+    }
+  
+    #dismissBanner {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background-color: transparent;
+      border: 1px solid #f1f1f1;
+      color: #f1f1f1;
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s ease;
+    }
+  
+    #dismissBanner:hover {
+      background-color: #f1f1f1;
+      color: #181818;
+    }
+  
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  
+    @media (max-width: 600px) {
+      #farewellBanner h2 {
+        font-size: 18px;
+      }
+  
+      #farewellBanner p {
+        font-size: 14px;
+      }
+    }
+  </style>
+  
+  <div id="farewellBanner">
+    <h2>Farewell Announcement</h2>
+    <p>The website owner of PillowTalk, <strong>@2025Joe</strong>, has been let go.</p>
+    <p>This website will no longer be available starting <strong>February 2026</strong>.</p>
+    <p><em>"“This is goodbye for now… I never imagined it would end like this. I truly hope that one day, I’ll be able to return and revive the PillowTalk website — a place that meant so much to me and so many others.”"</em></p>
+    <p>I want to personally thank <strong>Mr.Sparky</strong>, <strong>Kyper</strong>, <strong>Legacy</strong>, and our showhost <strong>The Foggy Golem</strong> — thank you from the bottom of my heart. Your support, dedication, and friendship during these unforgettable 2 years meant everything to me.</p>
+    <p class="credit">— Message written by 2025Joe</p>
+    <button id="dismissBanner" onclick="document.getElementById('farewellBanner').style.display='none';">Dismiss</button>
+  </div>
+  
+      
+
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">
+          <img src="IMG_1479.png" alt="PillowTalk Logo">
+          <span>PillowTalk</span>
+        </a>
+        <button class="mobile-nav-toggle" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="staff.html">Meet the Staff</a></li>
+          <li><a href="3years.html">3 Years of PillowTalk</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="overlay"></div>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Welcome to PillowTalk</h1>
+        <p class="tagline">Where we talk to the most important people in RecRoom - You!!!</p>
+        <div class="cta-buttons">
+          <a href="about.html" class="cta-button primary-cta">Learn More</a>
+          <a href="https://discord.gg/pillowtalk" target="_blank" rel="noopener noreferrer" class="cta-button secondary-cta">Join Our Discord</a>
         </div>
-    </header>
-    
-    <div class="overlay"></div>
+      </div>
+    </section>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h1>Welcome to PillowTalk</h1>
-                <p class="tagline">Where we talk to the most important people in RecRoom - You!!!</p>
-                <div class="cta-buttons">
-                    <a href="about.html" class="cta-button primary-cta">Learn More</a>
-                    <a href="https://discord.gg/pillowtalk" target="_blank" rel="noopener noreferrer" class="cta-button secondary-cta">Join Our Discord</a>
-                </div>
-            </div>
-        </section>
-
-        <section class="video-section">
-            <div class="container">
-                <div class="video-container">
-                    <video controls preload="metadata">
-                        <source src="trailer.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-            </div>
-        </section>
-
-        <section class="reviews-section">
-            <div class="container">
-                <h2 class="section-title">What Our Viewers Say</h2>
-                <div class="reviews-container" id="reviewsContainer">
-                    <!-- Reviews will be dynamically added here -->
-                </div>
-                <div class="review-form-container">
-                    <h3>Share Your Thoughts</h3>
-                    <form id="reviewForm" class="review-form">
-                        <input type="text" id="reviewName" placeholder="Your Name" required>
-                        <div class="star-rating">
-                            <input type="radio" id="star5" name="rating" value="5" required>
-                            <label for="star5" title="5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4">
-                            <label for="star4" title="4 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3">
-                            <label for="star3" title="3 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2">
-                            <label for="star2" title="2 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1">
-                            <label for="star1" title="1 star"></label>
-                        </div>
-                        <textarea id="reviewText" placeholder="Tell us about your experience..." required></textarea>
-                        <button type="submit">Submit Review</button>
-                    </form>
-                </div>
-            </div>
-        </section>        
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 PillowTalk.Top All rights reserved.</p>
+    <section class="video-section">
+      <div class="container">
+        <div class="video-container">
+          <video controls preload="metadata">
+            <source src="trailer.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
         </div>
-    </footer>
+      </div>
+    </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js"></script>
-    <script src="mobile-nav.js"></script>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 PillowTalk.Top All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+  <script src="mobile-nav.js"></script>
 </body>
 </html>
