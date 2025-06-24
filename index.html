@@ -3,224 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Longno</title>
-    <meta name="description" content="A digital experience for developer and security analyst, Longno.">
-    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>▲</text></svg>">
     
+    <title>Longno | Developer & Security Analyst</title>
+    <meta name="description" content="The digital portfolio of Longno, a developer and security analyst building robust applications and analyzing their defense.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.pillowtalk.top/"> 
+    <meta property="og:title" content="Longno | Developer & Security Analyst">
+    <meta property="og:description" content="Building robust applications and analyzing their defense.">
+    <meta property="og:image" content="https://your-domain.com/social-preview.png"> 
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://your-domain.com/">
+    <meta property="twitter:title" content="Longno | Developer & Security Analyst">
+    <meta property="twitter:description" content="Building robust applications and analyzing their defense.">
+    <meta property="twitter:image" content="https://your-domain.com/social-preview.png">
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>▲</text></svg>">
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
     <link href="https://api.fontshare.com/v2/css?f[]=monument-extended@800&f[]=satoshi@500,700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --color-background: #0D0D0D;
-            --color-text: #999;
-            --color-heading: #D9D9D9;
-            --color-accent: #61DAFF; 
-            --border-color: rgba(255, 255, 255, 0.08);
-            --card-color: rgba(18, 18, 18, 0.75);
-            --font-display: 'Monument Extended', sans-serif;
-            --font-body: 'Satoshi', sans-serif;
-            --ease: cubic-bezier(0.16, 1, 0.3, 1);
+            --color-background: #0A0A0A; --color-text: #999; --color-heading: #E0E0E0;
+            --color-accent: #61DAFF; --border-color: rgba(255, 255, 255, 0.08);
+            --card-color: rgba(18, 18, 18, 0.75); --font-display: 'Monument Extended', sans-serif;
+            --font-body: 'Satoshi', sans-serif; --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
         }
-
-
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        
+        html { scroll-behavior: smooth; }
         body {
-            background-color: var(--color-background);
-            color: var(--color-text);
-            font-family: var(--font-body);
+            background-color: var(--color-background); color: var(--color-text); font-family: var(--font-body);
             -webkit-font-smoothing: antialiased;
-            background-image: 
-                repeating-linear-gradient(var(--color-background) 0, var(--color-background) 1px, transparent 1px, transparent 100px),
-                repeating-linear-gradient(90deg, #1a1a1a 0, #1a1a1a 1px, transparent 1px, transparent 100px);
-            background-size: 100px 100px;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px; background-position: 0 0, 15px 15px;
         }
-
-        #spotlight {
-            position: fixed; inset: 0; z-index: -1; pointer-events: none;
-            background: radial-gradient(circle 500px at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(97, 218, 255, 0.06), transparent 80%);
-        }
-        
-
-        .container {
-            width: 90%; max-width: 960px; margin: 0 auto;
-        }
-
-
-        #hero {
-            height: 100vh;
-            display: flex; flex-direction: column; justify-content: center;
-        }
-        #hero h1 {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 15vw, 10rem);
-            color: var(--color-heading);
-            letter-spacing: -0.05em; line-height: 0.9;
-        }
-        #hero .char {
-            display: inline-block;
-            opacity: 0; transform: translateY(50px);
-            transition: transform 1s var(--ease), opacity 1s var(--ease);
-        }
-        #hero .subtitle {
-            font-weight: 500; font-size: 1.1rem; color: #888;
-            margin-top: 2rem;
-            opacity: 0; transform: translateY(20px);
-            transition: transform 1s 0.5s var(--ease), opacity 1s 0.5s var(--ease);
-        }
-        section { padding: 5vh 0; }
-        .section-title {
-            font-family: var(--font-body); font-weight: 700;
-            font-size: 1.25rem; color: var(--color-heading); margin-bottom: 2rem;
-        }
-        
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 1.2s var(--ease), transform 1.2s var(--ease);
-        }
+        #spotlight { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(circle 400px at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(97, 218, 255, 0.06), transparent 80%); }        
+        #cursor-dot, #cursor-outline { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; border-radius: 50%; mix-blend-mode: difference; }
+        #cursor-dot { width: 8px; height: 8px; background-color: var(--color-accent); transform: translate(-50%, -50%); }
+        #cursor-outline { width: 40px; height: 40px; border: 2px solid var(--color-accent); transform: translate(-50%, -50%); transition: width 0.3s var(--ease-out-quint), height 0.3s var(--ease-out-quint), opacity 0.3s var(--ease-out-quint); }
+        #cursor-outline.hidden { width: 0; height: 0; opacity: 0; }
+        .container { width: 90%; max-width: 1024px; margin: 0 auto; }
+        section { padding: 6vh 0; }
+        .section-title { font-family: var(--font-body); font-weight: 700; font-size: 1.25rem; color: var(--color-heading); margin-bottom: 2rem; }
+        .reveal { opacity: 0; transform: translateY(50px); transition: opacity 1.2s var(--ease-out-quint), transform 1.2s var(--ease-out-quint); }
         .reveal.visible { opacity: 1; transform: translateY(0); }
-        .card {
-            background-color: var(--card-color);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 40px;
-            text-decoration: none; display: block; color: inherit;
-            backdrop-filter: blur(20px);
-            transition: transform 0.3s var(--ease), background-color 0.3s;
-        }
-        .card:hover { transform: translateY(-5px); background-color: #141414; }
-        #about p {
-            font-size: 1.5rem; line-height: 1.4; color: var(--color-heading);
-            font-weight: 500; max-width: 32ch; margin-bottom: 2rem;
-        }
-        .skill-list { display: flex; flex-wrap: wrap; gap: 0.75rem; list-style: none; padding: 0; }
-        .skill-list li { background: #1f1f1f; padding: 0.5rem 1rem; border-radius: 6px; }
-        .project-grid {
-            display: grid; grid-template-columns: 1fr; gap: 2rem;
-        }
+        #hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+        #hero h1 { font-family: var(--font-display); font-size: clamp(3rem, 15vw, 9rem); color: var(--color-heading); letter-spacing: -0.05em; line-height: 0.9; }
+        #hero .char { display: inline-block; opacity: 0; transform: translateY(60px); transition: transform 1s var(--ease-out-quint), opacity 1s var(--ease-out-quint); }
+        #hero .subtitle { font-weight: 500; font-size: 1.25rem; color: #888; margin-top: 2rem; min-height: 2em; opacity: 0; transform: translateY(20px); transition: transform 1s 0.5s var(--ease-out-quint), opacity 1s 0.5s var(--ease-out-quint); }
+        .subtitle .typing-text { color: var(--color-heading); }
+        .typing-cursor { display: inline-block; width: 8px; background-color: var(--color-accent); animation: blink 0.7s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        .card { background-color: var(--card-color); border: 1px solid var(--border-color); border-radius: 12px; padding: 40px; text-decoration: none; display: block; color: inherit; backdrop-filter: blur(20px); transition: background-color 0.4s; transform-style: preserve-3d; }        
+        #about p, #approach p { font-size: 1.75rem; line-height: 1.4; color: var(--color-heading); font-weight: 500; max-width: 42ch; }
+        .skill-list { display: flex; flex-wrap: wrap; gap: 0.75rem; list-style: none; margin-top: 2rem; }
+        .skill-list li { background: #1f1f1f; padding: 0.5rem 1rem; border-radius: 6px; transition: background-color 0.3s, color 0.3s; }   
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
         .project-card h3 { font-size: 1.5rem; color: var(--color-heading); font-weight: 700; }
         .project-card p { margin-top: 0.5rem; max-width: 55ch; }
-        .presence-grid {
-            display: grid; grid-template-columns: 1fr; gap: 2rem;
-        }
-        .presence-card {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            min-height: 250px; text-align: center;
-        }
+        .tech-stack { font-size: 0.9rem; color: var(--color-accent); font-weight: 700; margin-top: 1rem; }
+        .project-card .arrow { font-size: 1.5rem; color: #555; position: absolute; bottom: 30px; right: 30px; transition: transform 0.4s var(--ease-out-quint); }
+        .project-card:hover .arrow { transform: translateX(5px); color: var(--color-heading); }
+        .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 1rem; }
+        .tool-card { background-color: #1a1a1a; border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem 1rem; text-align: center; font-weight: 500; color: var(--color-text); transition: background-color 0.3s, color 0.3s, transform 0.3s; }
+        .tool-card:hover { background-color: var(--color-accent); color: var(--color-background); transform: translateY(-5px); }
+        .presence-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        #github-card { padding: 20px; }
         #github-card img { width: 100%; height: auto; }
-        .presence-card iframe { border: none; width: 100%; max-width: 350px; height: 100px; }
+        #tryhackme-container { grid-column: 1 / -1; padding: 20px 40px; }
+        #tryhackme-container .thm-title { font-size: 1.5rem; color: var(--color-heading); font-weight: 700; margin-bottom: 1.5rem; text-align: center; }
+        .thm-badges { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem; }
+        .thm-badges iframe { border: none; width: 100%; max-width: 350px; height: 100px; }
+        .thm-badges .badge-img { max-width: 150px; height: auto; transition: transform 0.3s var(--ease-out-quint); cursor: pointer; }
+        .thm-badges .badge-img:hover { transform: scale(1.1) rotate(3deg); }        
+        .presence-card { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 250px; text-align: center; }
         .presence-card svg { width: 48px; height: 48px; fill: #666; transition: fill 0.3s; }
         .presence-card:hover svg { fill: var(--color-heading); }
         .presence-card .title { font-weight: 700; color: #888; margin-top: 1rem; }
+        #contact .card { text-align: center; }
+        #contact p { font-size: 1.25rem; line-height: 1.5; color: var(--color-text); max-width: 50ch; margin: 0 auto 2rem auto; }
+        .discord-tag { display: inline-block; background-color: #1f1f1f; padding: 0.75rem 1.5rem; border-radius: 8px; border: 1px solid var(--border-color); cursor: pointer; transition: background-color 0.3s; }
+        .discord-tag:hover { background-color: #2a2a2a; }
+        .discord-tag span { font-family: var(--font-body); font-weight: 700; font-size: 1.25rem; color: var(--color-heading); }
+        .discord-tag .copy-feedback { font-size: 0.9rem; color: var(--color-accent); margin-left: 0.5rem; }
         footer { padding: 10vh 0 5vh; text-align: center; color: #444; }
-
+        .footer-links { list-style: none; display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem; }
+        .footer-links a { color: #666; text-decoration: none; transition: color 0.3s; font-weight: 500; }
+        .footer-links a:hover { color: var(--color-heading); }
 
         @media (min-width: 768px) {
-            .project-grid { grid-template-columns: repeat(2, 1fr); }
-            .presence-grid { grid-template-columns: repeat(3, 1fr); }
-            #github-card { grid-column: 1 / -1; }
+            .presence-grid { grid-template-columns: repeat(2, 1fr); }
+            #tryhackme-container { grid-column: 1 / -1; }
         }
-
     </style>
 </head>
 <body>
 
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
     <div id="spotlight"></div>
     
     <div class="container">
         <header id="hero">
             <div>
                 <h1 id="hero-title"></h1>
-                <p class="subtitle"></p>
+                <p class="subtitle"><span id="typing-text" class="typing-text"></span><span class="typing-cursor"> </span></p>
             </div>
         </header>
 
         <main>
             <section id="about">
+                <h2 class="section-title reveal">About Me</h2>
                 <div class="card reveal">
                     <p>Hi, I'm Longno. A 19-year-old developer and security analyst from England. I build robust applications and analyze the architecture of their defense.</p>
                     <ul class="skill-list">
-                        <li>C#</li><li>Python</li><li>JavaScript</li><li>HTML/CSS</li><li>Java</li>
-                        <li>TypeScript</li><li>Cyber Security</li><li>C++</li>
+                        <li>C#</li><li>Python</li><li>JavaScript</li><li>HTML/CSS</li><li>Java</li><li>TypeScript</li><li>Cyber Security</li><li>C++</li>
                     </ul>
                 </div>
-            </section>    
+            </section>
+            
+
+            <section id="approach">
+                <h2 class="section-title reveal">My Approach</h2>
+                <div class="card reveal">
+                    <p>I build with a security-first mindset. For me, creating clean, maintainable code isn't just a preference—it's the foundation of a secure and scalable application. I bridge the gap between development and security, ensuring that what I build is not only functional but also resilient.</p>
+                </div>
+            </section>
+           
+            <section id="toolkit">
+                <h2 class="section-title reveal">My Toolkit</h2>
+                <div class="card reveal">
+                    <div class="tool-grid">
+                        <div class="tool-card">VS Code</div>
+                        <div class="tool-card">Visual Studio</div>
+                        <div class="tool-card">Git & GitHub</div>
+                        <div class="tool-card">Nmap</div>
+                        <div class="tool-card">Burp Suite</div>
+                        <div class="tool-card">Wireshark</div>
+                        <div class="tool-card">Postman</div>
+                        <div class="tool-card">Docker</div>
+                    </div>
+                </div>
+            </section>
+            
             <section id="projects">
                 <h2 class="section-title reveal">Featured Projects</h2>
-                <div class="project-grid">
+                <div class="grid">
                     <a href="https://github.com/Longno12/Game-Hub" target="_blank" class="card project-card reveal">
                         <h3>Game Hub</h3>
                         <p>Unified C# desktop application for launching multiple game libraries from a single, clean interface.</p>
+                        <p class="tech-stack">Tech: C#, .NET, WPF, XAML</p>
+                        <span class="arrow">→</span>
                     </a>
                     <a href="https://github.com/Longno12/Dynamic-Digital-Clock" target="_blank" class="card project-card reveal" style="transition-delay: 0.1s;">
                         <h3>Dynamic Digital Clock</h3>
                         <p>A performant real-time clock built with pure JavaScript, showcasing core front-end development fundamentals.</p>
+                        <p class="tech-stack">Tech: HTML, CSS, JavaScript</p>
+                        <span class="arrow">→</span>
                     </a>
                 </div>
             </section>
+
             <section id="presence">
                 <h2 class="section-title reveal">Professional Presence</h2>
                 <div class="presence-grid">
-                    <div id="github-card" class="card reveal">
-                         <a href="https://github.com/Longno12" target="_blank">
-                             <img src="https://github-readme-stats.vercel.app/api?username=Longno12&show_icons=true&theme=transparent&hide_border=true&title_color=D9D9D9&text_color=999&icon_color=61DAFF&text_bold=false" alt="GitHub Stats">
-                         </a>
-                    </div>
-                    <div id="tryhackme-card" class="card presence-card reveal" style="transition-delay: 0.1s;">
-                        <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=4826363&theme=dark"></iframe>
-                    </div>
-                    <a href="https://bugcrowd.com/Longno" target="_blank" class="card presence-card reveal" style="transition-delay: 0.2s;">
-                        <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c-6.628 0-12 5.372-12 12s5.372 12 12 12 12-5.372 12-12-5.372-12-12-12zm-3.515 17.925c-.27 0-.495-.225-.495-.495v-2.88c0-.27.225-.495.495-.495h7.02c.27 0 .495.225.495.495v2.88c0 .27-.225-.495-.495.495zm-.495-4.815c0-.27.225-.495.495-.495h7.02c.27 0 .495.225.495.495v2.88c0 .27-.225-.495-.495.495h-7.02c-.27 0-.495-.225-.495-.495zm.495-4.83c.27 0 .495.225.495.495v2.88c0 .27-.225-.495-.495-.495h-2.25c-.27 0-.495-.225-.495-.495v-2.88c0-.27.225-.495.495-.495zm4.77 0c.27 0 .495.225.495.495v2.88c0 .27-.225-.495-.495.495h-2.25c-.27 0-.495-.225-.495-.495v-2.88c0-.27.225-.495.495-.495z"/></svg>
+                     <a href="https://github.com/Longno12" target="_blank" id="github-card" class="card reveal" data-tilt>
+                         <img src="https://github-readme-stats.vercel.app/api?username=Longno12&show_icons=true&theme=transparent&hide_border=true&title_color=E0E0E0&text_color=999&icon_color=61DAFF&text_bold=false" alt="GitHub Stats for Longno12">
+                     </a>
+                    <a href="https://bugcrowd.com/Longno" target="_blank" class="card presence-card reveal" style="transition-delay: 0.1s;" data-tilt>
+                        <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c-6.628 0-12 5.372-12 12s5.372 12 12 12 12-5.372 12-12-5.372-12-12-12zm-3.515 17.925c-.27 0-.495-.225-.495-.495v-2.88c0-.27.225-.495.495-.495h7.02c.27 0 .495.225.495.495v2.88c0 .27-.225-.495-.495.495zm-.495-4.815c0-.27.225-.495.495-.495h7.02c.27 0 .495.225.495.495v2.88c0 .27-.225-.495-.495.495h-7.02c-.27 0-.495-.225-.495-.495zm.495-4.83c.27 0 .495.225.495.495v2.88c0 .27-.225-.495-.495-.495h-2.25c-.27 0-.495-.225-.495-.495v-2.88c0-.27.225-.495.495-.495zm4.77 0c.27 0 .495.225.495.495v2.88c0 .27-.225-.495-.495-.495h-2.25c-.27 0-.495-.225-.495-.495v-2.88c0-.27.225-.495.495-.495z"/></svg>
                         <span class="title">Bugcrowd</span>
                     </a>
+                    <div id="tryhackme-container" class="card reveal" style="transition-delay: 0.2s;" data-tilt>
+                        <h3 class="thm-title">TryHackMe Achievements</h3>
+                        <div class="thm-badges">
+                            <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=4826363&theme=dark"></iframe>
+                            <img src="https://github.com/Longno12/pics/raw/main/1.png" alt="TryHackMe Top 1% Badge" class="badge-img">
+                            <img src="https://github.com/Longno12/pics/raw/main/2.png" alt="TryHackMe Streak Badge" class="badge-img">
+                        </div>
+                    </div>
                 </div>
             </section>
-        </main>  
-        <footer><p>Built by Longno © 2024</p></footer>
+            
+            <!-- NEW "LET'S CONNECT" SECTION -->
+            <section id="contact">
+                 <div class="card reveal">
+                     <h2 class="section-title" style="text-align: center; margin-bottom: 1rem;">Let's Connect</h2>
+                     <p>I'm most active on Discord. Feel free to add me! Just click the tag below to copy my username.</p>
+                     <div id="discord-btn" class="discord-tag" title="Click to copy">
+                         <span id="discord-username">2025Joe</span>
+                         <span id="copy-feedback" class="copy-feedback"></span>
+                     </div>
+                 </div>
+            </section>
+        </main>
+        
+        <footer>
+            <ul class="footer-links">
+                <li><a href="https://github.com/Longno12" target="_blank">GitHub</a></li>
+             
+                <li><a href="#" target="_blank">LinkedIn</a></li>
+                <li><a href="https://tryhackme.com/p/Longno" target="_blank">TryHackMe</a></li>
+            </ul>
+            <p>Built by Longno © 2024</p>
+        </footer>
     </div>
     
+    <script type="text/javascript" src="https://unpkg.com/vanilla-tilt@1.8.0/dist/vanilla-tilt.min.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-
-        const spotlight = document.getElementById('spotlight');
+      
         const heroTitle = document.getElementById('hero-title');
         const heroSubtitle = document.querySelector('#hero .subtitle');
-        const text = "LONGNO";
-        heroTitle.innerHTML = text.split('').map(char => `<span class="char">${char}</span>`).join('');
-        
+        const mainText = "LONGNO";
+        heroTitle.innerHTML = mainText.split('').map(char => `<span class="char">${char}</span>`).join('');
         setTimeout(() => {
-            document.querySelectorAll('#hero .char').forEach((char, i) => {
-                char.style.transitionDelay = `${i * 0.05}s`;
-                char.style.opacity = '1';
-                char.style.transform = 'translateY(0)';
-            });
-            heroSubtitle.style.opacity = '1';
-            heroSubtitle.style.transform = 'translateY(0)';
+            document.querySelectorAll('#hero .char').forEach((char, i) => { char.style.transitionDelay = `${i * 0.05}s`; char.style.opacity = '1'; char.style.transform = 'translateY(0)'; });
+            heroSubtitle.style.opacity = '1'; heroSubtitle.style.transform = 'translateY(0)';
         }, 100);
+        const typingTextElement = document.getElementById('typing-text');
+        const words = ['Developer.', 'Security Analyst.', 'Problem Solver.'];
+        let wordIndex = 0; let charIndex = 0; let isDeleting = false;
+        function type() { const currentWord = words[wordIndex]; const typeSpeed = isDeleting ? 75 : 150; if (isDeleting) typingTextElement.textContent = currentWord.substring(0, charIndex--); else typingTextElement.textContent = currentWord.substring(0, charIndex++); if (!isDeleting && charIndex === currentWord.length + 1) { isDeleting = true; setTimeout(type, 2000); } else if (isDeleting && charIndex === -1) { isDeleting = false; wordIndex = (wordIndex + 1) % words.length; setTimeout(type, 500); } else { setTimeout(type, typeSpeed); } }
+        type();
+        const cursorDot = document.getElementById('cursor-dot'); const cursorOutline = document.getElementById('cursor-outline');
+        window.addEventListener('mousemove', e => { requestAnimationFrame(() => { document.body.style.setProperty('--mouse-x', `${e.clientX}px`); document.body.style.setProperty('--mouse-y', `${e.clientY}px`); cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`; cursorOutline.style.left = `${e.clientX}px`; cursorOutline.style.top = `${e.clientY}px`; }); });
+        const interactiveElements = document.querySelectorAll('a, button, .skill-list li, .badge-img, .discord-tag, .tool-card');
+        interactiveElements.forEach(el => { el.addEventListener('mouseenter', () => cursorOutline.classList.add('hidden')); el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hidden')); });
 
-        window.addEventListener('mousemove', e => {
-            requestAnimationFrame(() => {
-                spotlight.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      
+        const discordBtn = document.getElementById('discord-btn');
+        const discordUsername = document.getElementById('discord-username').textContent;
+        const copyFeedback = document.getElementById('copy-feedback');
+        discordBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(discordUsername).then(() => {
+                copyFeedback.textContent = 'Copied!';
+                setTimeout(() => { copyFeedback.textContent = ''; }, 2000);
+            }).catch(err => {
+                copyFeedback.textContent = 'Failed to copy';
+                console.error('Failed to copy text: ', err);
             });
         });
 
+        VanillaTilt.init(document.querySelectorAll(".card"), { max: 8, speed: 400, glare: true, "max-glare": 0.15 });
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-
-        document.querySelectorAll('.reveal').forEach(el => {
-            observer.observe(el);
-        });
-        
+            entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     });
     </script>
 </body>
