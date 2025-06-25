@@ -3,251 +3,317 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Longno | Developer & Security Analyst</title>
-    <meta name="description" content="The digital portfolio of Longno, a developer and security analyst building robust applications and analyzing their defense.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.pillowtalk.top/"> 
-    <meta property="og:title" content="Longno | Developer & Security Analyst">
-    <meta property="og:description" content="Building robust applications and analyzing their defense.">
-    <meta property="og:image" content="https://your-domain.com/social-preview.png"> 
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://your-domain.com/">
-    <meta property="twitter:title" content="Longno | Developer & Security Analyst">
-    <meta property="twitter:description" content="Building robust applications and analyzing their defense.">
-    <meta property="twitter:image" content="https://your-domain.com/social-preview.png">
-    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>▲</text></svg>">
-    <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-    <link href="https://api.fontshare.com/v2/css?f[]=monument-extended@800&f[]=satoshi@500,700&display=swap" rel="stylesheet">
+    <title>Longno | Interactive Portfolio v4.0</title>
+    <meta name="description" content="The digital command center and interactive portfolio for Longno, a Developer and Security Analyst.">
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>▲</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Orbitron:wght@700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --color-background: #0A0A0A; --color-text: #999; --color-heading: #E0E0E0;
-            --color-accent: #61DAFF; --border-color: rgba(255, 255, 255, 0.08);
-            --card-color: rgba(18, 18, 18, 0.75); --font-display: 'Monument Extended', sans-serif;
-            --font-body: 'Satoshi', sans-serif; --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+            --color-bg: #010409; --color-primary: #00e5ff; --color-secondary: #00ff41; --color-text: #c9d1d9;
+            --color-text-muted: #8b949e; --color-surface: rgba(22, 27, 34, 0.5); --color-border: rgba(0, 229, 255, 0.2);
+            --color-border-hover: rgba(0, 229, 255, 0.6); --font-display: 'Orbitron', sans-serif; --font-mono: 'Fira Code', monospace;
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body {
-            background-color: var(--color-background); color: var(--color-text); font-family: var(--font-body);
-            -webkit-font-smoothing: antialiased;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-            background-size: 30px 30px; background-position: 0 0, 15px 15px;
-        }
-        #spotlight { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(circle 400px at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(97, 218, 255, 0.06), transparent 80%); }        
-        #cursor-dot, #cursor-outline { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; border-radius: 50%; mix-blend-mode: difference; }
-        #cursor-dot { width: 8px; height: 8px; background-color: var(--color-accent); transform: translate(-50%, -50%); }
-        #cursor-outline { width: 40px; height: 40px; border: 2px solid var(--color-accent); transform: translate(-50%, -50%); transition: width 0.3s var(--ease-out-quint), height 0.3s var(--ease-out-quint), opacity 0.3s var(--ease-out-quint); }
-        #cursor-outline.hidden { width: 0; height: 0; opacity: 0; }
-        .container { width: 90%; max-width: 1024px; margin: 0 auto; }
-        section { padding: 6vh 0; }
-        .section-title { font-family: var(--font-body); font-weight: 700; font-size: 1.25rem; color: var(--color-heading); margin-bottom: 2rem; }
-        .reveal { opacity: 0; transform: translateY(50px); transition: opacity 1.2s var(--ease-out-quint), transform 1.2s var(--ease-out-quint); }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-        #hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-        #hero h1 { font-family: var(--font-display); font-size: clamp(3rem, 15vw, 9rem); color: var(--color-heading); letter-spacing: -0.05em; line-height: 0.9; }
-        #hero .char { display: inline-block; opacity: 0; transform: translateY(60px); transition: transform 1s var(--ease-out-quint), opacity 1s var(--ease-out-quint); }
-        #hero .subtitle { font-weight: 500; font-size: 1.25rem; color: #888; margin-top: 2rem; min-height: 2em; opacity: 0; transform: translateY(20px); transition: transform 1s 0.5s var(--ease-out-quint), opacity 1s 0.5s var(--ease-out-quint); }
-        .subtitle .typing-text { color: var(--color-heading); }
-        .typing-cursor { display: inline-block; width: 8px; background-color: var(--color-accent); animation: blink 0.7s infinite; }
-        @keyframes blink { 50% { opacity: 0; } }
-        .card { background-color: var(--card-color); border: 1px solid var(--border-color); border-radius: 12px; padding: 40px; text-decoration: none; display: block; color: inherit; backdrop-filter: blur(20px); transition: background-color 0.4s; transform-style: preserve-3d; }        
-        #about p, #approach p { font-size: 1.75rem; line-height: 1.4; color: var(--color-heading); font-weight: 500; max-width: 42ch; }
-        .skill-list { display: flex; flex-wrap: wrap; gap: 0.75rem; list-style: none; margin-top: 2rem; }
-        .skill-list li { background: #1f1f1f; padding: 0.5rem 1rem; border-radius: 6px; transition: background-color 0.3s, color 0.3s; }   
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
-        .project-card h3 { font-size: 1.5rem; color: var(--color-heading); font-weight: 700; }
-        .project-card p { margin-top: 0.5rem; max-width: 55ch; }
-        .tech-stack { font-size: 0.9rem; color: var(--color-accent); font-weight: 700; margin-top: 1rem; }
-        .project-card .arrow { font-size: 1.5rem; color: #555; position: absolute; bottom: 30px; right: 30px; transition: transform 0.4s var(--ease-out-quint); }
-        .project-card:hover .arrow { transform: translateX(5px); color: var(--color-heading); }
-        .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 1rem; }
-        .tool-card { background-color: #1a1a1a; border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem 1rem; text-align: center; font-weight: 500; color: var(--color-text); transition: background-color 0.3s, color 0.3s, transform 0.3s; }
-        .tool-card:hover { background-color: var(--color-accent); color: var(--color-background); transform: translateY(-5px); }
-        .presence-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-        #github-card { padding: 20px; }
-        #github-card img { width: 100%; height: auto; }
-        #tryhackme-container { grid-column: 1 / -1; padding: 20px 40px; }
-        #tryhackme-container .thm-title { font-size: 1.5rem; color: var(--color-heading); font-weight: 700; margin-bottom: 1.5rem; text-align: center; }
-        .thm-badges { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem; }
-        .thm-badges iframe { border: none; width: 100%; max-width: 350px; height: 100px; }
-        .thm-badges .badge-img { max-width: 150px; height: auto; transition: transform 0.3s var(--ease-out-quint); cursor: pointer; }
-        .thm-badges .badge-img:hover { transform: scale(1.1) rotate(3deg); }        
-        .presence-card { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 250px; text-align: center; }
-        .presence-card svg { width: 48px; height: 48px; fill: #666; transition: fill 0.3s; }
-        .presence-card:hover svg { fill: var(--color-heading); }
-        .presence-card .title { font-weight: 700; color: #888; margin-top: 1rem; }
-        #contact .card { text-align: center; }
-        #contact p { font-size: 1.25rem; line-height: 1.5; color: var(--color-text); max-width: 50ch; margin: 0 auto 2rem auto; }
-        .discord-tag { display: inline-block; background-color: #1f1f1f; padding: 0.75rem 1.5rem; border-radius: 8px; border: 1px solid var(--border-color); cursor: pointer; transition: background-color 0.3s; }
-        .discord-tag:hover { background-color: #2a2a2a; }
-        .discord-tag span { font-family: var(--font-body); font-weight: 700; font-size: 1.25rem; color: var(--color-heading); }
-        .discord-tag .copy-feedback { font-size: 0.9rem; color: var(--color-accent); margin-left: 0.5rem; }
-        footer { padding: 10vh 0 5vh; text-align: center; color: #444; }
-        .footer-links { list-style: none; display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem; }
-        .footer-links a { color: #666; text-decoration: none; transition: color 0.3s; font-weight: 500; }
-        .footer-links a:hover { color: var(--color-heading); }
-
-        @media (min-width: 768px) {
-            .presence-grid { grid-template-columns: repeat(2, 1fr); }
-            #tryhackme-container { grid-column: 1 / -1; }
+        body { background-color: var(--color-bg); color: var(--color-text); font-family: var(--font-mono); -webkit-font-smoothing: antialiased; overflow: hidden; cursor: crosshair; }
+        body::after { content: ' '; display: block; position: fixed; inset: 0; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); z-index: 3; background-size: 100% 3px, 3px 100%; pointer-events: none; animation: flicker 0.15s infinite; }
+        @keyframes flicker { 0%{opacity:.28} 5%{opacity:.35} 10%{opacity:.55} 15%{opacity:.24} 20%{opacity:.81} 25%{opacity:.22} 30%{opacity:.7} 35%{opacity:.96} 40%{opacity:.07} 45%{opacity:.31} 50%{opacity:.94} 55%{opacity:.59} 60%{opacity:.49} 65%{opacity:.93} 70%{opacity:.17} 75%{opacity:.13} 80%{opacity:.5} 85%{opacity:.15} 90%{opacity:.74} 95%{opacity:.37} 100%{opacity:.16} }
+        #background-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .overlay { position: fixed; inset: 0; pointer-events: none; z-index: 1; background-image: linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px); background-size: 35px 35px; box-shadow: inset 0 0 150px 75px rgba(1, 4, 9, 0.95); }
+        #boot-sequence { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 10; background-color: var(--color-bg); font-size: 1.2rem; }
+        #boot-text p { white-space: pre-wrap; line-height: 1.6; }
+        #boot-text .highlight, #terminal-prompt-path { color: var(--color-primary); }
+        #boot-text .success { color: var(--color-secondary); }
+        .ui-container { position: relative; z-index: 2; display: flex; height: 100vh; padding: 2rem; gap: 2rem; opacity: 0; visibility: hidden; }
+        .ui-container.initialized { opacity: 1; visibility: visible; }
+        @keyframes slideInFromLeft { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideInFromRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        .ui-container.initialized .sidebar { animation: slideInFromLeft 1s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+        .ui-container.initialized .main-content { animation: slideInFromRight 1s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+        .sidebar { width: 280px; flex-shrink: 0; backdrop-filter: blur(10px); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 1.5rem; display: flex; flex-direction: column; opacity: 0; }
+        .sidebar-header { font-family: var(--font-display); font-size: 2rem; color: var(--color-primary); text-shadow: 0 0 8px var(--color-primary); margin-bottom: 1.5rem; }
+        .sidebar-header .version { font-size: 0.8rem; color: var(--color-text-muted); font-family: var(--font-mono); letter-spacing: 2px; }
+        .sidebar-nav a { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 1rem; color: var(--color-text-muted); text-decoration: none; font-size: 1rem; border-left: 2px solid transparent; transition: all 0.3s ease; }
+        .sidebar-nav a:hover, .sidebar-nav a.active { background-color: rgba(0, 229, 255, 0.1); color: var(--color-primary); border-left-color: var(--color-primary); text-shadow: 0 0 5px var(--color-primary); }
+        .sidebar-nav svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+        .sidebar-status { margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--color-border); font-size: 0.8rem; color: var(--color-text-muted); }
+        .sidebar-status > div { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+        #status-light { width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 8px; animation: pulse 2s infinite; background-color: var(--color-secondary); color: var(--color-secondary); }
+        .system-monitor { display: flex; align-items: center; gap: 10px; }
+        .system-monitor canvas { width: 100px; height: 20px; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .sidebar-footer { padding-top: 1rem; border-top: 1px solid var(--color-border); margin-top: 1rem; display: flex; justify-content: center; gap: 1.5rem; }
+        .sidebar-footer a { color: var(--color-text-muted); transition: all 0.3s ease; }
+        .sidebar-footer a:hover { color: var(--color-primary); transform: translateY(-2px); }
+        .sidebar-footer svg { width: 24px; height: 24px; }
+        #discord-copy { cursor: pointer; }
+        .main-content { flex-grow: 1; display: flex; flex-direction: column; backdrop-filter: blur(10px); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; overflow: hidden; padding: 2rem; opacity: 0; }
+        .main-content-area { flex-grow: 1; overflow-y: auto; padding-right: 1rem; margin-right: -1rem; }
+        h1[data-scramble] { min-height: 44px; } /* Prevent layout shift during scramble */
+        #terminal-container { flex-shrink: 0; margin-top: 1rem; border-top: 1px solid var(--color-border); padding-top: 1rem; }
+        #terminal-output { height: 120px; overflow-y: auto; font-size: 0.9rem; line-height: 1.6; }
+        #terminal-output p { margin-bottom: 4px; }
+        .terminal-error { color: #ff4d4d; } .terminal-success { color: var(--color-secondary); } .terminal-link { text-decoration: underline; cursor: pointer; }
+        #terminal-prompt { display: flex; align-items: center; }
+        #terminal-input { background: transparent; border: none; color: var(--color-text); flex-grow: 1; font-family: var(--font-mono); font-size: 0.9rem; }
+        #terminal-input:focus { outline: none; }
+        #terminal-cursor { width: 9px; height: 1.2em; background: var(--color-text); display: inline-block; vertical-align: middle; animation: terminal-blink 1s steps(1) infinite; }
+        @keyframes terminal-blink { 50% { opacity: 0; } }
+        #modal-container { position: fixed; inset: 0; z-index: 20; background-color: rgba(1, 4, 9, 0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
+        #modal-container:not(.modal-hidden) { opacity: 1; visibility: visible; }
+        #modal-content { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; width: 90%; max-width: 800px; max-height: 90vh; padding: 2rem; position: relative; transform: scale(0.95); transition: transform 0.3s ease; overflow-y: auto; }
+        #modal-container:not(.modal-hidden) #modal-content { transform: scale(1); }
+        #modal-close-btn { position: absolute; top: 1rem; right: 1.5rem; background: none; border: none; font-size: 2.5rem; color: var(--color-text-muted); cursor: pointer; transition: color 0.3s, transform 0.3s; }
+        #modal-close-btn:hover { color: var(--color-primary); transform: rotate(90deg); }
+        #modal-body h2 { font-family: var(--font-display); color: var(--color-primary); font-size: 2rem; margin-bottom: 1rem; }
+        #modal-body h3 { color: var(--color-secondary); margin-top: 1.5rem; margin-bottom: 0.5rem; border-left: 3px solid var(--color-secondary); padding-left: 1rem; }
+        #modal-body p { line-height: 1.8; color: var(--color-text); }
+        #modal-body .modal-links { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;}
+        #modal-body .modal-links a { color: var(--color-secondary); text-decoration: none; font-weight: bold; border: 1px solid var(--color-secondary); padding: 0.5rem 1rem; transition: background-color 0.3s, color 0.3s; }
+        #modal-body .modal-links a:hover { background-color: var(--color-secondary); color: var(--color-bg); }
+        .grid { display: grid; gap: 1.5rem; } .grid-2-col { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
+        .card { background-color: transparent; border: 1px solid var(--color-border); padding: 1.5rem; position: relative; transition: background-color 0.3s ease; }
+        .card:hover { background-color: rgba(0, 229, 255, 0.05); }
+        .card .corner { position: absolute; width: 20px; height: 20px; border: 2px solid transparent; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .card .corner-tl { top: -1px; left: -1px; border-top-color: var(--color-border-hover); border-left-color: var(--color-border-hover); } .card .corner-tr { top: -1px; right: -1px; border-top-color: var(--color-border-hover); border-right-color: var(--color-border-hover); } .card .corner-bl { bottom: -1px; left: -1px; border-bottom-color: var(--color-border-hover); border-left-color: var(--color-border-hover); } .card .corner-br { bottom: -1px; right: -1px; border-bottom-color: var(--color-border-hover); border-right-color: var(--color-border-hover); }
+        .card:hover .corner { width: 50%; height: 50%; border-color: var(--color-primary); }
+        .card h3 { font-family: var(--font-display); font-size: 1.4rem; color: var(--color-text); margin-bottom: 0.75rem; }
+        .card .project-link { margin-top: 1rem; display: inline-block; color: var(--color-text); font-weight: 600; text-decoration: none; }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem; }
+        .tech-tags .tag { background: rgba(0, 255, 65, 0.1); color: var(--color-secondary); padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem; }
+        .cert-card { background: transparent; border: 1px solid var(--color-border); overflow: hidden; display: flex; flex-direction: column; text-decoration: none; transition: transform 0.3s, box-shadow 0.3s; }
+        .cert-card img { width: 100%; height: auto; display: block; flex-grow: 1; object-fit: cover; }
+        .cert-card:hover { transform: scale(1.03); box-shadow: 0 0 15px rgba(0, 229, 255, 0.3); }
+        @media (max-width: 1024px) {
+            .ui-container { flex-direction: column; padding: 1rem; gap: 1rem; }
+            .sidebar { width: 100%; flex-direction: row; align-items: center; padding: 0.5rem 1rem; animation: none !important; opacity: 1;}
+            .main-content { padding: 1.5rem; animation: none !important; opacity: 1;}
+            .sidebar-header { margin: 0; font-size: 1.5rem; } .sidebar-nav { display: flex; flex-grow: 1; justify-content: center; } .sidebar-nav a { padding: 0.5rem; }
+            .sidebar-nav .nav-text { display: none; } .sidebar-status { display: none; } .sidebar-footer { margin: 0; margin-left: auto; } .grid-2-col { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-
-    <div id="cursor-dot"></div>
-    <div id="cursor-outline"></div>
-    <div id="spotlight"></div>
-    
-    <div class="container">
-        <header id="hero">
-            <div>
-                <h1 id="hero-title"></h1>
-                <p class="subtitle"><span id="typing-text" class="typing-text"></span><span class="typing-cursor"> </span></p>
+    <canvas id="background-canvas"></canvas> <div class="overlay"></div> <div id="boot-sequence"><div id="boot-text"></div></div>
+    <div id="ui-container" class="ui-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">LONGNO<span class="version">_v4.0</span></div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-link active" data-content="about"><svg viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path></svg><span class="nav-text">./About</span></a>
+                <a href="#" class="nav-link" data-content="skills"><svg viewBox="0 0 24 24"><path d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"></path></svg><span class="nav-text">./Skills</span></a>
+                <a href="#" class="nav-link" data-content="projects"><svg viewBox="0 0 24 24"><path d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"></path></svg><span class="nav-text">./Projects</span></a>
+                <a href="#" class="nav-link" data-content="achievements"><svg viewBox="0 0 24 24"><path d="M16.5 18.75h-9a9 9 0 00-9 9H2.25A19.5 19.5 0 0112 3c5.568 0 10.45 2.454 13.5 6.273V18.75h-3.375a9.001 9.001 0 00-9-9zM15 13.5a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span class="nav-text">./Achievements</span></a>
+            </nav>
+            <div class="sidebar-status">
+                <div><span>SYS_TIME:</span><span id="status-time">--:--:--</span></div>
+                <div><span>STATUS:</span><span>NOMINAL</span><span id="status-light"></span></div>
+                <div class="system-monitor"><span>CPU:</span><canvas id="cpu-monitor"></canvas></div>
+                <div class="system-monitor"><span>MEM:</span><canvas id="mem-monitor"></canvas></div>
             </div>
-        </header>
-
-        <main>
-            <section id="about">
-                <h2 class="section-title reveal">About Me</h2>
-                <div class="card reveal">
-                    <p>Hi, I'm Longno. A 19-year-old developer and security analyst from England. I build robust applications and analyze the architecture of their defense.</p>
-                    <ul class="skill-list">
-                        <li>C#</li><li>Python</li><li>JavaScript</li><li>HTML/CSS</li><li>Java</li><li>TypeScript</li><li>Cyber Security</li><li>C++</li>
-                    </ul>
-                </div>
-            </section>
-            
-
-            <section id="approach">
-                <h2 class="section-title reveal">My Approach</h2>
-                <div class="card reveal">
-                    <p>I build with a security-first mindset. For me, creating clean, maintainable code isn't just a preference—it's the foundation of a secure and scalable application. I bridge the gap between development and security, ensuring that what I build is not only functional but also resilient.</p>
-                </div>
-            </section>
-           
-            <section id="toolkit">
-                <h2 class="section-title reveal">My Toolkit</h2>
-                <div class="card reveal">
-                    <div class="tool-grid">
-                        <div class="tool-card">VS Code</div>
-                        <div class="tool-card">Visual Studio</div>
-                        <div class="tool-card">Git & GitHub</div>
-                        <div class="tool-card">Nmap</div>
-                        <div class="tool-card">Burp Suite</div>
-                        <div class="tool-card">Wireshark</div>
-                        <div class="tool-card">Postman</div>
-                        <div class="tool-card">Docker</div>
-                    </div>
-                </div>
-            </section>
-            
-            <section id="projects">
-                <h2 class="section-title reveal">Featured Projects</h2>
-                <div class="grid">
-                    <a href="https://github.com/Longno12/Game-Hub" target="_blank" class="card project-card reveal">
-                        <h3>Game Hub</h3>
-                        <p>Unified C# desktop application for launching multiple game libraries from a single, clean interface.</p>
-                        <p class="tech-stack">Tech: C#, .NET, WPF, XAML</p>
-                        <span class="arrow">→</span>
-                    </a>
-                    <a href="https://github.com/Longno12/Dynamic-Digital-Clock" target="_blank" class="card project-card reveal" style="transition-delay: 0.1s;">
-                        <h3>Dynamic Digital Clock</h3>
-                        <p>A performant real-time clock built with pure JavaScript, showcasing core front-end development fundamentals.</p>
-                        <p class="tech-stack">Tech: HTML, CSS, JavaScript</p>
-                        <span class="arrow">→</span>
-                    </a>
-                </div>
-            </section>
-
-            <section id="presence">
-                <h2 class="section-title reveal">Professional Presence</h2>
-                <div class="presence-grid">
-                     <a href="https://github.com/Longno12" target="_blank" id="github-card" class="card reveal" data-tilt>
-                         <img src="https://github-readme-stats.vercel.app/api?username=Longno12&show_icons=true&theme=transparent&hide_border=true&title_color=E0E0E0&text_color=999&icon_color=61DAFF&text_bold=false" alt="GitHub Stats for Longno12">
-                     </a>
-                    <a href="https://bugcrowd.com/Longno" target="_blank" class="card presence-card reveal" style="transition-delay: 0.1s;" data-tilt>
-                        <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c-6.628 0-12 5.372-12 12s5.372 12 12 12 12-5.372 12-12-5.372-12-12-12zm-3.515 17.925c-.27 0-.495-.225-.495-.495v-2.88c0-.27.225-.495.495-.495h7.02c.27 0 .495.225.495.495v2.88c0 .27-.225-.495-.495.495zm-.495-4.815c0-.27.225-.495.495-.495h7.02c.27 0 .495.225.495.495v2.88c0 .27-.225-.495-.495.495h-7.02c-.27 0-.495-.225-.495-.495zm.495-4.83c.27 0 .495.225.495.495v2.88c0 .27-.225-.495-.495-.495h-2.25c-.27 0-.495-.225-.495-.495v-2.88c0-.27.225-.495.495-.495zm4.77 0c.27 0 .495.225.495.495v2.88c0 .27-.225-.495-.495-.495h-2.25c-.27 0-.495-.225-.495-.495v-2.88c0-.27.225-.495.495-.495z"/></svg>
-                        <span class="title">Bugcrowd</span>
-                    </a>
-                    <div id="tryhackme-container" class="card reveal" style="transition-delay: 0.2s;" data-tilt>
-                        <h3 class="thm-title">TryHackMe Achievements</h3>
-                        <div class="thm-badges">
-                            <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=4826363&theme=dark"></iframe>
-                            <img src="https://github.com/Longno12/pics/raw/main/1.png" alt="TryHackMe Top 1% Badge" class="badge-img">
-                            <img src="https://github.com/Longno12/pics/raw/main/2.png" alt="TryHackMe Streak Badge" class="badge-img">
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- NEW "LET'S CONNECT" SECTION -->
-            <section id="contact">
-                 <div class="card reveal">
-                     <h2 class="section-title" style="text-align: center; margin-bottom: 1rem;">Let's Connect</h2>
-                     <p>I'm most active on Discord. Feel free to add me! Just click the tag below to copy my username.</p>
-                     <div id="discord-btn" class="discord-tag" title="Click to copy">
-                         <span id="discord-username">2025Joe</span>
-                         <span id="copy-feedback" class="copy-feedback"></span>
-                     </div>
-                 </div>
-            </section>
-        </main>
-        
-        <footer>
-            <ul class="footer-links">
-                <li><a href="https://github.com/Longno12" target="_blank">GitHub</a></li>
-             
-                <li><a href="#" target="_blank">LinkedIn</a></li>
-                <li><a href="https://tryhackme.com/p/Longno" target="_blank">TryHackMe</a></li>
-            </ul>
-            <p>Built by Longno © 2024</p>
-        </footer>
+            <div class="sidebar-footer">
+                <a href="https://github.com/Longno12" target="_blank" title="GitHub"><svg viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+                <a href="#" id="discord-copy" title="Copy Discord ID: 2025Joe"><svg viewBox="0 0 24 24"><g fill="none"><path d="M5.503 5.152c-.893.352-1.684.87-2.348 1.487A11.02 11.02 0 0 0 12 21.943c.27 0 .538-.01.803-.028l-1.383-2.113a.21.21 0 0 1-.051-.144c-.035-.411.049-.82.234-1.176l.245-.466c.334-.633.91-1.144 1.583-1.458a8.948 8.948 0 0 1-5.367-3.807l-.337.288a9.01 9.01 0 0 0-1.745.892zm14.851.681c.214.37.387.75.52 1.14.24 1.32.072 2.684-.528 3.868-.628 1.233-1.644 2.185-2.88 2.72a15.74 15.74 0 0 1-1.103.359l.144.417c.28.813.21 1.706-.184 2.457a3.4 3.4 0 0 1-.42.607l1.714.949a11.02 11.02 0 0 0 4.154-10.73c-.22-.98-.62-1.9-1.167-2.731l-1.442 1.448zm-6.273-3.05a10.978 10.978 0 0 0-4.162 0l1.45 1.448a9.01 9.01 0 0 1 1.262-.001l1.45-1.447zM12 7.214a4.786 4.786 0 1 0 0 9.572 4.786 4.786 0 0 0 0-9.572z" fill="currentColor"/></g></svg></a>
+                <span id="copy-feedback"></span>
+            </div>
+        </aside>
+        <main class="main-content"><div class="main-content-area" id="main-content-area"></div><div id="terminal-container"><div id="terminal-output"></div><div id="terminal-prompt"><span><span id="terminal-prompt-path">longno</span>@v4.0:~$ </span><input type="text" id="terminal-input" autofocus><span id="terminal-cursor"></span></div></div></main>
     </div>
+    <div id="modal-container" class="modal-hidden"><div id="modal-content"><button id="modal-close-btn">×</button><div id="modal-body"></div></div></div>
     
-    <script type="text/javascript" src="https://unpkg.com/vanilla-tilt@1.8.0/dist/vanilla-tilt.min.js"></script>
+    <template id="content-template-about"><h1 data-scramble data-text="> ./About_Me"></h1><div class="content-body"><p>19-year-old developer and security analyst from England. My passion lies at the intersection of creation and protection—I build <strong>robust, scalable applications</strong> with a security-first mindset.</p><p>For me, clean and maintainable code isn't just an aesthetic choice; it's the fundamental building block of a resilient system. I thrive on bridging the gap between development and security, ensuring that every project is not only functionally elegant but also hardened against emerging threats.</p><p>Currently seeking opportunities to apply my skills in a challenging, growth-oriented environment. Let's build something secure together.</p></div></template>
+    <template id="content-template-skills"><h1 data-scramble data-text="> ./Skills_&_Toolkit"></h1><div class="content-body grid grid-2-col"><div class="card"><span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span><h3>// Languages</h3><ul style="list-style: none; padding-left: 1.5rem;"><li style="padding:.4rem 0;position:relative;line-height:1.6;">C#</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Python</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">JavaScript / TypeScript</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Java & CSS</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">C++</li></ul></div><div class="card"><span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span><h3>// Frameworks & Libraries</h3><ul style="list-style: none; padding-left: 1.5rem;"><li style="padding:.4rem 0;position:relative;line-height:1.6;">.NET Framework / Core</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">ASP.NET</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Node.js</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">React.js (Basic)</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Three.js</li></ul></div><div class="card"><span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span><h3>// Security Tools</h3><ul style="list-style: none; padding-left: 1.5rem;"><li style="padding:.4rem 0;position:relative;line-height:1.6;">Burp Suite</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Nmap</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Wireshark</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Metasploit (Basic)</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Ghidra</li></ul></div><div class="card"><span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span><h3>// Development & Ops</h3><ul style="list-style: none; padding-left: 1.5rem;"><li style="padding:.4rem 0;position:relative;line-height:1.6;">Git & GitHub</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Docker</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Visual Studio & VS Code</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Agile Methodologies</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">CI/CD Principles</li></ul></div></div></template>
+    <template id="content-template-projects"><h1 data-scramble data-text="> ./Projects"></h1><div class="content-body grid grid-2-col"><div class="card"><span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span><h3>// Game Hub</h3><p>A unified desktop application for launching games from multiple libraries (Steam, Epic, etc.) through a single, clean interface.</p><div class="tech-tags"><span class="tag">C#</span><span class="tag">.NET</span><span class="tag">WinForms</span></div><a href="#" class="project-link" data-project="game-hub">> VIEW DETAILS</a></div><div class="card"><span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span><h3>// Dynamic Digital Clock</h3><p>A sleek, performant, and real-time digital clock built with pure vanilla JavaScript, focusing on efficient DOM manipulation.</p><div class="tech-tags"><span class="tag">JavaScript</span><span class="tag">HTML5</span><span class="tag">CSS3</span></div><a href="#" class="project-link" data-project="digital-clock">> VIEW DETAILS</a></div></div></template>
+    <template id="content-template-achievements"><h1 data-scramble data-text="> ./Achievements"></h1><div class="content-body grid grid-2-col"><a href="https://github.com/Longno12" target="_blank" class="cert-card" style="grid-column: 1 / -1;"><img src="https://github-readme-stats.vercel.app/api?username=Longno12&show_icons=true&theme=transparent&hide_border=true&title_color=00e5ff&text_color=c9d1d9&icon_color=00e5ff&text_bold=false" alt="My GitHub stats, showing stars, commits, and top languages."></a><a href="https://tryhackme.com/p/Longno" target="_blank" class="cert-card"><img src="https://raw.githubusercontent.com/Longno12/pics/main/1.png" alt="TryHackMe 3 Million Legend Badge"></a><a href="https://tryhackme.com/p/Longno" target="_blank" class="cert-card"><img src="https://raw.githubusercontent.com/Longno12/pics/main/2.png" alt="TryHackMe Intro to Security Engineering Certificate"></a><a href="https://tryhackme.com/p/Longno" target="_blank" class="cert-card"><img src="https://raw.githubusercontent.com/Longno12/pics/main/3.jpg" alt="TryHackMe Pre Security Certificate"></a></div></template>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-      
-        const heroTitle = document.getElementById('hero-title');
-        const heroSubtitle = document.querySelector('#hero .subtitle');
-        const mainText = "LONGNO";
-        heroTitle.innerHTML = mainText.split('').map(char => `<span class="char">${char}</span>`).join('');
-        setTimeout(() => {
-            document.querySelectorAll('#hero .char').forEach((char, i) => { char.style.transitionDelay = `${i * 0.05}s`; char.style.opacity = '1'; char.style.transform = 'translateY(0)'; });
-            heroSubtitle.style.opacity = '1'; heroSubtitle.style.transform = 'translateY(0)';
-        }, 100);
-        const typingTextElement = document.getElementById('typing-text');
-        const words = ['Developer.', 'Security Analyst.', 'Problem Solver.'];
-        let wordIndex = 0; let charIndex = 0; let isDeleting = false;
-        function type() { const currentWord = words[wordIndex]; const typeSpeed = isDeleting ? 75 : 150; if (isDeleting) typingTextElement.textContent = currentWord.substring(0, charIndex--); else typingTextElement.textContent = currentWord.substring(0, charIndex++); if (!isDeleting && charIndex === currentWord.length + 1) { isDeleting = true; setTimeout(type, 2000); } else if (isDeleting && charIndex === -1) { isDeleting = false; wordIndex = (wordIndex + 1) % words.length; setTimeout(type, 500); } else { setTimeout(type, typeSpeed); } }
-        type();
-        const cursorDot = document.getElementById('cursor-dot'); const cursorOutline = document.getElementById('cursor-outline');
-        window.addEventListener('mousemove', e => { requestAnimationFrame(() => { document.body.style.setProperty('--mouse-x', `${e.clientX}px`); document.body.style.setProperty('--mouse-y', `${e.clientY}px`); cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`; cursorOutline.style.left = `${e.clientX}px`; cursorOutline.style.top = `${e.clientY}px`; }); });
-        const interactiveElements = document.querySelectorAll('a, button, .skill-list li, .badge-img, .discord-tag, .tool-card');
-        interactiveElements.forEach(el => { el.addEventListener('mouseenter', () => cursorOutline.classList.add('hidden')); el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hidden')); });
 
-      
-        const discordBtn = document.getElementById('discord-btn');
-        const discordUsername = document.getElementById('discord-username').textContent;
-        const copyFeedback = document.getElementById('copy-feedback');
-        discordBtn.addEventListener('click', () => {
-            navigator.clipboard.writeText(discordUsername).then(() => {
-                copyFeedback.textContent = 'Copied!';
-                setTimeout(() => { copyFeedback.textContent = ''; }, 2000);
-            }).catch(err => {
-                copyFeedback.textContent = 'Failed to copy';
-                console.error('Failed to copy text: ', err);
-            });
-        });
+        const contentArea = document.getElementById('main-content-area');
+        const uiContainer = document.getElementById('ui-container');
+        
+        async function runBootSequence() {
+            const bootText = document.getElementById('boot-text');
+            const bootLines = [
+                { text: 'BOOTING LN-OS v4.0...', delay: 50 }, { text: '...', delay: 200 },
+                { text: 'INITIATING SYSTEM CHECK...', delay: 50 }, { text: '  > MEMORY INTEGRITY... <span class="success">[OK]</span>', delay: 150 },
+                { text: '  > CPU CORES... <span class="success">[OK]</span>', delay: 150 }, { text: '  > PARTICLE RENDERER... <span class="success">[OK]</span>', delay: 150 },
+                { text: 'LOADING UI MODULES...', delay: 300 }, { text: '  > Module: <span class="highlight">core/identity.mod</span>... LOADED', delay: 100 },
+                { text: '  > Module: <span class="highlight">core/skills.mod</span>... LOADED', delay: 100 }, { text: '  > Module: <span class="highlight">core/projects.mod</span>... LOADED', delay: 100 },
+                { text: '  > Module: <span class="highlight">net/achievements.mod</span>... LOADED', delay: 100 }, { text: '...', delay: 300 },
+                { text: 'CONNECTION ESTABLISHED.', delay: 300 }, { text: 'DEPLOYING UI...', delay: 800 }
+            ];
+            const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+            for (const line of bootLines) { const p = document.createElement('p'); p.innerHTML = line.text; bootText.appendChild(p); await sleep(line.delay); }
+            const bootScreen = document.getElementById('boot-sequence');
+            bootScreen.style.transition = 'opacity 0.5s ease-out';
+            bootScreen.style.opacity = '0';
+            uiContainer.classList.add('initialized');
+            setTimeout(() => { bootScreen.style.display = 'none'; loadContent('about'); }, 500);
+        }
 
-        VanillaTilt.init(document.querySelectorAll(".card"), { max: 8, speed: 400, glare: true, "max-glare": 0.15 });
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        const scrambleChars = '!<>-_\\/[]{}—=+*^?#________';
+        function scrambleText(element) {
+            const originalText = element.dataset.text;
+            let counter = 0;
+            const interval = setInterval(() => {
+                let scrambled = originalText.split('').map((char, index) => {
+                    if (index < counter) return originalText[index];
+                    return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+                }).join('');
+                element.textContent = scrambled;
+                if (counter >= originalText.length) clearInterval(interval);
+                counter += 1 / 3;
+            }, 30);
+        }
+
+        function animateContentAppearance(panel) {
+            const elements = panel.querySelectorAll('p, .card, .cert-card');
+            elements.forEach(el => { el.style.opacity = 0; el.style.transform = 'translateY(10px)'; });
+            let delay = 50;
+            elements.forEach(el => { setTimeout(() => { el.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out'; el.style.opacity = 1; el.style.transform = 'translateY(0px)'; }, delay); delay += 30; });
+            const header = panel.querySelector('h1[data-scramble]');
+            if (header) scrambleText(header);
+        }
+        
+        function loadContent(contentId) {
+            const template = document.getElementById(`content-template-${contentId}`);
+            if (!template) { return; }
+            contentArea.innerHTML = '';
+            const content = template.content.cloneNode(true);
+            contentArea.appendChild(content);
+            animateContentAppearance(contentArea);
+        }
+
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const hoverSound = new Audio('https://raw.githubusercontent.com/Longno12/pics/main/Hover.mp3');
+            const clickSound = new Audio('https://raw.githubusercontent.com/Longno12/pics/main/Click.mp3');
+            hoverSound.volume = 0.3; clickSound.volume = 0.5;
+            const playSound = (sound) => { if (audioContext.state === 'running') { const s = sound.cloneNode(); s.volume = sound.volume; s.play().catch(e => {}); }};
+            const resumeAudio = () => { if (audioContext.state === 'suspended') audioContext.resume(); document.removeEventListener('click', resumeAudio); };
+            document.addEventListener('click', resumeAudio);
+            document.querySelectorAll('a, button, input').forEach(el => { el.addEventListener('mouseenter', () => playSound(hoverSound)); if(el.tagName !== 'INPUT') el.addEventListener('click', () => playSound(clickSound)); });
+        } catch (e) { console.warn("Web Audio API is not supported."); }
+        
+        function updateSystemStatus() {
+            const timeEl = document.getElementById('status-time');
+            if (!timeEl) return;
+            setInterval(() => { const now = new Date(); timeEl.textContent = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`; }, 1000);
+        }
+
+        function createMonitorGraph(canvasId, color) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let values = new Array(50).fill(0);
+            function draw() {
+                const newHeight = Math.random() * canvas.height;
+                values.push(newHeight);
+                if(values.length > 50) values.shift();
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = color;
+                values.forEach((val, i) => {
+                    ctx.fillRect(i * 2, canvas.height - val, 2, val);
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        }
+
+        const terminalInput = document.getElementById('terminal-input');
+        const terminalOutput = document.getElementById('terminal-output');
+        const terminalPromptPath = document.getElementById('terminal-prompt-path');
+        let currentPath = '~';
+
+        const fileSystem = {
+            '~': ['about.md', 'skills.json', 'projects/'],
+            '~/projects': ['game-hub.url', 'digital-clock.url'],
+        };
+
+        const fileContents = {
+            'about.md': `User: Longno (19, England)\nSpecialization: Developer & Security Analyst\nStatus: Seeking new opportunities`,
+            'skills.json': `{ "languages": ["C#", "Python", "JS/TS"], "security": ["Burp Suite", "Nmap", "Wireshark"] }`,
+            'game-hub.url': 'Project Details: Game Hub\nUse `open game-hub.url` to view.',
+            'digital-clock.url': 'Project Details: Dynamic Digital Clock\nUse `open digital-clock.url` to view.',
+        };
+
+        const logToTerminal = (message, type = 'response') => {
+            const p = document.createElement('p');
+            if (type === 'user') p.innerHTML = `<span><span id="terminal-prompt-path">${currentPath}</span>$ </span>${message}`;
+            else p.innerHTML = message.replace(/\n/g, '<br>');
+            if (type === 'error') p.classList.add('terminal-error');
+            if (type === 'success') p.classList.add('terminal-success');
+            terminalOutput.appendChild(p); terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        };
+
+        const parseCommand = (command) => {
+            const [cmd, ...args] = command.trim().toLowerCase().split(' ');
+            logToTerminal(command, 'user');
+            switch (cmd) {
+                case 'help': logToTerminal(`Available commands:\n  theme [hex] - set accent color\n  nav [page] - navigate site\n  ls - list files\n  cd [dir] - change directory\n  cat [file] - view file content\n  open [file] - open project file\n  clear - clear terminal`); break;
+                case 'theme': if (args[0] && /^#[0-9a-f]{6}$/i.test(args[0])) { document.documentElement.style.setProperty('--color-primary', args[0]); logToTerminal(`Primary color updated.`, 'success'); } else { logToTerminal(`Error: Invalid hex color.`, 'error'); } break;
+                case 'nav': const navTarget = document.querySelector(`.nav-link[data-content="${args[0]}"]`); if (navTarget) { navTarget.click(); logToTerminal(`Navigating to ./${args[0]}`, 'success'); } else { logToTerminal(`Error: Section not found: ${args[0]}`, 'error'); } break;
+                case 'clear': terminalOutput.innerHTML = ''; break;
+                case 'ls': logToTerminal((fileSystem[currentPath] || []).join('\n')); break;
+                case 'cd': const targetDir = args[0] === '..' ? '~' : `~/${args[0].replace('/', '')}`; if (fileSystem[targetDir]) { currentPath = targetDir; terminalPromptPath.textContent = currentPath; } else { logToTerminal(`cd: no such file or directory: ${args[0]}`, 'error'); } break;
+                case 'cat': if (fileContents[`${currentPath}/${args[0]}`.replace('~/', '')]) logToTerminal(fileContents[`${currentPath}/${args[0]}`.replace('~/', '')]); else logToTerminal(`cat: ${args[0]}: No such file`, 'error'); break;
+                case 'open':
+                    const projectKey = args[0].replace('.url', '');
+                    if (projectData[projectKey]) { openModal(projectKey); logToTerminal(`Opening details for ${projectKey}...`, 'success'); }
+                    else { logToTerminal(`open: cannot open ${args[0]}`, 'error'); } break;
+                case '': break; default: logToTerminal(`Command not found: ${cmd}. Type 'help' for a list.`, 'error');
+            }
+        };
+        terminalInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); parseCommand(terminalInput.value); terminalInput.value = ''; } });
+        
+        const projectData = {
+            'game-hub': { title: '// Project: Game Hub', description: `<h3>Objective</h3><p>To create a centralized desktop application in C# that consolidates various game libraries (like Steam, Epic Games, etc.) into one elegant and efficient user interface. The primary goal was to practice object-oriented programming principles and tackle system interoperability challenges.</p><h3>Challenges & Solutions</h3><p>A key challenge was designing a flexible system to handle different library APIs and local file structures. I solved this by implementing a modular "Provider" pattern, where each library is a self-contained module that implements a common IGameProvider interface. This makes the system easily extensible.</p><h3>What I Learned</h3><p>This project solidified my understanding of OOP design, file I/O in C#, and the importance of user-centric UI design. It was a deep dive into building a practical, real-world utility.</p>`, github: 'https://github.com/Longno12/Game-Hub' },
+            'digital-clock': { title: '// Project: Dynamic Digital Clock', description: `<h3>Objective</h3><p>The goal was to build a visually appealing, high-performance digital clock using only vanilla JavaScript, HTML, and CSS. This project served as a fundamental exercise in efficient DOM manipulation and the use of JavaScript's Date object without relying on any external libraries.</p><h3>Challenges & Solutions</h3><p>The main challenge was ensuring performance. Updating the DOM every second can be inefficient if done poorly. I implemented a solution where I only update the text content of the clock elements, avoiding costly re-renders of the entire component. This keeps the animation smooth and the CPU usage minimal.</p><h3>What I Learned</h3><p>This was a fantastic exercise in front-end fundamentals. I learned the nuances of setInterval, the importance of performance optimization in browser environments, and how to create a sleek UI with pure CSS.</p>`, github: 'https://github.com/Longno12/Dynamic-Digital-Clock' }
+        };
+        const modalContainer = document.getElementById('modal-container');
+        const modalBody = document.getElementById('modal-body');
+        function openModal(projectKey) {
+            const data = projectData[projectKey]; if (!data) return;
+            modalBody.innerHTML = `<h2>${data.title}</h2>${data.description}<div class="modal-links"><a href="${data.github}" target="_blank">> VIEW SOURCE ON GITHUB</a></div>`;
+            modalContainer.classList.remove('modal-hidden');
+        }
+        function closeModal() { modalContainer.classList.add('modal-hidden'); }
+        document.addEventListener('click', (e) => { if (e.target.closest('.project-link')) { e.preventDefault(); openModal(e.target.closest('.project-link').dataset.project); } if(e.target.id === 'modal-container' || e.target.id === 'modal-close-btn') closeModal();});
+
+        document.querySelectorAll('.nav-link').forEach(link => { link.addEventListener('click', (e) => { e.preventDefault(); if (link.classList.contains('active')) return; const contentId = link.dataset.content; document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active')); link.classList.add('active'); loadContent(contentId); }); });
+        document.getElementById('discord-copy').addEventListener('click', (e) => { e.preventDefault(); navigator.clipboard.writeText("2025Joe").then(() => { const fb = document.getElementById('copy-feedback'); if (fb) { fb.textContent = '[COPIED]'; setTimeout(() => { fb.textContent = ''; }, 2000); } }); });
+
+        let scene, camera, renderer, particles; let mouseX = 0, mouseY = 0;
+        function init3D() {
+            const canvas = document.getElementById('background-canvas');
+            scene = new THREE.Scene(); camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 3000); camera.position.z = 1000;
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight); renderer.setClearColor(0x000000, 0);
+            const computedStyle = getComputedStyle(document.documentElement);
+            const primaryColorStr = computedStyle.getPropertyValue('--color-primary').trim();
+            const secondaryColorStr = computedStyle.getPropertyValue('--color-secondary').trim();
+            const particleCount = 20000;
+            const positions = new Float32Array(particleCount * 3); const colors = new Float32Array(particleCount * 3);
+            const color = new THREE.Color();
+            for (let i = 0; i < particleCount; i++) { const i3 = i * 3; positions[i3] = (Math.random() - 0.5) * 2000; positions[i3+1] = (Math.random() - 0.5) * 2000; positions[i3+2] = (Math.random() - 0.5) * 2000; color.set(Math.random() > 0.5 ? primaryColorStr : secondaryColorStr); colors[i3] = color.r; colors[i3+1] = color.g; colors[i3+2] = color.b; }
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3)); geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            const material = new THREE.PointsMaterial({ size: 2, blending: THREE.AdditiveBlending, transparent: true, vertexColors: true });
+            particles = new THREE.Points(geometry, material); scene.add(particles);
+            window.addEventListener('resize', onWindowResize, false); document.addEventListener('mousemove', onMouseMove, false); animate();
+        }
+        function onWindowResize() { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); }
+        function onMouseMove(event) { mouseX = event.clientX - window.innerWidth / 2; mouseY = event.clientY - window.innerHeight / 2; }
+        function animate() { requestAnimationFrame(animate); const t = Date.now() * 0.0001; camera.position.x += (mouseX - camera.position.x) * 0.02; camera.position.y += (-mouseY - camera.position.y) * 0.02; camera.lookAt(scene.position); particles.rotation.y = t * 0.2; renderer.render(scene, camera); }
+        
+        updateSystemStatus(); init3D(); runBootSequence();
+        createMonitorGraph('cpu-monitor', getComputedStyle(document.documentElement).getPropertyValue('--color-primary'));
+        createMonitorGraph('mem-monitor', getComputedStyle(document.documentElement).getPropertyValue('--color-secondary'));
+        logToTerminal('Terminal initialized. Type `help` for commands.');
     });
     </script>
 </body>
