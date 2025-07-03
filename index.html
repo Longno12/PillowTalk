@@ -3,340 +3,605 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Longno | Interactive Portfolio v4.0</title>
-    <meta name="description" content="The digital command center and interactive portfolio for Longno, a Developer and Security Analyst.">
-
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>▲</text></svg>">
+    <title>Joe Savage | Cybersecurity Professional</title>
+    <meta name="description" content="Joe Savage (Longno) - Cybersecurity professional specializing in penetration testing, vulnerability research, and secure development.">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&family=Exo+2:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
 
     <style>
+        /* ===== SETUP & VARIABLES ===== */
         :root {
-            --color-bg: #010409; --color-primary: #00e5ff; --color-secondary: #00ff41; --color-text: #c9d1d9;
-            --color-text-muted: #8b949e; --color-surface: rgba(22, 27, 34, 0.5); --color-border: rgba(0, 229, 255, 0.2);
-            --color-border-hover: rgba(0, 229, 255, 0.6); --font-display: 'Orbitron', sans-serif; --font-mono: 'Fira Code', monospace;
+            --bg-primary: #0D1117;
+            --bg-secondary: #161B22;
+            --surface: rgba(33, 38, 45, 0.6);
+            --border-color: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --heading-primary: #f0f6fc;
+            --accent-primary: #58a6ff;
+            --accent-secondary: #1f6feb;
+            --accent-glow: rgba(88, 166, 255, 0.3);
+            --danger: #f85149;
+            --success: #3fb950;
+            --font-heading: 'Exo 2', sans-serif;
+            --font-body: 'Roboto Mono', monospace;
+            --border-radius: 8px;
+            --transition-fast: all 0.2s ease-in-out;
+            --transition-slow: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: var(--color-bg); color: var(--color-text); font-family: var(--font-mono); -webkit-font-smoothing: antialiased; overflow: hidden; cursor: crosshair; }
-        body::after { content: ' '; display: block; position: fixed; inset: 0; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); z-index: 3; background-size: 100% 3px, 3px 100%; pointer-events: none; animation: flicker 0.15s infinite; }
-        @keyframes flicker { 0%{opacity:.28} 5%{opacity:.35} 10%{opacity:.55} 15%{opacity:.24} 20%{opacity:.81} 25%{opacity:.22} 30%{opacity:.7} 35%{opacity:.96} 40%{opacity:.07} 45%{opacity:.31} 50%{opacity:.94} 55%{opacity:.59} 60%{opacity:.49} 65%{opacity:.93} 70%{opacity:.17} 75%{opacity:.13} 80%{opacity:.5} 85%{opacity:.15} 90%{opacity:.74} 95%{opacity:.37} 100%{opacity:.16} }
-        #background-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
-        .overlay { position: fixed; inset: 0; pointer-events: none; z-index: 1; background-image: linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px); background-size: 35px 35px; box-shadow: inset 0 0 150px 75px rgba(1, 4, 9, 0.95); }
-        #boot-sequence { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 10; background-color: var(--color-bg); font-size: 1.2rem; }
-        #boot-text p { white-space: pre-wrap; line-height: 1.6; }
-        #boot-text .highlight, #terminal-prompt-path { color: var(--color-primary); }
-        #boot-text .success { color: var(--color-secondary); }
-        .ui-container { position: relative; z-index: 2; display: flex; height: 100vh; padding: 2rem; gap: 2rem; opacity: 0; visibility: hidden; }
-        .ui-container.initialized { opacity: 1; visibility: visible; }
-        @keyframes slideInFromLeft { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes slideInFromRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        .ui-container.initialized .sidebar { animation: slideInFromLeft 1s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
-        .ui-container.initialized .main-content { animation: slideInFromRight 1s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
-        .sidebar { width: 280px; flex-shrink: 0; backdrop-filter: blur(10px); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 1.5rem; display: flex; flex-direction: column; opacity: 0; }
-        .sidebar-header { font-family: var(--font-display); font-size: 2rem; color: var(--color-primary); text-shadow: 0 0 8px var(--color-primary); margin-bottom: 1.5rem; }
-        .sidebar-header .version { font-size: 0.8rem; color: var(--color-text-muted); font-family: var(--font-mono); letter-spacing: 2px; }
-        .sidebar-nav a { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 1rem; color: var(--color-text-muted); text-decoration: none; font-size: 1rem; border-left: 2px solid transparent; transition: all 0.3s ease; }
-        .sidebar-nav a:hover, .sidebar-nav a.active { background-color: rgba(0, 229, 255, 0.1); color: var(--color-primary); border-left-color: var(--color-primary); text-shadow: 0 0 5px var(--color-primary); }
-        .sidebar-nav svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
-        .sidebar-status { margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--color-border); font-size: 0.8rem; color: var(--color-text-muted); }
-        .sidebar-status > div { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-        #status-light { width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 8px; animation: pulse 2s infinite; background-color: var(--color-secondary); color: var(--color-secondary); }
-        .system-monitor { display: flex; align-items: center; gap: 10px; }
-        .system-monitor canvas { width: 100px; height: 20px; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        .sidebar-footer { padding-top: 1rem; border-top: 1px solid var(--color-border); margin-top: 1rem; display: flex; justify-content: center; gap: 1.5rem; }
-        .sidebar-footer a { color: var(--color-text-muted); transition: all 0.3s ease; }
-        .sidebar-footer a:hover { color: var(--color-primary); transform: translateY(-2px); }
-        .sidebar-footer svg { width: 24px; height: 24px; }
-        #discord-copy { cursor: pointer; }
-        .main-content { flex-grow: 1; display: flex; flex-direction: column; backdrop-filter: blur(10px); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; overflow: hidden; padding: 2rem; opacity: 0; }
-        .main-content-area { flex-grow: 1; overflow-y: auto; padding-right: 1rem; margin-right: -1rem; }
-        h1[data-scramble] { min-height: 44px; } /* Prevent layout shift during scramble */
-        #terminal-container { flex-shrink: 0; margin-top: 1rem; border-top: 1px solid var(--color-border); padding-top: 1rem; }
-        #terminal-output { height: 120px; overflow-y: auto; font-size: 0.9rem; line-height: 1.6; }
-        #terminal-output p { margin-bottom: 4px; }
-        .terminal-error { color: #ff4d4d; } .terminal-success { color: var(--color-secondary); } .terminal-link { text-decoration: underline; cursor: pointer; }
-        #terminal-prompt { display: flex; align-items: center; }
-        #terminal-input { background: transparent; border: none; color: var(--color-text); flex-grow: 1; font-family: var(--font-mono); font-size: 0.9rem; }
-        #terminal-input:focus { outline: none; }
-        #terminal-cursor { width: 9px; height: 1.2em; background: var(--color-text); display: inline-block; vertical-align: middle; animation: terminal-blink 1s steps(1) infinite; }
-        @keyframes terminal-blink { 50% { opacity: 0; } }
-        #modal-container { position: fixed; inset: 0; z-index: 20; background-color: rgba(1, 4, 9, 0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
-        #modal-container:not(.modal-hidden) { opacity: 1; visibility: visible; }
-        #modal-content { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; width: 90%; max-width: 800px; max-height: 90vh; padding: 2rem; position: relative; transform: scale(0.95); transition: transform 0.3s ease; overflow-y: auto; }
-        #modal-container:not(.modal-hidden) #modal-content { transform: scale(1); }
-        #modal-close-btn { position: absolute; top: 1rem; right: 1.5rem; background: none; border: none; font-size: 2.5rem; color: var(--color-text-muted); cursor: pointer; transition: color 0.3s, transform 0.3s; }
-        #modal-close-btn:hover { color: var(--color-primary); transform: rotate(90deg); }
-        #modal-body h2 { font-family: var(--font-display); color: var(--color-primary); font-size: 2rem; margin-bottom: 1rem; }
-        #modal-body h3 { color: var(--color-secondary); margin-top: 1.5rem; margin-bottom: 0.5rem; border-left: 3px solid var(--color-secondary); padding-left: 1rem; }
-        #modal-body p { line-height: 1.8; color: var(--color-text); }
-        #modal-body .modal-links { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;}
-        #modal-body .modal-links a { color: var(--color-secondary); text-decoration: none; font-weight: bold; border: 1px solid var(--color-secondary); padding: 0.5rem 1rem; transition: background-color 0.3s, color 0.3s; }
-        #modal-body .modal-links a:hover { background-color: var(--color-secondary); color: var(--color-bg); }
-        .grid { display: grid; gap: 1.5rem; } .grid-2-col { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
-        .card { background-color: transparent; border: 1px solid var(--color-border); padding: 1.5rem; position: relative; transition: background-color 0.3s ease; }
-        .card:hover { background-color: rgba(0, 229, 255, 0.05); }
-        .card .corner { position: absolute; width: 20px; height: 20px; border: 2px solid transparent; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .card .corner-tl { top: -1px; left: -1px; border-top-color: var(--color-border-hover); border-left-color: var(--color-border-hover); } .card .corner-tr { top: -1px; right: -1px; border-top-color: var(--color-border-hover); border-right-color: var(--color-border-hover); } .card .corner-bl { bottom: -1px; left: -1px; border-bottom-color: var(--color-border-hover); border-left-color: var(--color-border-hover); } .card .corner-br { bottom: -1px; right: -1px; border-bottom-color: var(--color-border-hover); border-right-color: var(--color-border-hover); }
-        .card:hover .corner { width: 50%; height: 50%; border-color: var(--color-primary); }
-        .card h3 { font-family: var(--font-display); font-size: 1.4rem; color: var(--color-text); margin-bottom: 0.75rem; }
-        .card .project-link { margin-top: 1rem; display: inline-block; color: var(--color-text); font-weight: 600; text-decoration: none; }
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem; }
-        .tech-tags .tag { background: rgba(0, 255, 65, 0.1); color: var(--color-secondary); padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem; }
-        .cert-card { background: transparent; border: 1px solid var(--color-border); overflow: hidden; display: flex; flex-direction: column; text-decoration: none; transition: transform 0.3s, box-shadow 0.3s; }
-        .cert-card img { width: 100%; height: auto; display: block; flex-grow: 1; object-fit: cover; }
-        .cert-card:hover { transform: scale(1.03); box-shadow: 0 0 15px rgba(0, 229, 255, 0.3); }
-        @media (max-width: 1024px) {
-            .ui-container { flex-direction: column; padding: 1rem; gap: 1rem; }
-            .sidebar { width: 100%; flex-direction: row; align-items: center; padding: 0.5rem 1rem; animation: none !important; opacity: 1;}
-            .main-content { padding: 1.5rem; animation: none !important; opacity: 1;}
-            .sidebar-header { margin: 0; font-size: 1.5rem; } .sidebar-nav { display: flex; flex-grow: 1; justify-content: center; } .sidebar-nav a { padding: 0.5rem; }
-            .sidebar-nav .nav-text { display: none; } .sidebar-status { display: none; } .sidebar-footer { margin: 0; margin-left: auto; } .grid-2-col { grid-template-columns: 1fr; }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== GENERAL STYLING ===== */
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--heading-primary);
+        }
+        h1 { font-size: clamp(2.8rem, 7vw, 4.5rem); }
+        h2 { font-size: clamp(2rem, 6vw, 3rem); text-align: center; margin-bottom: 4rem; position: relative;}
+        h3 { font-size: 1.5rem; }
+
+        h2::after {
+            content: ''; display: block; width: 60px; height: 3px;
+            background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary));
+            margin: 1rem auto 0; border-radius: 2px;
+        }
+
+        a { color: var(--accent-primary); text-decoration: none; transition: var(--transition-fast); }
+        a:hover { color: #80bfff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        section { padding: 6rem 0; }
+
+        /* ===== COMPONENTS ===== */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem;
+            padding: 0.8rem 1.8rem; border-radius: var(--border-radius);
+            font-weight: 500; transition: var(--transition-fast); border: 2px solid transparent;
+            cursor: pointer; font-family: var(--font-body); font-size: 1rem;
+        }
+        .btn-primary { background-color: var(--accent-secondary); color: white; }
+        .btn-primary:hover { background-color: var(--accent-primary); transform: translateY(-3px); }
+        .btn-outline { background-color: transparent; color: var(--accent-primary); border-color: var(--accent-secondary); }
+        .btn-outline:hover { background-color: var(--surface); color: white; transform: translateY(-3px); }
+
+        .tag {
+            display: inline-block; padding: 0.3rem 0.8rem; border-radius: 50px;
+            font-size: 0.8rem; font-weight: 500; background-color: rgba(88, 166, 255, 0.15);
+            color: var(--accent-primary); border: 1px solid rgba(88, 166, 255, 0.2);
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            padding: 1.5rem 0; transition: all 0.3s ease-in-out;
+        }
+        .header.scrolled {
+            background-color: rgba(13, 17, 23, 0.85);
+            backdrop-filter: blur(10px); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            padding: 1rem 0;
+        }
+        .header-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-heading); font-weight: 800; font-size: 1.75rem; color: var(--heading-primary); }
+        .logo span { color: var(--accent-primary); }
+        .nav-list { display: flex; list-style: none; gap: 2.5rem; }
+        .nav-link { color: var(--text-primary); font-weight: 500; position: relative; padding: 0.5rem 0; letter-spacing: 1px; }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 0; height: 2px; background-color: var(--accent-primary); transition: var(--transition-fast);
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .mobile-nav-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; z-index: 1001; }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            padding-top: 80px; position: relative; overflow: hidden; text-align: center;
+        }
+        .hero::before { /* Animated Grid Background */
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background-image: linear-gradient(to right, var(--border-color) 1px, transparent 1px), linear-gradient(to bottom, var(--border-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.2;
+            animation: moveGrid 20s linear infinite;
+        }
+        @keyframes moveGrid {
+            from { background-position: 0 0; }
+            to { background-position: 40px 40px; }
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+        .hero-subtitle {
+            color: var(--accent-primary); font-family: var(--font-body); font-size: 1.1rem;
+            margin-bottom: 1rem; letter-spacing: 2px;
+        }
+        .hero-title {
+            margin-bottom: 1.5rem; text-shadow: 0 0 20px var(--accent-glow);
+            animation: fadeIn 1s ease-out;
+        }
+        .hero-description {
+            font-size: 1.25rem; color: var(--text-secondary); margin: 0 auto 2.5rem; max-width: 700px;
+        }
+        .hero-cta { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+        .glitch-text:hover { animation: glitch 0.3s linear infinite; }
+        @keyframes glitch{
+          2%,64%{ transform: translate(2px,0) skew(0deg); }
+          4%,60%{ transform: translate(-2px,0) skew(0deg); }
+          62%{ transform: translate(0,0) skew(5deg); }
+        }
+        .typing-container { min-height: 48px; } /* Prevent layout shift */
+        .cursor { display: inline-block; width: 10px; height: 1.2rem; background-color: var(--accent-primary); animation: blink 1s infinite; margin-left: 5px; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* ===== ABOUT SECTION ===== */
+        .about { background-color: var(--bg-secondary); }
+        .about-container { display: grid; grid-template-columns: 3fr 2fr; gap: 4rem; align-items: center; }
+        .about-image-wrapper { position: relative; }
+        .about-image {
+            width: 100%; border-radius: var(--border-radius); display: block;
+            border: 2px solid var(--border-color);
+            transition: var(--transition-slow);
+        }
+        .about-image-wrapper:hover .about-image { transform: scale(1.03); box-shadow: 0 0 30px var(--accent-glow); }
+        .about-content p { color: var(--text-secondary); margin-bottom: 1rem; }
+        .about-content strong { color: var(--text-primary); font-weight: 500; }
+
+        /* ===== TOOLBOX/SKILLS SECTION ===== */
+        .toolbox-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 1.5rem;
+            max-width: 900px; margin: 0 auto;
+        }
+        .skill-card {
+            background-color: var(--bg-secondary); border: 1px solid var(--border-color);
+            border-radius: var(--border-radius); padding: 1.5rem 1rem;
+            text-align: center; transition: var(--transition-fast);
+        }
+        .skill-card:hover { transform: translateY(-5px); border-color: var(--accent-secondary); box-shadow: 0 0 15px var(--accent-glow); }
+        .skill-card i { font-size: 3rem; color: var(--accent-primary); margin-bottom: 1rem; }
+        .skill-card span { font-size: 1rem; font-weight: 500; }
+
+        /* ===== PROJECTS & ACHIEVEMENTS ===== */
+        .projects, .achievements { background-color: var(--bg-secondary); }
+        .achievements { background-color: var(--bg-primary); }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
+        .project-card, .achievement-card {
+            background-color: var(--surface); border: 1px solid var(--border-color);
+            border-radius: var(--border-radius); overflow: hidden;
+            transition: var(--transition-slow);
+            backdrop-filter: blur(5px);
+            display: flex; flex-direction: column;
+        }
+        .project-card:hover, .achievement-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 20px var(--accent-glow);
+            border-color: var(--accent-primary);
+        }
+        .card-image { height: 200px; overflow: hidden; }
+        .card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .project-card:hover .card-image img, .achievement-card:hover .card-image img { transform: scale(1.05); }
+        .card-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-title { margin-bottom: 0.5rem; }
+        .card-description { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1; }
+        .project-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .project-links { display: flex; gap: 1rem; margin-top: auto; }
+        .achievement-source { color: var(--text-secondary); font-size: 0.9rem; }
+
+        /* ===== CONTACT SECTION ===== */
+        .contact { background-color: var(--bg-secondary); }
+        .contact-content { max-width: 700px; margin: 0 auto; text-align: center; }
+        .contact-description { color: var(--text-secondary); margin-bottom: 3rem; font-size: 1.1rem; }
+        #discord-handle {
+            display: inline-flex; align-items: center; gap: 0.75rem;
+            background-color: var(--bg-primary); padding: 1rem 1.5rem;
+            border: 1px solid var(--border-color); border-radius: var(--border-radius);
+            font-size: 1.25rem; margin-bottom: 3rem; cursor: pointer; transition: var(--transition-fast);
+        }
+        #discord-handle:hover { transform: translateY(-3px); background-color: var(--bg-secondary); border-color: var(--accent-secondary); }
+        .discord-icon { color: #5865F2; font-size: 1.5rem; }
+        .social-links { display: flex; justify-content: center; gap: 1.5rem; }
+        .social-icon {
+            display: flex; align-items: center; justify-content: center;
+            width: 50px; height: 50px; border-radius: 50%;
+            background-color: var(--surface); color: var(--text-primary);
+            font-size: 1.25rem; transition: var(--transition-fast); border: 1px solid var(--border-color);
+        }
+        .social-icon:hover {
+            color: white; background-color: var(--accent-secondary);
+            transform: translateY(-5px); box-shadow: 0 5px 15px var(--accent-glow);
+        }
+        
+        /* ===== FOOTER ===== */
+        .footer { text-align: center; padding: 3rem 0; background-color: var(--bg-primary); border-top: 1px solid var(--border-color); }
+        .footer-text { color: var(--text-secondary); font-size: 0.9rem; }
+
+        /* ===== UTILITIES & ANIMATIONS ===== */
+        .scroll-to-top {
+            position: fixed; bottom: 2rem; right: 2rem;
+            width: 50px; height: 50px;
+            background-color: var(--accent-secondary); color: white;
+            border: none; border-radius: 50%; font-size: 1.25rem;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            z-index: 999;
+            opacity: 0; transform: translateY(100px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .scroll-to-top.visible { opacity: 1; transform: translateY(0); }
+        .fade-in {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .stagger-children > * { transition-delay: calc(0.15s * var(--stagger-index)); }
+
+        /* ===== RESPONSIVE STYLES ===== */
+        @media (max-width: 992px) {
+            .about-container { grid-template-columns: 1fr; gap: 3rem; }
+            .about-image-wrapper { max-width: 500px; margin: 0 auto; order: -1; }
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; } h2 { font-size: 1.8rem; }
+            .container { padding: 0 1.5rem; }
+            .mobile-nav-toggle { display: block; }
+            .nav {
+                position: fixed; top: 0; right: -100%; width: min(80%, 350px); height: 100vh;
+                background-color: var(--bg-secondary); flex-direction: column; justify-content: center;
+                padding: 2rem; transition: right 0.4s cubic-bezier(0.22, 1, 0.36, 1); z-index: 1000;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+            }
+            .nav.active { right: 0; }
+            .nav-list { flex-direction: column; align-items: center; gap: 2rem; }
+            .nav-link { font-size: 1.2rem; }
+            .hero-cta { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 280px; }
+        }
+        @media (max-width: 480px) {
+            section { padding: 4rem 0; }
+            .card-grid { grid-template-columns: 1fr; }
+            .toolbox-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
         }
     </style>
 </head>
 <body>
-    <canvas id="background-canvas"></canvas> <div class="overlay"></div> <div id="boot-sequence"><div id="boot-text"></div></div>
-    <div id="ui-container" class="ui-container">
-        <aside class="sidebar">
-            <div class="sidebar-header">LONGNO<span class="version">_v4.0</span></div>
-            <nav class="sidebar-nav">
-                <a href="#" class="nav-link active" data-content="about"><svg viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path></svg><span class="nav-text">./About</span></a>
-                <a href="#" class="nav-link" data-content="skills"><svg viewBox="0 0 24 24"><path d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"></path></svg><span class="nav-text">./Skills</span></a>
-                <a href="#" class="nav-link" data-content="projects"><svg viewBox="0 0 24 24"><path d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"></path></svg><span class="nav-text">./Projects</span></a>
-                <a href="#" class="nav-link" data-content="achievements"><svg viewBox="0 0 24 24"><path d="M16.5 18.75h-9a9 9 0 00-9 9H2.25A19.5 19.5 0 0112 3c5.568 0 10.45 2.454 13.5 6.273V18.75h-3.375a9.001 9.001 0 00-9-9zM15 13.5a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span class="nav-text">./Achievements</span></a>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container header-container">
+            <a href="#" class="logo">Joe<span>Savage</span></a>
+            <nav class="nav" id="nav">
+                <ul class="nav-list">
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#toolbox" class="nav-link">Toolbox</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#achievements" class="nav-link">Certs</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
             </nav>
-            <div class="sidebar-status">
-                <div><span>SYS_TIME:</span><span id="status-time">--:--:--</span></div>
-                <div><span>STATUS:</span><span>NOMINAL</span><span id="status-light"></span></div>
-                <div class="system-monitor"><span>CPU:</span><canvas id="cpu-monitor"></canvas></div>
-                <div class="system-monitor"><span>MEM:</span><canvas id="mem-monitor"></canvas></div>
-            </div>
-            <div class="sidebar-footer">
-                <a href="https://github.com/Longno12" target="_blank" title="GitHub"><svg viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
-                <a href="#" id="discord-copy" title="Copy Discord ID: 2025Joe"><svg viewBox="0 0 24 24"><g fill="none"><path d="M5.503 5.152c-.893.352-1.684.87-2.348 1.487A11.02 11.02 0 0 0 12 21.943c.27 0 .538-.01.803-.028l-1.383-2.113a.21.21 0 0 1-.051-.144c-.035-.411.049-.82.234-1.176l.245-.466c.334-.633.91-1.144 1.583-1.458a8.948 8.948 0 0 1-5.367-3.807l-.337.288a9.01 9.01 0 0 0-1.745.892zm14.851.681c.214.37.387.75.52 1.14.24 1.32.072 2.684-.528 3.868-.628 1.233-1.644 2.185-2.88 2.72a15.74 15.74 0 0 1-1.103.359l.144.417c.28.813.21 1.706-.184 2.457a3.4 3.4 0 0 1-.42.607l1.714.949a11.02 11.02 0 0 0 4.154-10.73c-.22-.98-.62-1.9-1.167-2.731l-1.442 1.448zm-6.273-3.05a10.978 10.978 0 0 0-4.162 0l1.45 1.448a9.01 9.01 0 0 1 1.262-.001l1.45-1.447zM12 7.214a4.786 4.786 0 1 0 0 9.572 4.786 4.786 0 0 0 0-9.572z" fill="currentColor"/></g></svg></a>
-                <span id="copy-feedback"></span>
-            </div>
-        </aside>
-        <main class="main-content"><div class="main-content-area" id="main-content-area"></div><div id="terminal-container"><div id="terminal-output"></div><div id="terminal-prompt"><span><span id="terminal-prompt-path">longno</span>@v4.0:~$ </span><input type="text" id="terminal-input" autofocus><span id="terminal-cursor"></span></div></div></main>
-    </div>
-    <div id="modal-container" class="modal-hidden"><div id="modal-content"><button id="modal-close-btn">×</button><div id="modal-body"></div></div></div>
-    
-    <template id="content-template-about"><h1 data-scramble data-text="> ./About_Me"></h1><div class="content-body"><p>19-year-old developer and security analyst from England. My passion lies at the intersection of creation and protection—I build <strong>robust, scalable applications</strong> with a security-first mindset.</p><p>For me, clean and maintainable code isn't just an aesthetic choice; it's the fundamental building block of a resilient system. I thrive on bridging the gap between development and security, ensuring that every project is not only functionally elegant but also hardened against emerging threats.</p><p>Currently seeking opportunities to apply my skills in a challenging, growth-oriented environment. Let's build something secure together.</p></div></template>
-    <template id="content-template-skills"><h1 data-scramble data-text="> ./Skills_&_Toolkit"></h1><div class="content-body grid grid-2-col"><div class="card"><span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span><h3>// Languages</h3><ul style="list-style: none; padding-left: 1.5rem;"><li style="padding:.4rem 0;position:relative;line-height:1.6;">C#</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Python</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">JavaScript / TypeScript</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Java & CSS</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">C++</li></ul></div><div class="card"><span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span><h3>// Frameworks & Libraries</h3><ul style="list-style: none; padding-left: 1.5rem;"><li style="padding:.4rem 0;position:relative;line-height:1.6;">.NET Framework / Core</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">ASP.NET</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Node.js</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">React.js (Basic)</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Three.js</li></ul></div><div class="card"><span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span><h3>// Security Tools</h3><ul style="list-style: none; padding-left: 1.5rem;"><li style="padding:.4rem 0;position:relative;line-height:1.6;">Burp Suite</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Nmap</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Wireshark</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Metasploit (Basic)</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Ghidra</li></ul></div><div class="card"><span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span><h3>// Development & Ops</h3><ul style="list-style: none; padding-left: 1.5rem;"><li style="padding:.4rem 0;position:relative;line-height:1.6;">Git & GitHub</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Docker</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Visual Studio & VS Code</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">Agile Methodologies</li><li style="padding:.4rem 0;position:relative;line-height:1.6;">CI/CD Principles</li></ul></div></div></template>
-    <template id="content-template-projects"><h1 data-scramble data-text="> ./Projects"></h1><div class="content-body grid grid-2-col"><div class="card"><span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span><h3>// Game Hub</h3><p>A unified desktop application for launching games from multiple libraries (Steam, Epic, etc.) through a single, clean interface.</p><div class="tech-tags"><span class="tag">C#</span><span class="tag">.NET</span><span class="tag">WinForms</span></div><a href="#" class="project-link" data-project="game-hub">> VIEW DETAILS</a></div><div class="card"><span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span><h3>// Dynamic Digital Clock</h3><p>A sleek, performant, and real-time digital clock built with pure vanilla JavaScript, focusing on efficient DOM manipulation.</p><div class="tech-tags"><span class="tag">JavaScript</span><span class="tag">HTML5</span><span class="tag">CSS3</span></div><a href="#" class="project-link" data-project="digital-clock">> VIEW DETAILS</a></div></div></template>
-    <template id="content-template-achievements">
-    <h1 data-scramble data-text="> ./Achievements"></h1>
-    <div class="content-body grid grid-2-col">
-        <a href="https://github.com/Longno12" target="_blank" class="cert-card" style="grid-column: 1 / -1;">
-            <img src="https://github-readme-stats.vercel.app/api?username=Longno12&show_icons=true&theme=transparent&hide_border=true&title_color=00e5ff&text_color=c9d1d9&icon_color=00e5ff&text_bold=false" alt="My GitHub stats, showing stars, commits, and top languages.">
-        </a>
-        <a href="https://tryhackme.com/p/Longno" target="_blank" class="cert-card">
-            <img src="https://raw.githubusercontent.com/Longno12/pics/main/1.png" alt="TryHackMe 3 Million Legend Badge">
-        </a>
-        <a href="https://tryhackme.com/p/Longno" target="_blank" class="cert-card">
-            <img src="https://raw.githubusercontent.com/Longno12/pics/main/2.png" alt="TryHackMe Intro to Security Engineering Certificate">
-        </a>
-        <a href="https://tryhackme.com/p/Longno" target="_blank" class="cert-card">
-            <img src="https://raw.githubusercontent.com/Longno12/pics/main/3.jpg" alt="TryHackMe Pre Security Certificate">
-        </a>
-        <a href="https://tryhackme.com/p/Longno" target="_blank" class="cert-card">
-            <img src="https://raw.githubusercontent.com/Longno12/pics/main/4.png" alt="TryHackme Bronze League 1st pace ">
-        </a>
-        <a href="https://raw.githubusercontent.com/Longno12/pics/main/5.png" target="_blank" class="cert-card">
-            <img src="https://raw.githubusercontent.com/Longno12/pics/main/5.png" alt="TryHackme Understanding every OWASP vulnerability ">
-        </a>
-    </div>
-</template>
+            <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-content">
+                <p class="hero-subtitle fade-in">Hi, I'm Joe Savage. I'm a...</p>
+                <div class="typing-container">
+                    <h1 class="hero-title" id="typing-text"></h1><span class="cursor"></span>
+                </div>
+                <p class="hero-description fade-in">
+                    I build and break systems to make them unbreakable. A UK-based security professional passionate about finding vulnerabilities and strengthening digital defenses.
+                </p>
+                <div class="hero-cta fade-in">
+                    <a href="#projects" class="btn btn-primary">My Work <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="#contact" class="btn btn-outline">Get In Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="fade-in">01. About Me</h2>
+                <div class="about-container">
+                    <div class="about-content fade-in">
+                        <p>
+                            Hello! I'm Joe (Longno), a 19-year-old cybersecurity enthusiast from England. My journey in tech started in software development, where I quickly learned that an application is only as strong as its weakest link. This realization pivoted my focus towards the offensive side of security.
+                        </p>
+                        <p>
+                            Today, my work revolves around <strong>penetration testing</strong>, <strong>vulnerability research</strong>, and promoting <strong>secure coding practices</strong>. I thrive on the challenge of discovering exploits before malicious actors do, whether through rigorous testing, code analysis, or participating in CTFs and bug bounty programs.
+                        </p>
+                        <p>
+                            My philosophy is simple: security isn't a feature, it's a foundation.
+                        </p>
+                    </div>
+                    <div class="about-image-wrapper fade-in">
+                        <img src="https://raw.githubusercontent.com/Longno12/pics/main/Yeti.png" alt="Joe Savage's Avatar" class="about-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Toolbox Section -->
+        <section id="toolbox" class="toolbox">
+            <div class="container">
+                <h2 class="fade-in">02. My Toolbox</h2>
+                <div class="toolbox-grid fade-in stagger-children">
+                    <div class="skill-card" style="--stagger-index: 1;"><i class="devicon-python-plain"></i><span>Python</span></div>
+                    <div class="skill-card" style="--stagger-index: 2;"><i class="devicon-csharp-plain"></i><span>C# & .NET</span></div>
+                    <div class="skill-card" style="--stagger-index: 3;"><i class="devicon-javascript-plain"></i><span>JavaScript</span></div>
+                    <div class="skill-card" style="--stagger-index: 4;"><i class="devicon-bash-plain"></i><span>Bash Scripting</span></div>
+                    <div class="skill-card" style="--stagger-index: 5;"><i class="fas fa-network-wired"></i><span>Networking</span></div>
+                    <div class="skill-card" style="--stagger-index: 6;"><i class="devicon-linux-plain"></i><span>Linux</span></div>
+                    <div class="skill-card" style="--stagger-index: 7;"><i class="fas fa-shield-halved"></i><span>Metasploit</span></div>
+                    <div class="skill-card" style="--stagger-index: 8;"><i class="fas fa-bug"></i><span>Burp Suite</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects">
+            <div class="container">
+                <h2 class="fade-in">03. Security Projects</h2>
+                <div class="card-grid">
+                    <!-- Project 1 -->
+                    <div class="project-card fade-in">
+                        <div class="card-image"><img src="https://raw.githubusercontent.com/Longno12/pics/main/GameHub.png" alt="Game Hub Project"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Secure Game Hub</h3>
+                            <p class="card-description">A unified gaming platform developed with a security-first mindset, implementing measures to protect credentials and mitigate common attack vectors found in gaming applications.</p>
+                            <div class="project-tech"><span class="tag">C#</span><span class="tag">.NET</span><span class="tag">AppSec</span></div>
+                            <div class="project-links">
+                                <a href="https://github.com/Longno12/Game-Hub" class="btn btn-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> View Code</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="project-card fade-in">
+                        <div class="card-image"><img src="https://raw.githubusercontent.com/Longno12/pics/main/3.jpg" alt="Vulnerability Dashboard"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Vulnerability Dashboard</h3>
+                            <p class="card-description">A conceptual security dashboard for aggregating, analyzing, and tracking vulnerabilities from various scanners and reports, providing a centralized view of an organization's security posture.</p>
+                            <div class="project-tech"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">Data Viz</span></div>
+                            <div class="project-links">
+                                <a href="#" class="btn btn-outline" style="cursor: not-allowed; opacity: 0.6;"><i class="fas fa-lock"></i> Private Repo</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project 3 -->
+                    <div class="project-card fade-in">
+                        <div class="card-image"><img src="https://raw.githubusercontent.com/Longno12/pics/main/Clock.png" alt="Secure Clock Project"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Hardened Web App</h3>
+                            <p class="card-description">A simple client-side digital clock application built to demonstrate secure JavaScript implementation, content security policies (CSP), and resistance to common XSS and injection attacks.</p>
+                            <div class="project-tech"><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span><span class="tag">Web Security</span></div>
+                            <div class="project-links">
+                                <a href="https://github.com/Longno12/Dynamic-Digital-Clock" class="btn btn-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> View Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section id="achievements" class="achievements">
+            <div class="container">
+                <h2 class="fade-in">04. Certifications & Badges</h2>
+                <div class="card-grid">
+                    <a href="https://tryhackme.com/p/Longno" target="_blank" rel="noopener noreferrer" class="achievement-card fade-in">
+                        <div class="card-image"><img src="https://raw.githubusercontent.com/Longno12/pics/main/WebFundamentals.png" alt="Web Fundamentals"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Web Fundamentals Path</h3>
+                            <p class="achievement-source">TryHackMe</p>
+                        </div>
+                    </a>
+                    <a href="https://tryhackme.com/p/Longno" target="_blank" rel="noopener noreferrer" class="achievement-card fade-in">
+                        <div class="card-image"><img src="https://raw.githubusercontent.com/Longno12/pics/main/5.png" alt="OWASP Top 10"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">OWASP Top 10</h3>
+                            <p class="achievement-source">TryHackMe</p>
+                        </div>
+                    </a>
+                    <a href="https://tryhackme.com/p/Longno" target="_blank" rel="noopener noreferrer" class="achievement-card fade-in">
+                        <div class="card-image"><img src="https://raw.githubusercontent.com/Longno12/pics/main/4.png" alt="Pre Security Path"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Pre-Security Path</h3>
+                            <p class="achievement-source">TryHackMe</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="fade-in">05. Get In Touch</h2>
+                <div class="contact-content">
+                    <p class="contact-description fade-in">
+                        I'm always open to discussing new projects, security research, or collaboration opportunities. The best way to reach me is on Discord.
+                    </p>
+                    <div class="fade-in">
+                        <div id="discord-handle" title="Click to copy">
+                            <i class="fab fa-discord discord-icon"></i>
+                            <span id="discord-text">2025Joe</span>
+                        </div>
+                    </div>
+                    <p class="contact-description fade-in">
+                        You can also find me on these platforms:
+                    </p>
+                    <div class="social-links fade-in">
+                        <a href="https://github.com/Longno12" class="social-icon" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://tryhackme.com/p/Longno" class="social-icon" target="_blank" rel="noopener noreferrer" title="TryHackMe"><i class="fas fa-user-secret"></i></a>
+                        <a href="https://bugcrowd.com/Longno" class="social-icon" target="_blank" rel="noopener noreferrer" title="Bugcrowd"><i class="fas fa-bug-slash"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                Designed & Built by Joe Savage (Longno)<br>
+                © <span id="year"></span> | All Rights Reserved
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scroll To Top Button -->
+    <button id="scroll-to-top" class="scroll-to-top" title="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-
-        const contentArea = document.getElementById('main-content-area');
-        const uiContainer = document.getElementById('ui-container');
-        
-        async function runBootSequence() {
-            const bootText = document.getElementById('boot-text');
-            const bootLines = [
-                { text: 'BOOTING LN-OS v4.0...', delay: 50 }, { text: '...', delay: 200 },
-                { text: 'INITIATING SYSTEM CHECK...', delay: 50 }, { text: '  > MEMORY INTEGRITY... <span class="success">[OK]</span>', delay: 150 },
-                { text: '  > CPU CORES... <span class="success">[OK]</span>', delay: 150 }, { text: '  > PARTICLE RENDERER... <span class="success">[OK]</span>', delay: 150 },
-                { text: 'LOADING UI MODULES...', delay: 300 }, { text: '  > Module: <span class="highlight">core/identity.mod</span>... LOADED', delay: 100 },
-                { text: '  > Module: <span class="highlight">core/skills.mod</span>... LOADED', delay: 100 }, { text: '  > Module: <span class="highlight">core/projects.mod</span>... LOADED', delay: 100 },
-                { text: '  > Module: <span class="highlight">net/achievements.mod</span>... LOADED', delay: 100 }, { text: '...', delay: 300 },
-                { text: 'CONNECTION ESTABLISHED.', delay: 300 }, { text: 'DEPLOYING UI...', delay: 800 }
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- TYPING EFFECT ---
+            const typingTextElement = document.getElementById('typing-text');
+            const phrases = [
+                "Cybersecurity Specialist.",
+                "Ethical Hacker.",
+                "Penetration Tester.",
+                "Software Developer."
             ];
-            const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-            for (const line of bootLines) { const p = document.createElement('p'); p.innerHTML = line.text; bootText.appendChild(p); await sleep(line.delay); }
-            const bootScreen = document.getElementById('boot-sequence');
-            bootScreen.style.transition = 'opacity 0.5s ease-out';
-            bootScreen.style.opacity = '0';
-            uiContainer.classList.add('initialized');
-            setTimeout(() => { bootScreen.style.display = 'none'; loadContent('about'); }, 500);
-        }
+            let phraseIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
 
-        const scrambleChars = '!<>-_\\/[]{}—=+*^?#________';
-        function scrambleText(element) {
-            const originalText = element.dataset.text;
-            let counter = 0;
-            const interval = setInterval(() => {
-                let scrambled = originalText.split('').map((char, index) => {
-                    if (index < counter) return originalText[index];
-                    return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
-                }).join('');
-                element.textContent = scrambled;
-                if (counter >= originalText.length) clearInterval(interval);
-                counter += 1 / 3;
-            }, 30);
-        }
+            function type() {
+                const currentPhrase = phrases[phraseIndex];
+                if (isDeleting) {
+                    typingTextElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    typingTextElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                    charIndex++;
+                }
 
-        function animateContentAppearance(panel) {
-            const elements = panel.querySelectorAll('p, .card, .cert-card');
-            elements.forEach(el => { el.style.opacity = 0; el.style.transform = 'translateY(10px)'; });
-            let delay = 50;
-            elements.forEach(el => { setTimeout(() => { el.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out'; el.style.opacity = 1; el.style.transform = 'translateY(0px)'; }, delay); delay += 30; });
-            const header = panel.querySelector('h1[data-scramble]');
-            if (header) scrambleText(header);
-        }
-        
-        function loadContent(contentId) {
-            const template = document.getElementById(`content-template-${contentId}`);
-            if (!template) { return; }
-            contentArea.innerHTML = '';
-            const content = template.content.cloneNode(true);
-            contentArea.appendChild(content);
-            animateContentAppearance(contentArea);
-        }
+                if (!isDeleting && charIndex === currentPhrase.length) {
+                    isDeleting = true;
+                    setTimeout(type, 2000);
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    setTimeout(type, 500);
+                } else {
+                    const typingSpeed = isDeleting ? 50 : 120;
+                    setTimeout(type, typingSpeed);
+                }
+            }
+            if (typingTextElement) type();
 
-        try {
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const hoverSound = new Audio('https://raw.githubusercontent.com/Longno12/pics/main/Hover.mp3');
-            const clickSound = new Audio('https://raw.githubusercontent.com/Longno12/pics/main/Click.mp3');
-            hoverSound.volume = 0.3; clickSound.volume = 0.5;
-            const playSound = (sound) => { if (audioContext.state === 'running') { const s = sound.cloneNode(); s.volume = sound.volume; s.play().catch(e => {}); }};
-            const resumeAudio = () => { if (audioContext.state === 'suspended') audioContext.resume(); document.removeEventListener('click', resumeAudio); };
-            document.addEventListener('click', resumeAudio);
-            document.querySelectorAll('a, button, input').forEach(el => { el.addEventListener('mouseenter', () => playSound(hoverSound)); if(el.tagName !== 'INPUT') el.addEventListener('click', () => playSound(clickSound)); });
-        } catch (e) { console.warn("Web Audio API is not supported."); }
-        
-        function updateSystemStatus() {
-            const timeEl = document.getElementById('status-time');
-            if (!timeEl) return;
-            setInterval(() => { const now = new Date(); timeEl.textContent = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`; }, 1000);
-        }
+            // --- HEADER SCROLL EFFECT ---
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('scrolled', window.scrollY > 50);
+            });
 
-        function createMonitorGraph(canvasId, color) {
-            const canvas = document.getElementById(canvasId);
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            let values = new Array(50).fill(0);
-            function draw() {
-                const newHeight = Math.random() * canvas.height;
-                values.push(newHeight);
-                if(values.length > 50) values.shift();
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = color;
-                values.forEach((val, i) => {
-                    ctx.fillRect(i * 2, canvas.height - val, 2, val);
+            // --- MOBILE NAVIGATION ---
+            const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+            const nav = document.getElementById('nav');
+            mobileNavToggle.addEventListener('click', () => {
+                nav.classList.toggle('active');
+                mobileNavToggle.innerHTML = nav.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (nav.classList.contains('active')) {
+                       nav.classList.remove('active');
+                       mobileNavToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
                 });
-                requestAnimationFrame(draw);
+            });
+
+            // --- ACTIVE NAV LINK ON SCROLL ---
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const observerOptions = { rootMargin: '-50% 0px -50% 0px' };
+            
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+            sections.forEach(section => sectionObserver.observe(section));
+
+
+            // --- SCROLL ANIMATIONS (FADE-IN) ---
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        fadeObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            fadeElements.forEach(el => fadeObserver.observe(el));
+
+            // --- DISCORD HANDLE COPY ---
+            const discordHandle = document.getElementById('discord-handle');
+            const discordText = document.getElementById('discord-text');
+            if (discordHandle) {
+                discordHandle.addEventListener('click', () => {
+                    navigator.clipboard.writeText(discordText.textContent).then(() => {
+                        const originalText = discordText.textContent;
+                        discordText.textContent = 'Copied!';
+                        setTimeout(() => {
+                            discordText.textContent = originalText;
+                        }, 2000);
+                    });
+                });
             }
-            draw();
-        }
 
-        const terminalInput = document.getElementById('terminal-input');
-        const terminalOutput = document.getElementById('terminal-output');
-        const terminalPromptPath = document.getElementById('terminal-prompt-path');
-        let currentPath = '~';
+            // --- SCROLL TO TOP BUTTON ---
+            const scrollToTopBtn = document.getElementById('scroll-to-top');
+            window.addEventListener('scroll', () => {
+                scrollToTopBtn.classList.toggle('visible', window.scrollY > 300);
+            });
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
 
-        const fileSystem = {
-            '~': ['about.md', 'skills.json', 'projects/'],
-            '~/projects': ['game-hub.url', 'digital-clock.url'],
-        };
-
-        const fileContents = {
-            'about.md': `User: Longno (19, England)\nSpecialization: Developer & Security Analyst\nStatus: Seeking new opportunities`,
-            'skills.json': `{ "languages": ["C#", "Python", "JS/TS"], "security": ["Burp Suite", "Nmap", "Wireshark"] }`,
-            'game-hub.url': 'Project Details: Game Hub\nUse `open game-hub.url` to view.',
-            'digital-clock.url': 'Project Details: Dynamic Digital Clock\nUse `open digital-clock.url` to view.',
-        };
-
-        const logToTerminal = (message, type = 'response') => {
-            const p = document.createElement('p');
-            if (type === 'user') p.innerHTML = `<span><span id="terminal-prompt-path">${currentPath}</span>$ </span>${message}`;
-            else p.innerHTML = message.replace(/\n/g, '<br>');
-            if (type === 'error') p.classList.add('terminal-error');
-            if (type === 'success') p.classList.add('terminal-success');
-            terminalOutput.appendChild(p); terminalOutput.scrollTop = terminalOutput.scrollHeight;
-        };
-
-        const parseCommand = (command) => {
-            const [cmd, ...args] = command.trim().toLowerCase().split(' ');
-            logToTerminal(command, 'user');
-            switch (cmd) {
-                case 'help': logToTerminal(`Available commands:\n  theme [hex] - set accent color\n  nav [page] - navigate site\n  ls - list files\n  cd [dir] - change directory\n  cat [file] - view file content\n  open [file] - open project file\n  clear - clear terminal`); break;
-                case 'theme': if (args[0] && /^#[0-9a-f]{6}$/i.test(args[0])) { document.documentElement.style.setProperty('--color-primary', args[0]); logToTerminal(`Primary color updated.`, 'success'); } else { logToTerminal(`Error: Invalid hex color.`, 'error'); } break;
-                case 'nav': const navTarget = document.querySelector(`.nav-link[data-content="${args[0]}"]`); if (navTarget) { navTarget.click(); logToTerminal(`Navigating to ./${args[0]}`, 'success'); } else { logToTerminal(`Error: Section not found: ${args[0]}`, 'error'); } break;
-                case 'clear': terminalOutput.innerHTML = ''; break;
-                case 'ls': logToTerminal((fileSystem[currentPath] || []).join('\n')); break;
-                case 'cd': const targetDir = args[0] === '..' ? '~' : `~/${args[0].replace('/', '')}`; if (fileSystem[targetDir]) { currentPath = targetDir; terminalPromptPath.textContent = currentPath; } else { logToTerminal(`cd: no such file or directory: ${args[0]}`, 'error'); } break;
-                case 'cat': if (fileContents[`${currentPath}/${args[0]}`.replace('~/', '')]) logToTerminal(fileContents[`${currentPath}/${args[0]}`.replace('~/', '')]); else logToTerminal(`cat: ${args[0]}: No such file`, 'error'); break;
-                case 'open':
-                    const projectKey = args[0].replace('.url', '');
-                    if (projectData[projectKey]) { openModal(projectKey); logToTerminal(`Opening details for ${projectKey}...`, 'success'); }
-                    else { logToTerminal(`open: cannot open ${args[0]}`, 'error'); } break;
-                case '': break; default: logToTerminal(`Command not found: ${cmd}. Type 'help' for a list.`, 'error');
-            }
-        };
-        terminalInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); parseCommand(terminalInput.value); terminalInput.value = ''; } });
-        
-        const projectData = {
-            'game-hub': { title: '// Project: Game Hub', description: `<h3>Objective</h3><p>To create a centralized desktop application in C# that consolidates various game libraries (like Steam, Epic Games, etc.) into one elegant and efficient user interface. The primary goal was to practice object-oriented programming principles and tackle system interoperability challenges.</p><h3>Challenges & Solutions</h3><p>A key challenge was designing a flexible system to handle different library APIs and local file structures. I solved this by implementing a modular "Provider" pattern, where each library is a self-contained module that implements a common IGameProvider interface. This makes the system easily extensible.</p><h3>What I Learned</h3><p>This project solidified my understanding of OOP design, file I/O in C#, and the importance of user-centric UI design. It was a deep dive into building a practical, real-world utility.</p>`, github: 'https://github.com/Longno12/Game-Hub' },
-            'digital-clock': { title: '// Project: Dynamic Digital Clock', description: `<h3>Objective</h3><p>The goal was to build a visually appealing, high-performance digital clock using only vanilla JavaScript, HTML, and CSS. This project served as a fundamental exercise in efficient DOM manipulation and the use of JavaScript's Date object without relying on any external libraries.</p><h3>Challenges & Solutions</h3><p>The main challenge was ensuring performance. Updating the DOM every second can be inefficient if done poorly. I implemented a solution where I only update the text content of the clock elements, avoiding costly re-renders of the entire component. This keeps the animation smooth and the CPU usage minimal.</p><h3>What I Learned</h3><p>This was a fantastic exercise in front-end fundamentals. I learned the nuances of setInterval, the importance of performance optimization in browser environments, and how to create a sleek UI with pure CSS.</p>`, github: 'https://github.com/Longno12/Dynamic-Digital-Clock' }
-        };
-        const modalContainer = document.getElementById('modal-container');
-        const modalBody = document.getElementById('modal-body');
-        function openModal(projectKey) {
-            const data = projectData[projectKey]; if (!data) return;
-            modalBody.innerHTML = `<h2>${data.title}</h2>${data.description}<div class="modal-links"><a href="${data.github}" target="_blank">> VIEW SOURCE ON GITHUB</a></div>`;
-            modalContainer.classList.remove('modal-hidden');
-        }
-        function closeModal() { modalContainer.classList.add('modal-hidden'); }
-        document.addEventListener('click', (e) => { if (e.target.closest('.project-link')) { e.preventDefault(); openModal(e.target.closest('.project-link').dataset.project); } if(e.target.id === 'modal-container' || e.target.id === 'modal-close-btn') closeModal();});
-
-        document.querySelectorAll('.nav-link').forEach(link => { link.addEventListener('click', (e) => { e.preventDefault(); if (link.classList.contains('active')) return; const contentId = link.dataset.content; document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active')); link.classList.add('active'); loadContent(contentId); }); });
-        document.getElementById('discord-copy').addEventListener('click', (e) => { e.preventDefault(); navigator.clipboard.writeText("2025Joe").then(() => { const fb = document.getElementById('copy-feedback'); if (fb) { fb.textContent = '[COPIED]'; setTimeout(() => { fb.textContent = ''; }, 2000); } }); });
-
-        let scene, camera, renderer, particles; let mouseX = 0, mouseY = 0;
-        function init3D() {
-            const canvas = document.getElementById('background-canvas');
-            scene = new THREE.Scene(); camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 3000); camera.position.z = 1000;
-            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight); renderer.setClearColor(0x000000, 0);
-            const computedStyle = getComputedStyle(document.documentElement);
-            const primaryColorStr = computedStyle.getPropertyValue('--color-primary').trim();
-            const secondaryColorStr = computedStyle.getPropertyValue('--color-secondary').trim();
-            const particleCount = 20000;
-            const positions = new Float32Array(particleCount * 3); const colors = new Float32Array(particleCount * 3);
-            const color = new THREE.Color();
-            for (let i = 0; i < particleCount; i++) { const i3 = i * 3; positions[i3] = (Math.random() - 0.5) * 2000; positions[i3+1] = (Math.random() - 0.5) * 2000; positions[i3+2] = (Math.random() - 0.5) * 2000; color.set(Math.random() > 0.5 ? primaryColorStr : secondaryColorStr); colors[i3] = color.r; colors[i3+1] = color.g; colors[i3+2] = color.b; }
-            const geometry = new THREE.BufferGeometry();
-            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3)); geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-            const material = new THREE.PointsMaterial({ size: 2, blending: THREE.AdditiveBlending, transparent: true, vertexColors: true });
-            particles = new THREE.Points(geometry, material); scene.add(particles);
-            window.addEventListener('resize', onWindowResize, false); document.addEventListener('mousemove', onMouseMove, false); animate();
-        }
-        function onWindowResize() { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); }
-        function onMouseMove(event) { mouseX = event.clientX - window.innerWidth / 2; mouseY = event.clientY - window.innerHeight / 2; }
-        function animate() { requestAnimationFrame(animate); const t = Date.now() * 0.0001; camera.position.x += (mouseX - camera.position.x) * 0.02; camera.position.y += (-mouseY - camera.position.y) * 0.02; camera.lookAt(scene.position); particles.rotation.y = t * 0.2; renderer.render(scene, camera); }
-        
-        updateSystemStatus(); init3D(); runBootSequence();
-        createMonitorGraph('cpu-monitor', getComputedStyle(document.documentElement).getPropertyValue('--color-primary'));
-        createMonitorGraph('mem-monitor', getComputedStyle(document.documentElement).getPropertyValue('--color-secondary'));
-        logToTerminal('Terminal initialized. Type `help` for commands.');
-    });
+            // --- FOOTER YEAR ---
+            document.getElementById('year').textContent = new Date().getFullYear();
+        });
     </script>
 </body>
 </html>
