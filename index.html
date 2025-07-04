@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
 
     <style>
-        /* ===== SETUP & VARIABLES ===== */
         :root {
             --bg-primary: #0D1117;
             --bg-secondary: #161B22;
@@ -57,7 +56,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* ===== GENERAL STYLING ===== */
         h1, h2, h3, h4 {
             font-family: var(--font-heading);
             font-weight: 700;
@@ -80,7 +78,6 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
         section { padding: 6rem 0; }
 
-        /* ===== COMPONENTS ===== */
         .btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem;
             padding: 0.8rem 1.8rem; border-radius: var(--border-radius);
@@ -98,7 +95,6 @@
             color: var(--accent-primary); border: 1px solid rgba(88, 166, 255, 0.2);
         }
 
-        /* ===== HEADER ===== */
         .header {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
             padding: 1.5rem 0; transition: all 0.3s ease-in-out;
@@ -120,12 +116,11 @@
         .nav-link:hover::after, .nav-link.active::after { width: 100%; }
         .mobile-nav-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; z-index: 1001; }
 
-        /* ===== HERO SECTION ===== */
         .hero {
             min-height: 100vh; display: flex; align-items: center;
             padding-top: 80px; position: relative; overflow: hidden; text-align: center;
         }
-        .hero::before { /* Animated Grid Background */
+        .hero::before { 
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background-image: linear-gradient(to right, var(--border-color) 1px, transparent 1px), linear-gradient(to bottom, var(--border-color) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -155,11 +150,10 @@
           4%,60%{ transform: translate(-2px,0) skew(0deg); }
           62%{ transform: translate(0,0) skew(5deg); }
         }
-        .typing-container { min-height: 48px; } /* Prevent layout shift */
+        .typing-container { min-height: 48px; } 
         .cursor { display: inline-block; width: 10px; height: 1.2rem; background-color: var(--accent-primary); animation: blink 1s infinite; margin-left: 5px; }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* ===== ABOUT SECTION ===== */
         .about { background-color: var(--bg-secondary); }
         .about-container { display: grid; grid-template-columns: 3fr 2fr; gap: 4rem; align-items: center; }
         .about-image-wrapper { position: relative; }
@@ -172,7 +166,6 @@
         .about-content p { color: var(--text-secondary); margin-bottom: 1rem; }
         .about-content strong { color: var(--text-primary); font-weight: 500; }
 
-        /* ===== TOOLBOX/SKILLS SECTION ===== */
         .toolbox-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 1.5rem;
             max-width: 900px; margin: 0 auto;
@@ -186,7 +179,6 @@
         .skill-card i { font-size: 3rem; color: var(--accent-primary); margin-bottom: 1rem; }
         .skill-card span { font-size: 1rem; font-weight: 500; }
 
-        /* ===== PROJECTS & ACHIEVEMENTS ===== */
         .projects, .achievements { background-color: var(--bg-secondary); }
         .achievements { background-color: var(--bg-primary); }
         .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
@@ -212,7 +204,7 @@
         .project-links { display: flex; gap: 1rem; margin-top: auto; }
         .achievement-source { color: var(--text-secondary); font-size: 0.9rem; }
 
-        /* ===== CONTACT SECTION ===== */
+
         .contact { background-color: var(--bg-secondary); }
         .contact-content { max-width: 700px; margin: 0 auto; text-align: center; }
         .contact-description { color: var(--text-secondary); margin-bottom: 3rem; font-size: 1.1rem; }
@@ -236,11 +228,52 @@
             transform: translateY(-5px); box-shadow: 0 5px 15px var(--accent-glow);
         }
         
-        /* ===== FOOTER ===== */
+        .policy-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+            color: var(--text-secondary);
+        }
+        .policy-content h3 {
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+        .policy-content p, .policy-content li {
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+        .policy-content ul {
+            list-style-position: inside;
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+        .policy-content strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        .policy-content .last-updated {
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 3rem;
+            font-size: 0.9rem;
+        }
+        .policy-content code {
+            background-color: var(--bg-primary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--accent-primary);
+        }
+
         .footer { text-align: center; padding: 3rem 0; background-color: var(--bg-primary); border-top: 1px solid var(--border-color); }
         .footer-text { color: var(--text-secondary); font-size: 0.9rem; }
+        .footer-links { margin-top: 1rem; display: flex; justify-content: center; gap: 2rem; }
+        .footer-links a { color: var(--text-secondary); }
+        .footer-links a:hover { color: var(--accent-primary); }
 
-        /* ===== UTILITIES & ANIMATIONS ===== */
         .scroll-to-top {
             position: fixed; bottom: 2rem; right: 2rem;
             width: 50px; height: 50px;
@@ -259,7 +292,6 @@
         .fade-in.visible { opacity: 1; transform: translateY(0); }
         .stagger-children > * { transition-delay: calc(0.15s * var(--stagger-index)); }
 
-        /* ===== RESPONSIVE STYLES ===== */
         @media (max-width: 992px) {
             .about-container { grid-template-columns: 1fr; gap: 3rem; }
             .about-image-wrapper { max-width: 500px; margin: 0 auto; order: -1; }
@@ -288,7 +320,6 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="header" id="header">
         <div class="container header-container">
             <a href="#" class="logo">Joe<span>Savage</span></a>
@@ -299,6 +330,8 @@
                     <li><a href="#projects" class="nav-link">Projects</a></li>
                     <li><a href="#achievements" class="nav-link">Certs</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li><a href="#tos" class="nav-link">TOS</a></li>
+                    <li><a href="#privacy" class="nav-link">Privacy</a></li>
                 </ul>
             </nav>
             <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation">
@@ -308,7 +341,6 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
         <section class="hero">
             <div class="container hero-content">
                 <p class="hero-subtitle fade-in">Hi, I'm Joe Savage. I'm a...</p>
@@ -324,8 +356,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- About Section -->
         <section id="about" class="about">
             <div class="container">
                 <h2 class="fade-in">01. About Me</h2>
@@ -347,8 +377,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Toolbox Section -->
         <section id="toolbox" class="toolbox">
             <div class="container">
                 <h2 class="fade-in">02. My Toolbox</h2>
@@ -364,8 +392,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Projects Section -->
         <section id="projects" class="projects">
             <div class="container">
                 <h2 class="fade-in">03. Security Projects</h2>
@@ -409,8 +435,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Achievements Section -->
         <section id="achievements" class="achievements">
             <div class="container">
                 <h2 class="fade-in">04. Certifications & Badges</h2>
@@ -439,8 +463,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Contact Section -->
         <section id="contact" class="contact">
             <div class="container">
                 <h2 class="fade-in">05. Get In Touch</h2>
@@ -465,26 +487,116 @@
                 </div>
             </div>
         </section>
-    </main>
+        <section id="tos" class="about">
+            <div class="container">
+                <h2 class="fade-in">Terms of Service</h2>
+                <div class="policy-content fade-in">
+                    <p class="last-updated">Last Updated: July 04, 2025</p>
+                    <p>By inviting or using our Discord Bot ("the Bot," "our Service") in your server, you and your server members agree to be bound by these Terms of Service ("Terms"). If you do not agree to these terms, you must not use the Bot.</p>
 
-    <!-- Footer -->
+                    <h3>1. License and Permitted Use</h3>
+                    <p>We grant you a non-exclusive, non-transferable, revocable license to use the Bot on the Discord platform. You agree to use the Bot in compliance with these Terms and the Discord Terms of Service.</p>
+                    
+                    <h3>2. User Responsibilities and Conduct</h3>
+                    <p>You agree not to:</p>
+                    <ul>
+                        <li>Use the Bot for any illegal or unauthorized purpose.</li>
+                        <li>Attempt to reverse engineer, decompile, or discover the source code of the Bot.</li>
+                        <li>Abuse the Bot's features, such as command spamming, or use it in a way that disrupts the service for others.</li>
+                        <li>Remove, obscure, or alter any copyright or proprietary notices.</li>
+                    </ul>
+                    <p>You are responsible for any user-generated content or configurations made using the Bot within your server.</p>
+
+                    <h3>3. Service Availability and Modifications</h3>
+                    <p>The Bot is provided on an "as-is" and "as-available" basis. We do not guarantee that the Service will be uninterrupted or error-free. We reserve the right to modify, suspend, or discontinue the Bot, in whole or in part, at any time with or without notice.</p>
+
+                    <h3>4. Termination</h3>
+                    <p>We reserve the right to terminate your access to the Bot, without notice, for any violation of these Terms. You may terminate this agreement at any time by removing the Bot from your Discord server(s).</p>
+
+                    <h3>5. Limitation of Liability</h3>
+                    <p>To the fullest extent permitted by law, Joe Savage (the developer) shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the Bot.</p>
+
+                    <h3>6. Changes to the Terms</h3>
+                    <p>We may revise these Terms from time to time. The most current version will always be posted on this page. By continuing to use the Service after revisions become effective, you agree to be bound by the revised Terms.</p>
+                    
+                    <h3>7. Contact Information</h3>
+                    <p>If you have any questions about these Terms, please contact me on Discord at <code>2025Joe</code>.</p>
+                </div>
+            </div>
+        </section>
+        <section id="privacy" class="projects">
+            <div class="container">
+                <h2 class="fade-in">Privacy Policy</h2>
+                <div class="policy-content fade-in">
+                    <p class="last-updated">Last Updated: July 04, 2025</p>
+                    <p>This Privacy Policy explains how we collect, use, and protect information in relation to our Discord Bot ("the Bot"). Your privacy is important to us, and we are committed to protecting it.</p>
+
+                    <h3>1. Information We Collect</h3>
+                    <p>To provide its services, the Bot collects and stores the following information:</p>
+                    <ul>
+                        <li><strong>Server Information:</strong> Discord Server IDs, server names, and server-specific configurations (e.g., command prefix, enabled/disabled features). This is necessary for the bot to function on a per-server basis.</li>
+                        <li><strong>User Information:</strong> Discord User IDs. This is used to identify users for permissions, moderation actions, and command usage.</li>
+                        <li><strong>Channel Information:</strong> Discord Channel IDs. This is used for commands that are channel-specific, such as logging or announcements.</li>
+                    </ul>
+                    <p><strong>We explicitly DO NOT collect or store:</strong></p>
+                    <ul>
+                        <li>Your Discord password or email address.</li>
+                        <li>The content of user messages (unless required for a specific, opt-in feature like logging, which will be clearly disclosed).</li>
+                        <li>Any personal information that is not made available by the Discord API.</li>
+                    </ul>
+
+                    <h3>2. How We Use Your Information</h3>
+                    <p>The data collected is used solely for the following purposes:</p>
+                    <ul>
+                        <li>To provide the Bot's core functionality and features.</li>
+                        <li>To customize the user experience based on server settings.</li>
+                        <li>To provide support and troubleshoot issues.</li>
+                        <li>To enforce our Terms of Service.</li>
+                    </ul>
+
+                    <h3>3. Data Storage and Security</h3>
+                    <p>All collected data is stored in a secure database. We take reasonable technical and administrative measures to protect the information against loss, theft, misuse, and unauthorized access or disclosure.</p>
+
+                    <h3>4. Data Sharing</h3>
+                    <p>We do not sell, trade, or otherwise transfer your data to outside parties. Your information will not be shared with any third party, except as required by law.</p>
+
+                    <h3>5. Data Retention and Deletion</h3>
+                    <p>Server-related data is retained as long as the Bot remains in that server. When the Bot is removed from a server, all associated data for that server is permanently deleted from our database. User-specific data can be requested for deletion at any time.</p>
+
+                    <h3>6. Your Rights and Data Control</h3>
+                    <p>You have the right to request access to the data we hold about you or your server. You also have the right to request the deletion of this data. To make a request, please contact me directly.</p>
+
+                    <h3>7. Children's Privacy</h3>
+                    <p>Our Service is not directed to individuals under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and you believe your child has provided us with personal information, please contact us so we can take action.</p>
+
+                    <h3>8. Changes to This Privacy Policy</h3>
+                    <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page. You are advised to review this page periodically for any changes.</p>
+                    
+                    <h3>9. Contact Us</h3>
+                    <p>If you have any questions or concerns about this Privacy Policy or our data practices, please contact the developer, Joe Savage, on Discord: <code>2025Joe</code>.</p>
+                </div>
+            </div>
+        </section>
+    </main>
     <footer class="footer">
         <div class="container">
             <p class="footer-text">
                 Designed & Built by Joe Savage (Longno)<br>
                 © <span id="year"></span> | All Rights Reserved
             </p>
+            <div class="footer-links">
+                <a href="#tos">Terms of Service</a>
+                <a href="#privacy">Privacy Policy</a>
+            </div>
         </div>
     </footer>
 
-    <!-- Scroll To Top Button -->
     <button id="scroll-to-top" class="scroll-to-top" title="Back to top">
         <i class="fas fa-arrow-up"></i>
     </button>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- TYPING EFFECT ---
             const typingTextElement = document.getElementById('typing-text');
             const phrases = [
                 "Cybersecurity Specialist.",
@@ -520,13 +632,11 @@
             }
             if (typingTextElement) type();
 
-            // --- HEADER SCROLL EFFECT ---
             const header = document.getElementById('header');
             window.addEventListener('scroll', () => {
                 header.classList.toggle('scrolled', window.scrollY > 50);
             });
 
-            // --- MOBILE NAVIGATION ---
             const mobileNavToggle = document.getElementById('mobile-nav-toggle');
             const nav = document.getElementById('nav');
             mobileNavToggle.addEventListener('click', () => {
@@ -542,7 +652,6 @@
                 });
             });
 
-            // --- ACTIVE NAV LINK ON SCROLL ---
             const sections = document.querySelectorAll('section[id]');
             const navLinks = document.querySelectorAll('.nav-link');
             const observerOptions = { rootMargin: '-50% 0px -50% 0px' };
@@ -563,7 +672,6 @@
             sections.forEach(section => sectionObserver.observe(section));
 
 
-            // --- SCROLL ANIMATIONS (FADE-IN) ---
             const fadeElements = document.querySelectorAll('.fade-in');
             const fadeObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -575,7 +683,6 @@
             }, { threshold: 0.1 });
             fadeElements.forEach(el => fadeObserver.observe(el));
 
-            // --- DISCORD HANDLE COPY ---
             const discordHandle = document.getElementById('discord-handle');
             const discordText = document.getElementById('discord-text');
             if (discordHandle) {
@@ -590,7 +697,6 @@
                 });
             }
 
-            // --- SCROLL TO TOP BUTTON ---
             const scrollToTopBtn = document.getElementById('scroll-to-top');
             window.addEventListener('scroll', () => {
                 scrollToTopBtn.classList.toggle('visible', window.scrollY > 300);
@@ -599,7 +705,6 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            // --- FOOTER YEAR ---
             document.getElementById('year').textContent = new Date().getFullYear();
         });
     </script>
